@@ -8,7 +8,7 @@ namespace WPF.InternalDialogs
 {
     // https://github.com/BenjaminGale/ModalContentPresenter/blob/master/ModalContentPresenter/ModalContentPresenter.cs
 
-    /// <summary>Provides a base class for all other Internal Dialog types.</summary>
+    /// <summary>Provides a base class for all other Internal Dialog types. However, it is still usable by itself, just add your own content.</summary>
     public class InternalDialog : ContentControl
     {
         #region Fields
@@ -43,7 +43,7 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("CloseFocusBehavior", typeof(InternalDialogCloseFocusBehavior), typeof(InternalDialog), 
                 new PropertyMetadata(InternalDialogCloseFocusBehavior.FocusPreviousFocusedIInputElement));
 
-        /// <summary>Gets or sets whether or not the dialog will close on escape key up.</summary>
+        /// <summary>Gets or sets whether or not the dialog will close on escape key up. Default is true.</summary>
         public bool CloseOnEscape
         {
             get { return (bool)GetValue(CloseOnEscapeProperty); }
@@ -80,7 +80,7 @@ namespace WPF.InternalDialogs
         /// InternalDialog.
         /// </summary>
         /// <remarks>
-        /// See VisibilityChanged for usage.
+        /// See VisibilityChanged for usage (it's all about the focus).
         /// </remarks>
         public UIElement FocusParent
         {
@@ -92,14 +92,14 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("FocusParent", typeof(UIElement), typeof(InternalDialog), new PropertyMetadata(null));
 
         /// <summary>gets or sets the result for the internal dialog.</summary>
-        public InternalDialogResult Result
+        public MessageBoxResult Result
         {
-            get { return (InternalDialogResult)GetValue(ResultProperty); }
+            get { return (MessageBoxResult)GetValue(ResultProperty); }
             set { SetValue(ResultProperty, value); }
         }
 
         public static readonly DependencyProperty ResultProperty =
-            DependencyProperty.Register("Result", typeof(InternalDialogResult), typeof(InternalDialog), new PropertyMetadata(InternalDialogResult.None));
+            DependencyProperty.Register("Result", typeof(MessageBoxResult), typeof(InternalDialog), new PropertyMetadata(MessageBoxResult.None));
 
         #endregion
 
@@ -115,10 +115,10 @@ namespace WPF.InternalDialogs
 
         #region Methods
 
-        private static void VisibilityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        protected static void VisibilityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             InternalDialog? instance = d as InternalDialog;
-
+            
             if (instance == null) return;
 
             Visibility visibility = (Visibility)e.NewValue;
@@ -198,7 +198,7 @@ namespace WPF.InternalDialogs
         {
             if (e.Key == Key.Escape && CloseOnEscape)
             {
-                Result = InternalDialogResult.Cancel;
+                Result = MessageBoxResult.Cancel;
                 Visibility = Visibility.Collapsed;
             }
         }

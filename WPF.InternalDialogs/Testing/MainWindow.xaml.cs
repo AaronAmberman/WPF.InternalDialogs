@@ -50,7 +50,7 @@ namespace Testing
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            internalDialog.Result = InternalDialogResult.Ok;
+            internalDialog.Result = MessageBoxResult.OK;
             internalDialog.Visibility = Visibility.Collapsed;
         }
 

@@ -23,4 +23,45 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="{x:Type local:MessageBoxInternalDialog}">
+        <Setter Property="ContentPadding" Value="5" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MessageBoxInternalDialog}">
+                    <Border x:Name="backgroundBorder" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
+                        <Border x:Name="borderBorder" SnapsToDevicePixels="True"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                Margin="{TemplateBinding Padding}" Padding="{TemplateBinding ContentPadding}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Grid.Row="0" Source="{TemplateBinding ImageSource}" />
+                                <TextBox Grid.Column="1" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True"
+                                         Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Message}" />
+                                <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="PART_YesButton" Content="Yes" Style="{TemplateBinding ButtonStyle}" Margin="0,0,0,0" />
+                                        <Button x:Name="PART_NoButton" Content="No" Style="{TemplateBinding ButtonStyle}" Margin="5,0,0,0" />
+                                        <Button x:Name="PART_OkButton" Content="OK" Style="{TemplateBinding ButtonStyle}" />
+                                        <Button x:Name="PART_CancelButton" Content="Cancel" Style="{TemplateBinding ButtonStyle}" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
