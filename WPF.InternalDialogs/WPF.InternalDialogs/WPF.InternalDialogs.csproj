@@ -6,4 +6,20 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Error.png" />
+    <None Remove="Information.png" />
+    <None Remove="Question.png" />
+    <None Remove="Warning.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Error.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Information.png" />
+    <Resource Include="Question.png" />
+    <Resource Include="Warning.png" />
+  </ItemGroup>
+
 </Project>

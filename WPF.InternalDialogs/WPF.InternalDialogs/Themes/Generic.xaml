@@ -24,14 +24,28 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type local:MessageBoxInternalDialog}">
-        <Setter Property="ContentPadding" Value="5" />
+        <Setter Property="ContentPadding" Value="10" />
+        <Setter Property="MessageBoxBackground" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle"/>
+        <Setter Property="ImageContent">
+            <Setter.Value>
+                <Image Width="48" Height="48" SnapsToDevicePixels="True"
+                       Source="{Binding ImageSource}" />
+                <!--<Image Width="48" Height="48" SnapsToDevicePixels="True"
+                       Source="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MessageBoxInternalDialog}}, Path=ImageSource}" />-->
+                <!--<Image Width="48" Height="48" SnapsToDevicePixels="True"
+                           Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ImageSource}" />-->
+                <!--<Image SnapsToDevicePixels="True" 
+                       Source="C:/Users/Aaron/source/repos/WPF.InternalDialogs/WPF.InternalDialogs/WPF.InternalDialogs/Error.png" />-->
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MessageBoxInternalDialog}">
                     <Border x:Name="backgroundBorder" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
-                        <Border x:Name="borderBorder" SnapsToDevicePixels="True"
+                        <Border x:Name="borderBorder" SnapsToDevicePixels="True" Background="{TemplateBinding MessageBoxBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="{TemplateBinding Padding}" Padding="{TemplateBinding ContentPadding}"
                                 CornerRadius="{TemplateBinding CornerRadius}"
@@ -40,17 +54,24 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Grid.Row="0" Source="{TemplateBinding ImageSource}" />
-                                <TextBox Grid.Column="1" Grid.Row="0" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True"
+                                <TextBlock x:Name="titleHeader" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,0,0,10"
+                                           Text="{TemplateBinding Title}" HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}" />                                
+                                <!--<ContentPresenter x:Name="imageCP" Grid.Column="0" Grid.Row="1" Margin="0,0,10,0"
+                                                  Content="{TemplateBinding ImageContent}" />-->
+                                <Image Width="48" Height="48" SnapsToDevicePixels="True"
+                                       Source="{TemplateBinding ImageSource}" />
+                                <TextBox Grid.Column="1" Grid.Row="1" Background="Transparent" BorderBrush="Transparent"
+                                         BorderThickness="0" IsReadOnly="True"
                                          Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Message}" />
-                                <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
-                                    <StackPanel Orientation="Horizontal">
+                                <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="0,10,0,0">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                         <Button x:Name="PART_YesButton" Content="Yes" Style="{TemplateBinding ButtonStyle}" Margin="0,0,0,0" />
                                         <Button x:Name="PART_NoButton" Content="No" Style="{TemplateBinding ButtonStyle}" Margin="5,0,0,0" />
                                         <Button x:Name="PART_OkButton" Content="OK" Style="{TemplateBinding ButtonStyle}" />
@@ -60,6 +81,50 @@
                             </Grid>
                         </Border>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- this gets it if ImageSource = null; -->
+                        <!--<Trigger Property="ImageSource" Value="{x:Null}">
+                            <Setter Property="Margin" Value="0" TargetName="imageCP" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="imageCP" />
+                        </Trigger>-->
+                        <!-- this gets it if ImageSource = string.Empty; -->
+                        <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Title.Length}" Value="0">
+                            <Setter Property="Margin" Value="0" TargetName="imageCP" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="imageCP" />
+                        </DataTrigger>-->
+                        <!-- this gets it if Title = null; -->
+                        <Trigger Property="Title" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="titleHeader" />
+                        </Trigger>
+                        <!-- this gets it if Title = string.Empty; -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Title.Length}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="titleHeader" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=MessageBoxButton}" Value="OK">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_OkButton" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_CancelButton" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_YesButton" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_NoButton" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=MessageBoxButton}" Value="OKCancel">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_OkButton" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_CancelButton" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_YesButton" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_NoButton" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=MessageBoxButton}" Value="YesNo">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_OkButton" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_CancelButton" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_YesButton" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_NoButton" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=MessageBoxButton}" Value="YesNoCancel">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_OkButton" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_CancelButton" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_YesButton" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_NoButton" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

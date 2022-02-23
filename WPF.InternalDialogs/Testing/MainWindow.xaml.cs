@@ -33,44 +33,74 @@ namespace Testing
         {
             if (e.Key == Key.Enter)
             {
-                if (internalDialog.Visibility == Visibility.Collapsed)
+                //if (internalDialog.Visibility == Visibility.Collapsed)
+                //{
+                //    internalDialog.Visibility = Visibility.Visible;
+                //}
+
+                if (mbiDialog.Visibility == Visibility.Collapsed)
                 {
-                    internalDialog.Visibility = Visibility.Visible;
+                    mbiDialog.Visibility = Visibility.Visible;
                 }
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!internalDialog.BlockUntilReturned)
+            //if (!internalDialog.IsModal)
+            //{
+            //    internalDialog.Visibility = Visibility.Visible;
+            //}
+
+            if (!mbiDialog.IsModal)
             {
-                internalDialog.Visibility = Visibility.Visible;
+                mbiDialog.Visibility = Visibility.Visible;
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            internalDialog.Result = MessageBoxResult.OK;
-            internalDialog.Visibility = Visibility.Collapsed;
+            //internalDialog.Result = MessageBoxResult.OK;
+            //internalDialog.Visibility = Visibility.Collapsed;
+
+            mbiDialog.Result = MessageBoxResult.OK;
+            mbiDialog.Visibility = Visibility.Collapsed;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (internalDialog.BlockUntilReturned)
+            //if (internalDialog.IsModal)
+            //{
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        Debug.WriteLine(i);
+            //    }
+
+            //    internalDialog.Visibility = Visibility.Visible;
+
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        Debug.WriteLine(i);
+            //    }
+
+            //    Debug.WriteLine(internalDialog.Result);
+            //}
+
+            if (mbiDialog.IsModal)
             {
                 for (int i = 0; i < 10; i++)
                 {
                     Debug.WriteLine(i);
                 }
 
-                internalDialog.Visibility = Visibility.Visible;
+                mbiDialog.Visibility = Visibility.Visible;
 
                 for (int i = 0; i < 10; i++)
                 {
                     Debug.WriteLine(i);
                 }
 
-                Debug.WriteLine(internalDialog.Result);
+                Debug.WriteLine(mbiDialog.Result);
             }
         }
     }

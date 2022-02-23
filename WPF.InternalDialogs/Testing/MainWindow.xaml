@@ -32,15 +32,25 @@
         </Grid>
         <Button Grid.Row="2" Content="Button" HorizontalAlignment="Center" Click="Button_Click"/>
         <Button Grid.Row="2" Content="Some Work" HorizontalAlignment="Center" Margin="200,0,0,0" Click="Button_Click_2"/>
-        <id:InternalDialog x:Name="internalDialog" Grid.Row="0" Grid.RowSpan="4" Padding="5" 
+        <Image Grid.Row="2" Source="pack://application:,,,/WPF.InternalDialogs;component/Error.png" Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" />
+        <Image Grid.Row="2" Source="pack://application:,,,/WPF.InternalDialogs;component/Information.png" Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0" />
+        <Image Grid.Row="2" Source="pack://application:,,,/WPF.InternalDialogs;component/Question.png" Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,100,0,0" />
+        <Image Grid.Row="2" Source="pack://application:,,,/WPF.InternalDialogs;component/Warning.png" Width="48" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,150,0,0" />
+        <!--<id:InternalDialog x:Name="internalDialog" Grid.Row="0" Grid.RowSpan="4" Padding="5" 
                            Background="#AA000000" BorderBrush="#FF0066FF" BorderThickness="3" Foreground="White"
-                           CornerRadius="5" CloseOnEscape="True" CloseFocusBehavior="FocusPreviousFocusedIInputElement" 
-                           BlockUntilReturned="False"
+                           CornerRadius="5" CloseOnEscape="True" CloseFocusBehavior="FocusPreviousFocusedIInputElement" IsModal="False"
                            FocusParent="{Binding ElementName=rootGrid}">
             <Grid>
                 <TextBlock Text="My Content" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
                 <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Click_1" />
             </Grid>
-        </id:InternalDialog>
+        </id:InternalDialog>-->
+        <id:MessageBoxInternalDialog x:Name="mbiDialog" Grid.Row="0" Grid.RowSpan="4" Padding="5" 
+                                     Background="#AA000000" BorderBrush="#FF444444" BorderThickness="2"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                     CornerRadius="5" CloseOnEscape="True" CloseFocusBehavior="FocusPreviousFocusedIInputElement" IsModal="False"
+                                     Message="This is a message box!!!" Title="My Title"
+                                     MessageBoxButton="YesNo" MessageBoxImage="Error"
+                                     FocusParent="{Binding ElementName=rootGrid}"/>
     </Grid>
 </Window>

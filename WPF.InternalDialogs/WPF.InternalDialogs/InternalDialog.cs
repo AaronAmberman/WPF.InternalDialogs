@@ -21,17 +21,7 @@ namespace WPF.InternalDialogs
         #endregion
 
         #region Properties
-
-        /// <summary>Gets or sets whether or not the dialog will block upon opening (similar to ShowDialog). Default is false.</summary>
-        public bool BlockUntilReturned
-        {
-            get { return (bool)GetValue(BlockUntilReturnedProperty); }
-            set { SetValue(BlockUntilReturnedProperty, value); }
-        }
-
-        public static readonly DependencyProperty BlockUntilReturnedProperty =
-            DependencyProperty.Register("BlockUntilReturned", typeof(bool), typeof(InternalDialog), new PropertyMetadata(false));
-
+        
         /// <summary>Gets or sets the behavior to take when closing the dialog in regards to setting focus to content underneath.</summary>
         public InternalDialogCloseFocusBehavior CloseFocusBehavior
         {
@@ -91,6 +81,16 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty FocusParentProperty =
             DependencyProperty.Register("FocusParent", typeof(UIElement), typeof(InternalDialog), new PropertyMetadata(null));
 
+        /// <summary>Gets or sets whether or not the dialog will block upon opening (similar to ShowDialog). Default is false.</summary>
+        public bool IsModal
+        {
+            get { return (bool)GetValue(IsModalProperty); }
+            set { SetValue(IsModalProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsModalProperty =
+            DependencyProperty.Register("IsModal", typeof(bool), typeof(InternalDialog), new PropertyMetadata(false));
+
         /// <summary>gets or sets the result for the internal dialog.</summary>
         public MessageBoxResult Result
         {
@@ -103,19 +103,43 @@ namespace WPF.InternalDialogs
 
         #endregion
 
+        #region Events
+
+        public static readonly RoutedEvent PreviewVisibilityChangedEvent = EventManager.RegisterRoutedEvent(
+            "PreviewVisibilityChanged", RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(InternalDialog));
+
+        /// <summary>Occurs when the visibility changed.</summary>
+        public event RoutedEventHandler PreviewVisibilityChanged
+        {
+            add { AddHandler(PreviewVisibilityChangedEvent, value); }
+            remove { RemoveHandler(PreviewVisibilityChangedEvent, value); }
+        }
+
+        public static readonly RoutedEvent VisibilityChangedEvent = EventManager.RegisterRoutedEvent(
+            "VisibilityChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(InternalDialog));
+
+        /// <summary>Occurs when the visibility changed.</summary>
+        public event RoutedEventHandler VisibilityChanged
+        {
+            add { AddHandler(VisibilityChangedEvent, value); }
+            remove { RemoveHandler(VisibilityChangedEvent, value); }
+        }
+
+        #endregion
+
         #region Constructors
 
         static InternalDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(InternalDialog), new FrameworkPropertyMetadata(typeof(InternalDialog)));
-            VisibilityProperty.OverrideMetadata(typeof(InternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, VisibilityChanged));            
+            VisibilityProperty.OverrideMetadata(typeof(InternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, VisibilityChangedCallback));            
         }
 
         #endregion
 
         #region Methods
 
-        protected static void VisibilityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        protected static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             InternalDialog? instance = d as InternalDialog;
             
@@ -138,8 +162,15 @@ namespace WPF.InternalDialogs
                 if (instance.FocusParent == null)
                     throw new InvalidOperationException("FocusParent null");
 
+                // raise preview event (tunneling)
+                RoutedEventArgs args = new RoutedEventArgs(PreviewVisibilityChangedEvent);
+
+                instance.RaiseEvent(args);
+
+                // set key up for escape on close
                 instance.KeyUp += instance.InternalDialog_KeyUp;
 
+                // handle focus management
                 instance.cachedTabNavigationMode = KeyboardNavigation.GetTabNavigation(instance.FocusParent);
                 instance.cachedDirectionalNavigationMode = KeyboardNavigation.GetDirectionalNavigation(instance.FocusParent);
 
@@ -150,7 +181,16 @@ namespace WPF.InternalDialogs
 
                 instance.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
 
-                if (instance.BlockUntilReturned)
+                // raise non preview event (bubbling)
+                if (!args.Handled)
+                {
+                    args = new RoutedEventArgs(VisibilityChangedEvent);
+
+                    instance.RaiseEvent(args);
+                }
+
+                // if modal...block
+                if (instance.IsModal)
                 {
                     instance.frame = new DispatcherFrame();
 
@@ -159,7 +199,8 @@ namespace WPF.InternalDialogs
             }
             else // Collapsed
             {
-                if (instance.BlockUntilReturned)
+                // if modal...unblock
+                if (instance.IsModal)
                 {
                     if (instance.frame != null)
                     {
@@ -168,8 +209,15 @@ namespace WPF.InternalDialogs
                     }
                 }
 
+                // raise preview event (tunneling)
+                RoutedEventArgs args = new RoutedEventArgs(PreviewVisibilityChangedEvent);
+
+                instance.RaiseEvent(args);
+
+                // remove escape key up handler
                 instance.KeyUp -= instance.InternalDialog_KeyUp;
 
+                // reset focus to what it was before we were shown
                 KeyboardNavigation.SetTabNavigation(instance.FocusParent, instance.cachedTabNavigationMode);
                 KeyboardNavigation.SetDirectionalNavigation(instance.FocusParent, instance.cachedDirectionalNavigationMode);
 
@@ -190,6 +238,14 @@ namespace WPF.InternalDialogs
                     case InternalDialogCloseFocusBehavior.FocusPreviousFocusedIInputElement:
                         Keyboard.Focus(instance.cachedFocusedElement);
                         break;
+                }
+
+                // raise non preview event (bubbling)
+                if (!args.Handled)
+                {
+                    args = new RoutedEventArgs(VisibilityChangedEvent);
+
+                    instance.RaiseEvent(args);
                 }
             }
         }
