@@ -64,9 +64,9 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(InternalDialog), new PropertyMetadata(new CornerRadius(0)));
 
         /// <summary>
-        /// Gets or sets the UIElement used to pass focus back to upon close (Visibility.Collapsed). Not the 
-        /// IInputElement from Keyboard.FocusedElement. Generally a root Grid, Panel or Border. This UIElement 
-        /// is not used for positioning. UI placement is up to the front-end designer using the instance of 
+        /// Gets or sets the UIElement used to borrow focus from / pass focus back to upon open / close (Visibility.Visible / 
+        /// Visibility.Collapsed). Not the IInputElement from Keyboard.FocusedElement. Generally a root Grid, Panel or Border. 
+        /// This UIElement is not used for positioning. UI placement is up to the front-end designer using the instance of 
         /// InternalDialog.
         /// </summary>
         /// <remarks>

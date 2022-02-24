@@ -1,30 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WPF.InternalDialogs
 {
+    /// <summary>An internal dialog message box that is very similar to the normal message box. This class cannot be inherited.</summary>
     [TemplatePart(Name = "PART_CancelButton", Type = typeof(Button))]
+    [TemplatePart(Name = "PART_CloseButton", Type = typeof(Button))]
     [TemplatePart(Name = "PART_OkButton", Type = typeof(Button))]
     [TemplatePart(Name = "PART_NoButton", Type = typeof(Button))]
     [TemplatePart(Name = "PART_YesButton", Type = typeof(Button))]
-    public class MessageBoxInternalDialog : InternalDialog
+    public sealed class MessageBoxInternalDialog : InternalDialog
     {
         #region Fields
 
-        private bool isImageSourceInternallySet = false;
         private Button? cancelButton;
+        private Button? closeButton;
         private Button? okButton;
         private Button? noButton;
         private Button? yesButton;
@@ -32,6 +24,16 @@ namespace WPF.InternalDialogs
         #endregion
 
         #region Properties
+
+        /// <summary>Gets or sets the background for the button area.</summary>
+        public SolidColorBrush ButtonAreaBackground
+        {
+            get { return (SolidColorBrush)GetValue(ButtonAreaBackgroundProperty); }
+            set { SetValue(ButtonAreaBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonAreaBackgroundProperty =
+            DependencyProperty.Register("ButtonAreaBackground", typeof(SolidColorBrush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>gets or sets the style to use for the buttons in the message box.</summary>
         public Style ButtonStyle
@@ -43,36 +45,15 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ButtonStyleProperty =
             DependencyProperty.Register("ButtonStyle", typeof(Style), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>Gets or sets the content for the image section of the message box internal dialog.</summary>
-        public object ImageContent
+        /// <summary>Gets or sets the message to display in the dialog.</summary>
+        public string Message
         {
-            get { return (object)GetValue(ImageContentProperty); }
-            set { SetValue(ImageContentProperty, value); }
+            get { return (string)GetValue(MessageProperty); }
+            set { SetValue(MessageProperty, value); }
         }
 
-        public static readonly DependencyProperty ImageContentProperty =
-            DependencyProperty.Register("ImageContent", typeof(object), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
-
-        /// <summary>Gets or sets the image source for the message box icon. Overrides what MessageBoxImage would set.</summary>
-        public Uri ImageSource
-        {
-            get { return (Uri)GetValue(ImageSourceProperty); }
-            set 
-            { 
-                SetValue(ImageSourceProperty, value);
-
-                //if (!isImageSourceInternallySet && !string.IsNullOrEmpty(value.AbsoluteUri))
-                //{
-                //    // if the image source is set (if not empty) then we'll set image to None,
-                //    // if we didn't set it internally because of the MessageBoxImage property
-                //    MessageBoxImage = MessageBoxImage.None;
-                //}                
-            }
-        }
-
-        public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.Register("ImageSource", typeof(Uri), typeof(MessageBoxInternalDialog), 
-                new PropertyMetadata(new Uri("pack://application:,,,/Error.png", UriKind.Absolute)));
+        public static readonly DependencyProperty MessageProperty =
+            DependencyProperty.Register("Message", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata(string.Empty));
 
         /// <summary>Gets or sets the background for the message box part of the message box internal dialog. Not the same as Background.</summary>
         public SolidColorBrush MessageBoxBackground
@@ -94,54 +75,56 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty MessageBoxButtonProperty =
             DependencyProperty.Register("MessageBoxButton", typeof(MessageBoxButton), typeof(MessageBoxInternalDialog), new PropertyMetadata(MessageBoxButton.OK));
 
-        /// <summary>
-        /// Gets or sets the image to use for the icon. If ImageSource is set then that source is used and this is ignored. However, 
-        /// it is up to the developer to change the image for different states...if so desired. If ImageSource is set then this is 
-        /// set to MessageBoxImage.None. Default is None.
-        /// </summary>
-        public MessageBoxImage MessageBoxImage
+        /// <summary>Gets or sets the image for the message.</summary>
+        public MessageBoxInternalDialogImage MessageBoxImage
         {
-            get { return (MessageBoxImage)GetValue(MessageBoxImageProperty); }
-            set 
-            { 
-                SetValue(MessageBoxImageProperty, value);
-
-                //switch (value)
-                //{
-                //    case MessageBoxImage.None:
-                //        if (!isImageSourceInternallySet) // if this was set by the user then set image source to none
-                //        {
-                //            ImageSource = new Uri("");
-                //        }
-                //        break;
-                //    case MessageBoxImage.Error:
-                //        ImageSource = new Uri("pack://application:,,,/Error.png", UriKind.Absolute);
-                //        break;
-                //    case MessageBoxImage.Information:
-                //        ImageSource = new Uri("pack://application:,,,/Information.png", UriKind.Absolute);
-                //        break;
-                //    case MessageBoxImage.Question:
-                //        ImageSource = new Uri("pack://application:,,,/Question.png", UriKind.Absolute);
-                //        break;
-                //    case MessageBoxImage.Warning:
-                //        ImageSource = new Uri("pack://application:,,,/Warning.png", UriKind.Absolute);
-                //        break;
-                //}
-            }
+            get { return (MessageBoxInternalDialogImage)GetValue(MessageBoxImageProperty); }
+            set { SetValue(MessageBoxImageProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxImageProperty =
-            DependencyProperty.Register("MessageBoxImage", typeof(MessageBoxImage), typeof(MessageBoxInternalDialog), new PropertyMetadata(MessageBoxImage.Question));
+            DependencyProperty.Register("MessageBoxImage", typeof(MessageBoxInternalDialogImage), typeof(MessageBoxInternalDialog), 
+                new PropertyMetadata(MessageBoxInternalDialogImage.None));
 
-        /// <summary>Gets or sets the message to display in the dialog.</summary>
-        public string Message
+        /// <summary>Gets or sets the message box maximum height.</summary>
+        public double MessageBoxMaxHeight
         {
-            get { return (string)GetValue(MessageProperty); }
-            set { SetValue(MessageProperty, value); }
+            get { return (double)GetValue(MessageBoxMaxHeightProperty); }
+            set { SetValue(MessageBoxMaxHeightProperty, value); }
         }
 
-        public static readonly DependencyProperty MessageProperty =
-            DependencyProperty.Register("Message", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty MessageBoxMaxHeightProperty =
+            DependencyProperty.Register("MessageBoxMaxHeight", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(Double.PositiveInfinity));
+
+        /// <summary>Gets or sets the message box maximum width.</summary>
+        public double MessageBoxMaxWidth
+        {
+            get { return (double)GetValue(MessageBoxMaxWidthProperty); }
+            set { SetValue(MessageBoxMaxWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty MessageBoxMaxWidthProperty =
+            DependencyProperty.Register("MessageBoxMaxWidth", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(Double.PositiveInfinity));
+
+        /// <summary>Gets or sets the message box minimum height.</summary>
+        public double MessageBoxMinHeight
+        {
+            get { return (double)GetValue(MessageBoxMinHeightProperty); }
+            set { SetValue(MessageBoxMinHeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty MessageBoxMinHeightProperty =
+            DependencyProperty.Register("MessageBoxMinHeight", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(0.0));
+
+        /// <summary>Gets or sets the message box minimum width.</summary>
+        public double MessageBoxMinWidth
+        {
+            get { return (double)GetValue(MessageBoxMinWidthProperty); }
+            set { SetValue(MessageBoxMinWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty MessageBoxMinWidthProperty =
+            DependencyProperty.Register("MessageBoxMinWidth", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(0.0));
 
         /// <summary>Gets or sets the title to the message box.</summary>
         public string Title
@@ -152,6 +135,16 @@ namespace WPF.InternalDialogs
 
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata(string.Empty));
+
+        /// <summary>Gets or sets the background for the title area.</summary>
+        public SolidColorBrush TitleAreaBackground
+        {
+            get { return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty); }
+            set { SetValue(TitleAreaBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty TitleAreaBackgroundProperty =
+            DependencyProperty.Register("TitleAreaBackground", typeof(SolidColorBrush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the horizontal alignment of the title.</summary>
         public HorizontalAlignment TitleHorizontalAlignment
@@ -171,56 +164,27 @@ namespace WPF.InternalDialogs
         static MessageBoxInternalDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageBoxInternalDialog), new FrameworkPropertyMetadata(typeof(MessageBoxInternalDialog)));
-            //VisibilityProperty.OverrideMetadata(typeof(MessageBoxInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, VisibilityChangedCallback));
         }
 
         #endregion
 
         #region Methods
 
-        //new protected static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    MessageBoxInternalDialog? instance = d as MessageBoxInternalDialog;
-
-        //    if (instance == null) return;
-
-        //    // call our base
-        //    InternalDialog.VisibilityChangedCallback(d, e);
-
-        //    // do our work
-        //    Visibility visibility = (Visibility)e.NewValue;
-
-        //    // we will have Visible and Collapsed states, no Hidden
-        //    if (visibility == Visibility.Hidden)
-        //    {
-        //        instance.Visibility = Visibility.Collapsed;
-
-        //        // kick out and let us setting the new value make the below logic run,
-        //        // we'll leave our callback (this if will not be hit next callback)
-        //        return;
-        //    }
-
-        //    //if (visibility == Visibility.Visible)
-        //    //{
-                
-        //    //}
-        //    //else // Collapsed
-        //    //{
-
-        //    //}
-        //}
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             cancelButton = GetTemplateChild("PART_CancelButton") as Button;
+            closeButton = GetTemplateChild("PART_CloseButton") as Button;
             okButton = GetTemplateChild("PART_OkButton") as Button;
             noButton = GetTemplateChild("PART_NoButton") as Button;
             yesButton = GetTemplateChild("PART_YesButton") as Button;
 
             if (cancelButton != null)
                 cancelButton.Click += CancelButton_Click;
+
+            if (closeButton != null)
+                closeButton.Click += CloseButton_Click;
 
             if (okButton != null)
                 okButton.Click += OkButton_Click;
@@ -233,6 +197,12 @@ namespace WPF.InternalDialogs
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Result = MessageBoxResult.Cancel;
+            Visibility = Visibility.Collapsed;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Result = MessageBoxResult.Cancel;
             Visibility = Visibility.Collapsed;
