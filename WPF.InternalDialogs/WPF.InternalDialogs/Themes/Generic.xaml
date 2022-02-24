@@ -45,7 +45,7 @@
         <Setter Property="MessageBoxImage" Value="None" />
         <Setter Property="MessageBoxMaxHeight" Value="600" />
         <Setter Property="MessageBoxMaxWidth" Value="800" />
-        <Setter Property="Padding" Value="10" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
@@ -60,13 +60,13 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 MinHeight="{TemplateBinding MessageBoxMinHeight}" MinWidth="{TemplateBinding MessageBoxMinWidth}"
                                 MaxHeight="{TemplateBinding MessageBoxMaxHeight}" MaxWidth="{TemplateBinding MessageBoxMaxWidth}">
-                            <Grid>
+                            <Grid Margin="{TemplateBinding ContentPadding}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0" Background="{TemplateBinding TitleAreaBackground}">
+                                <Grid Grid.Row="0">
                                     <Grid Margin="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -470,7 +470,7 @@
                                                  Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Message}" />
                                     </Grid>
                                 </Grid>
-                                <Grid Grid.Row="2" Background="{TemplateBinding ButtonAreaBackground}">
+                                <Grid Grid.Row="2">
                                     <Grid Margin="5">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Grid.Column="0" x:Name="PART_YesButton" Content="Yes"
