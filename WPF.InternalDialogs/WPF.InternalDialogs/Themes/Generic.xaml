@@ -1,7 +1,11 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:WPF.InternalDialogs">
+    xmlns:local="clr-namespace:WPF.InternalDialogs"
+    xmlns:converters="clr-namespace:WPF.InternalDialogs.Converters">
+
+    <converters:CornerRadiusConverter x:Key="CornerRadiusConverter" />
+
     <Style TargetType="{x:Type local:InternalDialog}">
         <Setter Property="ContentPadding" Value="5" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -23,6 +27,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style TargetType="{x:Type local:MessageBoxInternalDialog}">
         <Setter Property="Background" Value="#AA000000" />
         <Setter Property="BorderBrush" Value="#FF333333" />
@@ -66,7 +71,8 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
+                                <Border Grid.Row="0" Background="{TemplateBinding TitleAreaBackground}"
+                                        CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource CornerRadiusConverter}, ConverterParameter=TL|TR}">
                                     <Grid Margin="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -91,7 +97,7 @@
                                             </Rectangle>
                                         </Button>
                                     </Grid>
-                                </Grid>
+                                </Border>
                                 <Grid Grid.Row="1">
                                     <Grid Margin="10">
                                         <Grid.ColumnDefinitions>
@@ -470,7 +476,8 @@
                                                  Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Message}" />
                                     </Grid>
                                 </Grid>
-                                <Grid Grid.Row="2">
+                                <Border Grid.Row="2" Background="{TemplateBinding ButtonAreaBackground}"
+                                        CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource CornerRadiusConverter}, ConverterParameter=BL|BR}">
                                     <Grid Margin="5">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Grid.Column="0" x:Name="PART_YesButton" Content="Yes"
@@ -483,7 +490,7 @@
                                                     Style="{TemplateBinding ButtonStyle}" />
                                         </StackPanel>
                                     </Grid>
-                                </Grid>
+                                </Border>
                             </Grid> 
                         </Border>
                     </Border>

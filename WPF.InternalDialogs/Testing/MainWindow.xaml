@@ -50,7 +50,7 @@
         </id:InternalDialog>-->
         <id:MessageBoxInternalDialog x:Name="mbiDialog" Grid.Row="0" Grid.RowSpan="4"
                                      Message="This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!!" 
-                                     Title="Message Box Title" MessageBoxImage="Help" CornerRadius="0" 
+                                     Title="Message Box Title" MessageBoxImage="Help" CornerRadius="10"
                                      FocusParent="{Binding ElementName=rootGrid}"/>
     </Grid>
 </Window>
