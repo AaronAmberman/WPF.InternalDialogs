@@ -76,7 +76,16 @@
         <Setter Property="InputBoxMinWidth" Value="300" />
         <Setter Property="IsModal" Value="False"/>
         <Setter Property="Padding" Value="0" />
-        <Setter Property="ResizeGripBrush" Value="White" />
+        <Setter Property="ResizeGripContent">
+            <Setter.Value>
+                <Grid>
+                    <Line X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="0" X2="17" Y1="17" Y2="17" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="17" X2="17" Y1="0" Y2="18" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                </Grid>
+            </Setter.Value>
+        </Setter>
         <Setter Property="ResizeGripCursor" Value="SizeNWSE" />
         <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
@@ -161,12 +170,7 @@
                             <Thumb x:Name="PART_ResizeThumb" Width="18" Height="18"
                                    Background="#01000000" Style="{StaticResource InternalDialogThumb}"
                                    Cursor="{TemplateBinding ResizeGripCursor}" />
-                            <Grid IsHitTestVisible="False">
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="17" Y1="17" Y2="17" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="17" X2="17" Y1="0" Y2="18" StrokeThickness="1" SnapsToDevicePixels="True" />
-                            </Grid>
+                            <ContentPresenter Content="{TemplateBinding ResizeGripContent}" IsHitTestVisible="False" />
                         </Grid>
                     </Canvas>
                     <ControlTemplate.Triggers>
@@ -222,7 +226,16 @@
         <Setter Property="MessageBoxMinHeight" Value="50" />
         <Setter Property="MessageBoxMinWidth" Value="100" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="ResizeGripBrush" Value="White" />
+        <Setter Property="ResizeGripContent">
+            <Setter.Value>
+                <Grid>
+                    <Line X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="0" X2="17" Y1="17" Y2="17" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="17" X2="17" Y1="0" Y2="18" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                </Grid>
+            </Setter.Value>
+        </Setter>
         <Setter Property="ResizeGripCursor" Value="SizeNWSE" />
         <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
@@ -676,12 +689,7 @@
                             <Thumb x:Name="PART_ResizeThumb" Width="18" Height="18"
                                    Background="#01000000" Style="{StaticResource InternalDialogThumb}"
                                    Cursor="{TemplateBinding ResizeGripCursor}" />
-                            <Grid IsHitTestVisible="False">
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="17" Y1="17" Y2="17" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="17" X2="17" Y1="0" Y2="18" StrokeThickness="1" SnapsToDevicePixels="True" />
-                            </Grid>
+                            <ContentPresenter Content="{TemplateBinding ResizeGripContent}" IsHitTestVisible="False" />
                         </Grid>
                     </Canvas>
                     <ControlTemplate.Triggers>
@@ -816,12 +824,21 @@
         <!-- does not work because of the canvas -->
         <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
         <Setter Property="IsModal" Value="False"/>
+        <Setter Property="Padding" Value="0" />
         <Setter Property="ResizableMaxHeight" Value="600" />
         <Setter Property="ResizableMaxWidth" Value="800" />
         <Setter Property="ResizableMinHeight" Value="50" />
         <Setter Property="ResizableMinWidth" Value="50" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="ResizeGripBrush" Value="White" />
+        <Setter Property="ResizeGripContent">
+            <Setter.Value>
+                <Grid>
+                    <Line X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="0" X2="17" Y1="17" Y2="17" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                    <Line X1="17" X2="17" Y1="0" Y2="18" StrokeThickness="1" SnapsToDevicePixels="True" Stroke="#FFFFFFFF" />
+                </Grid>
+            </Setter.Value>
+        </Setter>
         <Setter Property="ResizeGripCursor" Value="SizeNWSE" />
         <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
@@ -894,12 +911,7 @@
                             <Thumb x:Name="PART_ResizeThumb" Width="18" Height="18"
                                    Background="#01000000" Style="{StaticResource InternalDialogThumb}"
                                    Cursor="{TemplateBinding ResizeGripCursor}" />
-                            <Grid IsHitTestVisible="False">
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="17" Y1="17" Y2="17" StrokeThickness="1" SnapsToDevicePixels="True" />
-                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="17" X2="17" Y1="0" Y2="18" StrokeThickness="1" SnapsToDevicePixels="True" />
-                            </Grid>
+                            <ContentPresenter Content="{TemplateBinding ResizeGripContent}" IsHitTestVisible="False" />
                         </Grid>
                     </Canvas>
                     <ControlTemplate.Triggers>

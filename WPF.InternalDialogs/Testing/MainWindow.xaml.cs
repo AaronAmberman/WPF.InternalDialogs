@@ -35,20 +35,29 @@ namespace Testing
                 //    internalDialog.Visibility = Visibility.Visible;
                 //}
 
+
+
+
                 //if (mbiDialog.Visibility == Visibility.Collapsed)
                 //{
                 //    mbiDialog.Visibility = Visibility.Visible;
                 //}
+
+
+
 
                 //if (ibid.Visibility == Visibility.Collapsed)
                 //{
                 //    ibid.Visibility = Visibility.Visible;
                 //}
 
-                if (mrid.Visibility == Visibility.Collapsed)
-                {
-                    mrid.Visibility = Visibility.Visible;
-                }
+
+
+
+                //if (mrid.Visibility == Visibility.Collapsed)
+                //{
+                //    mrid.Visibility = Visibility.Visible;
+                //}
             }
         }
 
@@ -59,15 +68,24 @@ namespace Testing
             //    internalDialog.Visibility = Visibility.Visible;
             //}
 
+
+
+
             //if (!mbiDialog.IsModal)
             //{
             //    mbiDialog.Visibility = Visibility.Visible;
             //}
 
+
+
+
             //if (!ibid.IsModal)
             //{
             //    ibid.Visibility = Visibility.Visible;
             //}
+
+
+
 
             if (!mrid.IsModal)
             {
@@ -80,14 +98,23 @@ namespace Testing
             //internalDialog.Result = MessageBoxResult.OK;
             //internalDialog.Visibility = Visibility.Collapsed;
 
+
+
+
             //mbiDialog.Result = MessageBoxResult.OK;
             //mbiDialog.Visibility = Visibility.Collapsed;
+
+
+
 
             //ibid.Result = MessageBoxResult.OK;
             //ibid.Visibility = Visibility.Collapsed;
 
-            mrid.Result = MessageBoxResult.OK;
-            mrid.Visibility = Visibility.Collapsed;
+
+
+
+            //mrid.Result = MessageBoxResult.OK;
+            //mrid.Visibility = Visibility.Collapsed;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -108,6 +135,9 @@ namespace Testing
 
             //    Debug.WriteLine(internalDialog.Result);
             //}
+
+
+
 
             //if (mbiDialog.IsModal)
             //{
@@ -132,6 +162,9 @@ namespace Testing
             //    mbiDialog.Visibility = Visibility.Visible;
             //}
 
+
+
+
             //for (int i = 0; i < 10; i++)
             //{
             //    Debug.WriteLine(i);
@@ -146,25 +179,28 @@ namespace Testing
 
             //Debug.WriteLine(ibid.Result);
 
-            for (int i = 0; i < 10; i++)
-            {
-                Debug.WriteLine(i);
-            }
 
-            mrid.Visibility = Visibility.Visible;
 
-            for (int i = 0; i < 10; i++)
-            {
-                Debug.WriteLine(i);
-            }
 
-            Debug.WriteLine(mrid.Result);
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    Debug.WriteLine(i);
+            //}
+
+            //mrid.Visibility = Visibility.Visible;
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    Debug.WriteLine(i);
+            //}
+
+            //Debug.WriteLine(mrid.Result);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            mrid.Result = MessageBoxResult.OK;
-            mrid.Visibility = Visibility.Collapsed;
+            //mrid.Result = MessageBoxResult.OK;
+            //mrid.Visibility = Visibility.Collapsed;
         }
     }
 }

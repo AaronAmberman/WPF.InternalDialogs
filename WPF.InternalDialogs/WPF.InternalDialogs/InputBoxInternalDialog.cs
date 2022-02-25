@@ -172,15 +172,20 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty LayoutUpdateFineseCountProperty =
             DependencyProperty.Register("LayoutUpdateFineseCount", typeof(int), typeof(InputBoxInternalDialog), new PropertyMetadata(20));
 
-        /// <summary>Gets or sets the brush for the gripper section at the bottom right.</summary>
-        public SolidColorBrush ResizeGripBrush
+        /// <summary>Gets or sets the content for the resize grip.</summary>
+        /// <remarks>
+        /// Resize Grip is 18x18 and the top left slightly overlays the bottom right of the resizable area. Plan your visuals accordingly. There 
+        /// is also sometihng to know, the opacity for the whole resize grip area is .8 or 80% and on mouse over goes to 1.0 or 100%. This is so 
+        /// we can generically achieve a mouse over look. Plan your visuals accordingly.
+        /// </remarks>
+        public object ResizeGripContent
         {
-            get { return (SolidColorBrush)GetValue(ResizeGripBrushProperty); }
-            set { SetValue(ResizeGripBrushProperty, value); }
+            get { return (object)GetValue(ResizeGripContentProperty); }
+            set { SetValue(ResizeGripContentProperty, value); }
         }
 
-        public static readonly DependencyProperty ResizeGripBrushProperty =
-            DependencyProperty.Register("ResizeGripBrush", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(Brushes.White));
+        public static readonly DependencyProperty ResizeGripContentProperty =
+            DependencyProperty.Register("ResizeGripContent", typeof(object), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the cursor for the resize gripper.</summary>
         public Cursor ResizeGripCursor

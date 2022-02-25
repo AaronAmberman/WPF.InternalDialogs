@@ -16,7 +16,7 @@
         Blocked = 2,
         CriticalError = 3,
         Downgrade = 4,
-        Help = 5,
+        Help = 5, // Question Mark
         Hidden = 6,
         Information = 7,
         Installed = 8,
