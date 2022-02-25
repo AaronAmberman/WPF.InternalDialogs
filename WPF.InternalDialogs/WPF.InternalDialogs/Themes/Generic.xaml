@@ -28,7 +28,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="MessageBoxInternalDialogThumb" TargetType="{x:Type Thumb}">
+    <Style x:Key="InternalDialogThumb" TargetType="{x:Type Thumb}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Template">
@@ -36,6 +36,144 @@
                 <ControlTemplate TargetType="{x:Type Thumb}">
                     <Rectangle x:Name="rectangle" Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" 
                                SnapsToDevicePixels="True" Width="{TemplateBinding Width}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:InputBoxInternalDialog}">
+        <Setter Property="Background" Value="#AA000000" />
+        <Setter Property="BorderBrush" Value="#FF333333" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="ButtonStyle">
+            <Setter.Value>
+                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="MinWidth" Value="50" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ButtonAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+        <Setter Property="CloseFocusBehavior" Value="FocusPreviousFocusedIInputElement" />
+        <Setter Property="CloseOnEscape" Value="True" />
+        <Setter Property="ContentPadding" Value="0" />
+        <!-- does not work because of the convas -->
+        <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
+        <Setter Property="IsModal" Value="False"/>
+        <Setter Property="InputBoxAcceptsReturn" Value="False" />
+        <Setter Property="InputBoxAcceptsTab" Value="False" />
+        <Setter Property="InputBoxBackground" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="InputBoxMaxHeight" Value="600" />
+        <Setter Property="InputBoxMaxWidth" Value="800" />
+        <Setter Property="InputBoxMinHeight" Value="125" />
+        <Setter Property="InputBoxMinWidth" Value="300" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="ResizeGripBrush" Value="White" />
+        <Setter Property="ResizeGripCursor" Value="SizeNWSE" />
+        <Setter Property="ResizeGripVisibility" Value="Visible" />
+        <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+        <Setter Property="TitleCursor" Value="SizeAll" />
+        <!-- does not work because of the convas -->
+        <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:InputBoxInternalDialog}">
+                    <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">                        
+                        <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding InputBoxBackground}"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
+                                MinHeight="{TemplateBinding InputBoxMinHeight}" MinWidth="{TemplateBinding InputBoxMinWidth}"
+                                MaxHeight="{TemplateBinding InputBoxMaxHeight}" MaxWidth="{TemplateBinding InputBoxMaxWidth}"
+                                Canvas.Left="0" Canvas.Top="0">
+                            <Grid Margin="{TemplateBinding ContentPadding}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Background="{TemplateBinding TitleAreaBackground}"
+                                        CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource CornerRadiusConverter}, ConverterParameter=TL|TR}">
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Thumb x:Name="PART_TitleThumb" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,-5"
+                                               Background="{TemplateBinding TitleAreaBackground}" Style="{StaticResource InternalDialogThumb}"
+                                               Cursor="{TemplateBinding TitleCursor}" />
+                                        <TextBlock x:Name="titleHeader" Grid.Column="0" TextWrapping="Wrap" IsHitTestVisible="False"
+                                                   Text="{TemplateBinding Title}" HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}" />
+                                        <Button x:Name="PART_CloseButton" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
+                                                Style="{TemplateBinding CloseButtonStyle}">
+                                            <Rectangle Width="16" Height="16">
+                                                <Rectangle.Fill>
+                                                    <DrawingBrush>
+                                                        <DrawingBrush.Drawing>
+                                                            <DrawingGroup>
+                                                                <DrawingGroup.Children>
+                                                                    <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                                                                    <GeometryDrawing Brush="#FF212121" Geometry="F1M8.583,8L13,12.424 12.424,13 8,8.583 3.576,13 3,12.424 7.417,8 3,3.576 3.576,3 8,7.417 12.424,3 13,3.576z" />
+                                                                </DrawingGroup.Children>
+                                                            </DrawingGroup>
+                                                        </DrawingBrush.Drawing>
+                                                    </DrawingBrush>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                                <Grid Grid.Row="1">
+                                    <Grid Margin="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="10,0,10,10" Foreground="{TemplateBinding Foreground}"
+                                                   Text="{TemplateBinding InputBoxMessage}" />
+                                        <TextBox Grid.Row="1" TextWrapping="Wrap" Margin="10,0" AcceptsReturn="{TemplateBinding InputBoxAcceptsReturn}"
+                                                 AcceptsTab="{TemplateBinding InputBoxAcceptsTab}"
+                                                 Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Input}" />
+                                    </Grid>
+                                </Grid>
+                                <Border Grid.Row="2" Background="{TemplateBinding ButtonAreaBackground}"
+                                        CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource CornerRadiusConverter}, ConverterParameter=BL|BR}">
+                                    <Grid Margin="5">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Grid.Column="2" x:Name="PART_OkButton" Content="OK" 
+                                                    Style="{TemplateBinding ButtonStyle}" />
+                                            <Button Grid.Column="3" x:Name="PART_CancelButton" Content="Cancel" Margin="5,0,0,0"
+                                                    Style="{TemplateBinding ButtonStyle}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <Grid x:Name="PART_ResizeThumbContainer" Canvas.Left="0" Canvas.Top="0" Opacity="0.8"
+                              Visibility="{TemplateBinding ResizeGripVisibility}">
+                            <Thumb x:Name="PART_ResizeThumb" Width="18" Height="18"
+                                   Background="#01000000" Style="{StaticResource InternalDialogThumb}"
+                                   Cursor="{TemplateBinding ResizeGripCursor}" />
+                            <Grid IsHitTestVisible="False">
+                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" />
+                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" />
+                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="17" Y1="17" Y2="17" StrokeThickness="1" SnapsToDevicePixels="True" />
+                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="17" X2="17" Y1="0" Y2="18" StrokeThickness="1" SnapsToDevicePixels="True" />
+                            </Grid>
+                        </Grid>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="PART_ResizeThumbContainer">
+                            <Setter Property="Opacity" Value="1" TargetName="PART_ResizeThumbContainer" />
+                        </Trigger>
+                        <!-- this gets it if Title = null; -->
+                        <Trigger Property="Title" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="titleHeader" />
+                        </Trigger>
+                        <!-- this gets it if Title = string.Empty; -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Title.Length}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="titleHeader" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -78,7 +216,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MessageBoxInternalDialog}">
-                    <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">                        
+                    <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding MessageBoxBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
@@ -99,7 +237,7 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Thumb x:Name="PART_TitleThumb" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,-5"
-                                               Background="{TemplateBinding TitleAreaBackground}" Style="{StaticResource MessageBoxInternalDialogThumb}"
+                                               Background="{TemplateBinding TitleAreaBackground}" Style="{StaticResource InternalDialogThumb}"
                                                Cursor="{TemplateBinding TitleCursor}" />
                                         <TextBlock x:Name="titleHeader" Grid.Column="0" TextWrapping="Wrap" IsHitTestVisible="False"
                                                    Text="{TemplateBinding Title}" HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}" />
@@ -520,7 +658,7 @@
                         <Grid x:Name="PART_ResizeThumbContainer" Canvas.Left="0" Canvas.Top="0" Opacity="0.8"
                               Visibility="{TemplateBinding ResizeGripVisibility}">
                             <Thumb x:Name="PART_ResizeThumb" Width="18" Height="18"
-                                   Background="#01000000" Style="{StaticResource MessageBoxInternalDialogThumb}"
+                                   Background="#01000000" Style="{StaticResource InternalDialogThumb}"
                                    Cursor="{TemplateBinding ResizeGripCursor}" />
                             <Grid IsHitTestVisible="False">
                                 <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" />

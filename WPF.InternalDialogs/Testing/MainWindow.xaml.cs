@@ -35,9 +35,14 @@ namespace Testing
                 //    internalDialog.Visibility = Visibility.Visible;
                 //}
 
-                if (mbiDialog.Visibility == Visibility.Collapsed)
+                //if (mbiDialog.Visibility == Visibility.Collapsed)
+                //{
+                //    mbiDialog.Visibility = Visibility.Visible;
+                //}
+
+                if (ibid.Visibility == Visibility.Collapsed)
                 {
-                    mbiDialog.Visibility = Visibility.Visible;
+                    ibid.Visibility = Visibility.Visible;
                 }
             }
         }
@@ -49,9 +54,14 @@ namespace Testing
             //    internalDialog.Visibility = Visibility.Visible;
             //}
 
-            if (!mbiDialog.IsModal)
+            //if (!mbiDialog.IsModal)
+            //{
+            //    mbiDialog.Visibility = Visibility.Visible;
+            //}
+
+            if (!ibid.IsModal)
             {
-                mbiDialog.Visibility = Visibility.Visible;
+                ibid.Visibility = Visibility.Visible;
             }
         }
 
@@ -60,8 +70,11 @@ namespace Testing
             //internalDialog.Result = MessageBoxResult.OK;
             //internalDialog.Visibility = Visibility.Collapsed;
 
-            mbiDialog.Result = MessageBoxResult.OK;
-            mbiDialog.Visibility = Visibility.Collapsed;
+            //mbiDialog.Result = MessageBoxResult.OK;
+            //mbiDialog.Visibility = Visibility.Collapsed;
+
+            ibid.Result = MessageBoxResult.OK;
+            ibid.Visibility = Visibility.Collapsed;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -83,27 +96,60 @@ namespace Testing
             //    Debug.WriteLine(internalDialog.Result);
             //}
 
-            if (mbiDialog.IsModal)
+            //if (mbiDialog.IsModal)
+            //{
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        Debug.WriteLine(i);
+            //    }
+
+            //    mbiDialog.Visibility = Visibility.Visible;
+
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        Debug.WriteLine(i);
+            //    }
+
+            //    Debug.WriteLine(mbiDialog.Result);
+            //}
+            //else
+            //{
+            //    mbiDialog.Message = "Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application.Some other message about your application.Some other message about your application. Some other message about your application. Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.";
+
+            //    mbiDialog.Visibility = Visibility.Visible;
+            //}
+
+            if (ibid.IsModal)
             {
                 for (int i = 0; i < 10; i++)
                 {
                     Debug.WriteLine(i);
                 }
 
-                mbiDialog.Visibility = Visibility.Visible;
+                ibid.Visibility = Visibility.Visible;
 
                 for (int i = 0; i < 10; i++)
                 {
                     Debug.WriteLine(i);
                 }
 
-                Debug.WriteLine(mbiDialog.Result);
+                Debug.WriteLine(ibid.Result);
             }
             else
             {
-                mbiDialog.Message = "Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application.Some other message about your application.Some other message about your application. Some other message about your application. Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.";
+                for (int i = 0; i < 10; i++)
+                {
+                    Debug.WriteLine(i);
+                }
 
-                mbiDialog.Visibility = Visibility.Visible;
+                ibid.Visibility = Visibility.Visible;
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Debug.WriteLine(i);
+                }
+
+                Debug.WriteLine(ibid.Result);
             }
         }
     }
