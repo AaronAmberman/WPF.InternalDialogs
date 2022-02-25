@@ -28,7 +28,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="MessageBoxInternalDialogTitleThumb" TargetType="{x:Type Thumb}">
+    <Style x:Key="MessageBoxInternalDialogThumb" TargetType="{x:Type Thumb}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Template">
@@ -68,8 +68,10 @@
         <Setter Property="MessageBoxMinWidth" Value="100" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="ResizeGripBrush" Value="White" />
+        <Setter Property="ResizeGripCursor" Value="SizeNWSE" />
         <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+        <Setter Property="TitleCursor" Value="SizeAll" />
         <!-- does not work because of the convas -->
         <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
@@ -97,7 +99,8 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Thumb x:Name="PART_TitleThumb" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,-5"
-                                               Background="{TemplateBinding TitleAreaBackground}" Style="{StaticResource MessageBoxInternalDialogTitleThumb}" />
+                                               Background="{TemplateBinding TitleAreaBackground}" Style="{StaticResource MessageBoxInternalDialogThumb}"
+                                               Cursor="{TemplateBinding TitleCursor}" />
                                         <TextBlock x:Name="titleHeader" Grid.Column="0" TextWrapping="Wrap" IsHitTestVisible="False"
                                                    Text="{TemplateBinding Title}" HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}" />
                                         <Button x:Name="PART_CloseButton" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
@@ -514,10 +517,11 @@
                                 </Border>
                             </Grid>
                         </Border>
-                        <Grid x:Name="PART_ResizeThumbContainer" Canvas.Left="0" Canvas.Top="0"
+                        <Grid x:Name="PART_ResizeThumbContainer" Canvas.Left="0" Canvas.Top="0" Opacity="0.8"
                               Visibility="{TemplateBinding ResizeGripVisibility}">
-                            <Thumb x:Name="PART_ResizeThumb" Width="18" Height="18" 
-                                   Background="#01000000" Style="{StaticResource MessageBoxInternalDialogTitleThumb}" />
+                            <Thumb x:Name="PART_ResizeThumb" Width="18" Height="18"
+                                   Background="#01000000" Style="{StaticResource MessageBoxInternalDialogThumb}"
+                                   Cursor="{TemplateBinding ResizeGripCursor}" />
                             <Grid IsHitTestVisible="False">
                                 <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" />
                                 <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" />
@@ -527,6 +531,9 @@
                         </Grid>
                     </Canvas>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="PART_ResizeThumbContainer">
+                            <Setter Property="Opacity" Value="1" TargetName="PART_ResizeThumbContainer" />
+                        </Trigger>
                         <!-- this gets it if Title = null; -->
                         <Trigger Property="Title" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="titleHeader" />

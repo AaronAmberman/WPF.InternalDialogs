@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace WPF.InternalDialogs
@@ -160,6 +161,16 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ResizeGripBrushProperty =
             DependencyProperty.Register("ResizeGripBrush", typeof(SolidColorBrush), typeof(MessageBoxInternalDialog), new PropertyMetadata(Brushes.White));
 
+        /// <summary>Gets or sets the cursor for the resize gripper.</summary>
+        public Cursor ResizeGripCursor
+        {
+            get { return (Cursor)GetValue(ResizeGripCursorProperty); }
+            set { SetValue(ResizeGripCursorProperty, value); }
+        }
+
+        public static readonly DependencyProperty ResizeGripCursorProperty =
+            DependencyProperty.Register("ResizeGripCursor", typeof(Cursor), typeof(MessageBoxInternalDialog), new PropertyMetadata(Cursors.SizeNWSE));
+
         /// <summary>Gets or sets the visibility of the resize grip. Visible = resizing enabled, Collapsed/Hidden = resizing disabled.</summary>
         public Visibility ResizeGripVisibility
         {
@@ -189,6 +200,16 @@ namespace WPF.InternalDialogs
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
             DependencyProperty.Register("TitleAreaBackground", typeof(SolidColorBrush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
+
+        /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
+        public Cursor TitleCursor
+        {
+            get { return (Cursor)GetValue(TitleCursorProperty); }
+            set { SetValue(TitleCursorProperty, value); }
+        }
+        
+        public static readonly DependencyProperty TitleCursorProperty =
+            DependencyProperty.Register("TitleCursor", typeof(Cursor), typeof(MessageBoxInternalDialog), new PropertyMetadata(Cursors.SizeAll));
 
         /// <summary>Gets or sets the horizontal alignment of the title.</summary>
         public HorizontalAlignment TitleHorizontalAlignment
@@ -337,8 +358,8 @@ namespace WPF.InternalDialogs
             Canvas.SetTop(innerBorder, centerY);
 
             // we are going to move the resizer too (bottom right of message box)
-            double resizerX = centerX + messageBoxWidth - 10;
-            double resizerY = centerY + messageBoxHeight - 10;
+            double resizerX = centerX + messageBoxWidth - 5;
+            double resizerY = centerY + messageBoxHeight - 5;
 
             Canvas.SetLeft(resizeThumbContainer, resizerX);
             Canvas.SetTop(resizeThumbContainer, resizerY);
@@ -438,8 +459,8 @@ namespace WPF.InternalDialogs
                 double width = innerBorder.ActualWidth;
                 double height = innerBorder.ActualHeight;
 
-                double resizerX = updatedX + width - 10;
-                double resizerY = updatedY + height - 10;
+                double resizerX = updatedX + width - 5;
+                double resizerY = updatedY + height - 5;
 
                 Canvas.SetLeft(resizeThumbContainer, resizerX);
                 Canvas.SetTop(resizeThumbContainer, resizerY);
@@ -527,28 +548,28 @@ namespace WPF.InternalDialogs
                 double left = Canvas.GetLeft(innerBorder);
                 double top = Canvas.GetTop(innerBorder);
 
-                double newWidth = left + innerBorder.Width - 10;
-                double newHeight = top + innerBorder.Height - 10;
+                double newWidth = left + innerBorder.Width - 5;
+                double newHeight = top + innerBorder.Height - 5;
 
                 // make sure we can only drag to the minimum and maximum size of the message box
                 if (innerBorder.Width <= MessageBoxMinWidth)
                 {
-                    newWidth = left + MessageBoxMinWidth - 10;
+                    newWidth = left + MessageBoxMinWidth - 5;
                 }
 
                 if (innerBorder.Width >= MessageBoxMaxWidth)
                 {
-                    newWidth = left + MessageBoxMaxWidth - 10;
+                    newWidth = left + MessageBoxMaxWidth - 5;
                 }
 
                 if (innerBorder.Height <= MessageBoxMinHeight)
                 {
-                    newHeight = top + MessageBoxMinHeight - 10;
+                    newHeight = top + MessageBoxMinHeight - 5;
                 }
 
                 if (innerBorder.Height >= MessageBoxMaxHeight)
                 {
-                    newHeight = top + MessageBoxMaxHeight - 10;
+                    newHeight = top + MessageBoxMaxHeight - 5;
                 }
 
                 Canvas.SetLeft(resizeThumbContainer, newWidth);
