@@ -27,7 +27,20 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="MessageBoxInternalDialogTitleThumb" TargetType="{x:Type Thumb}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Rectangle x:Name="rectangle" Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" 
+                               SnapsToDevicePixels="True" Width="{TemplateBinding Width}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type local:MessageBoxInternalDialog}">
         <Setter Property="Background" Value="#AA000000" />
         <Setter Property="BorderBrush" Value="#FF333333" />
@@ -43,7 +56,8 @@
         <Setter Property="CloseFocusBehavior" Value="FocusPreviousFocusedIInputElement" />
         <Setter Property="CloseOnEscape" Value="True" />
         <Setter Property="ContentPadding" Value="0" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <!-- does not work because of the convas -->
+        <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
         <Setter Property="IsModal" Value="False"/>
         <Setter Property="MessageBoxBackground" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
         <Setter Property="MessageBoxButton" Value="OK" />
@@ -52,19 +66,19 @@
         <Setter Property="MessageBoxMaxWidth" Value="800" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <!-- does not work because of the convas -->
+        <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MessageBoxInternalDialog}">
-                    <Border x:Name="backgroundBorder" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
-                        <Border x:Name="borderBorder" SnapsToDevicePixels="True" Background="{TemplateBinding MessageBoxBackground}"
+                    <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
+                        <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding MessageBoxBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 MinHeight="{TemplateBinding MessageBoxMinHeight}" MinWidth="{TemplateBinding MessageBoxMinWidth}"
-                                MaxHeight="{TemplateBinding MessageBoxMaxHeight}" MaxWidth="{TemplateBinding MessageBoxMaxWidth}">
+                                MaxHeight="{TemplateBinding MessageBoxMaxHeight}" MaxWidth="{TemplateBinding MessageBoxMaxWidth}"
+                                Canvas.Left="0" Canvas.Top="0">
                             <Grid Margin="{TemplateBinding ContentPadding}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -78,7 +92,9 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock x:Name="titleHeader" Grid.Column="0" TextWrapping="Wrap"
+                                        <Thumb x:Name="PART_TitleThumb" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,-5"
+                                               Background="{TemplateBinding TitleAreaBackground}" Style="{StaticResource MessageBoxInternalDialogTitleThumb}" />
+                                        <TextBlock x:Name="titleHeader" Grid.Column="0" TextWrapping="Wrap" IsHitTestVisible="False"
                                                    Text="{TemplateBinding Title}" HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}" />
                                         <Button x:Name="PART_CloseButton" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
                                             <Rectangle Width="16" Height="16">
@@ -493,7 +509,7 @@
                                 </Border>
                             </Grid> 
                         </Border>
-                    </Border>
+                    </Canvas>
                     <ControlTemplate.Triggers>
                         <!-- this gets it if Title = null; -->
                         <Trigger Property="Title" Value="{x:Null}">

@@ -30,8 +30,8 @@
             <TextBlock Grid.Column="0" Text="Something" Margin="0,0,5,0" />
             <CheckBox Grid.Column="1" Content="A ChckBox" />
         </Grid>
-        <Button Grid.Row="2" Content="Button" HorizontalAlignment="Center" Click="Button_Click"/>
-        <Button Grid.Row="2" Content="Some Work" HorizontalAlignment="Center" Margin="200,0,0,0" Click="Button_Click_2"/>
+        <Button Grid.Row="2" Content="Non-Modal" HorizontalAlignment="Center" Click="Button_Click"/>
+        <Button Grid.Row="2" Content="Modal" HorizontalAlignment="Center" Margin="200,0,0,0" Click="Button_Click_2"/>
         <Canvas x:Name="canvas" Grid.Row="3" Background="LightBlue" ClipToBounds="True">
             <Thumb x:Name="titleBorder" Background="LightGray" BorderBrush="Blue" BorderThickness="1" 
                    Padding="10" Margin="10" Width="500" Height="25" Canvas.Left="0" Canvas.Top="0"
@@ -49,8 +49,8 @@
             </Grid>
         </id:InternalDialog>-->
         <id:MessageBoxInternalDialog x:Name="mbiDialog" Grid.Row="0" Grid.RowSpan="4"
-                                     Message="This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!!" 
-                                     Title="Message Box Title" MessageBoxImage="Help" CornerRadius="10"
+                                     Message="This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!! This is a message box!!!" 
+                                     Title="Message Box Title" MessageBoxImage="Information" CornerRadius="10" IsModal="False"
                                      FocusParent="{Binding ElementName=rootGrid}"/>
     </Grid>
 </Window>

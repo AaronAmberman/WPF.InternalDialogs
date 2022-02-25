@@ -102,6 +102,12 @@ namespace Testing
 
                 Debug.WriteLine(mbiDialog.Result);
             }
+            else
+            {
+                mbiDialog.Message = "Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application.Some other message about your application.Some other message about your application. Some other message about your application. Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.";
+
+                mbiDialog.Visibility = Visibility.Visible;
+            }
         }
 
         private void onDragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
