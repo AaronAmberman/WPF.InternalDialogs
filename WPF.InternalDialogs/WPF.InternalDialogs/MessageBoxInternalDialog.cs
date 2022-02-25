@@ -253,6 +253,9 @@ namespace WPF.InternalDialogs
              * sure why the WPF framework doesn't fire LayoutUpdated in this scenario but without 
              * the event being called, sadly, our logic is not called. :( (same reason)
              * 
+             * Both of these can also seem to occur (again, on first show) if the computer is running
+             * slow or processing a heavy load. Seems rare even here.
+             * 
              * potential solution:
              * Very quickly show the message box when your MainWindow loads then immediately hide it.
              * This is so the OnApplyTemplate can run and we can grab our runtime controls that make 
