@@ -16,6 +16,8 @@ namespace WPF.InternalDialogs
     [TemplatePart(Name = "PART_NoButton", Type = typeof(Button))]
     [TemplatePart(Name = "PART_YesButton", Type = typeof(Button))]
     [TemplatePart(Name = "PART_TitleThumb", Type = typeof(Thumb))]
+    [TemplatePart(Name = "PART_ResizeThumbContainer", Type = typeof(Grid))]
+    [TemplatePart(Name = "PART_ResizeThumb", Type = typeof(Thumb))]
     public sealed class MessageBoxInternalDialog : InternalDialog
     {
         #region Fields
@@ -28,6 +30,8 @@ namespace WPF.InternalDialogs
         private Button? noButton;
         private Button? yesButton;
         private Thumb? titleThumb;
+        private Grid? resizeThumbContainer;
+        private Thumb? resizeThumb;
 
         private int hasBeenUpdatedCount = 0;
 
@@ -54,6 +58,16 @@ namespace WPF.InternalDialogs
 
         public static readonly DependencyProperty ButtonStyleProperty =
             DependencyProperty.Register("ButtonStyle", typeof(Style), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
+
+        /// <summary>gets or sets the style to use for the close button at the top right.</summary>
+        public Style CloseButtonStyle
+        {
+            get { return (Style)GetValue(CloseButtonStyleProperty); }
+            set { SetValue(CloseButtonStyleProperty, value); }
+        }
+
+        public static readonly DependencyProperty CloseButtonStyleProperty =
+            DependencyProperty.Register("CloseButtonStyle", typeof(Style), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the message to display in the dialog.</summary>
         public string Message
@@ -96,7 +110,7 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("MessageBoxImage", typeof(MessageBoxInternalDialogImage), typeof(MessageBoxInternalDialog), 
                 new PropertyMetadata(MessageBoxInternalDialogImage.None));
 
-        /// <summary>Gets or sets the message box maximum height.</summary>
+        /// <summary>Gets or sets the message box maximum height. Default is 600.0.</summary>
         public double MessageBoxMaxHeight
         {
             get { return (double)GetValue(MessageBoxMaxHeightProperty); }
@@ -104,9 +118,9 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty MessageBoxMaxHeightProperty =
-            DependencyProperty.Register("MessageBoxMaxHeight", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(Double.PositiveInfinity));
+            DependencyProperty.Register("MessageBoxMaxHeight", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(600.0));
 
-        /// <summary>Gets or sets the message box maximum width.</summary>
+        /// <summary>Gets or sets the message box maximum width. Default is 800.0</summary>
         public double MessageBoxMaxWidth
         {
             get { return (double)GetValue(MessageBoxMaxWidthProperty); }
@@ -114,9 +128,9 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty MessageBoxMaxWidthProperty =
-            DependencyProperty.Register("MessageBoxMaxWidth", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(Double.PositiveInfinity));
+            DependencyProperty.Register("MessageBoxMaxWidth", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(800.0));
 
-        /// <summary>Gets or sets the message box minimum height.</summary>
+        /// <summary>Gets or sets the message box minimum height. Default is 50.0.</summary>
         public double MessageBoxMinHeight
         {
             get { return (double)GetValue(MessageBoxMinHeightProperty); }
@@ -124,9 +138,9 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty MessageBoxMinHeightProperty =
-            DependencyProperty.Register("MessageBoxMinHeight", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(0.0));
+            DependencyProperty.Register("MessageBoxMinHeight", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(50.0));
 
-        /// <summary>Gets or sets the message box minimum width.</summary>
+        /// <summary>Gets or sets the message box minimum width. default is 100.0.</summary>
         public double MessageBoxMinWidth
         {
             get { return (double)GetValue(MessageBoxMinWidthProperty); }
@@ -134,7 +148,27 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty MessageBoxMinWidthProperty =
-            DependencyProperty.Register("MessageBoxMinWidth", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(0.0));
+            DependencyProperty.Register("MessageBoxMinWidth", typeof(double), typeof(MessageBoxInternalDialog), new PropertyMetadata(100.0));
+
+        /// <summary>Gets or sets the brush for the gripper section at the bottom right.</summary>
+        public SolidColorBrush ResizeGripBrush
+        {
+            get { return (SolidColorBrush)GetValue(ResizeGripBrushProperty); }
+            set { SetValue(ResizeGripBrushProperty, value); }
+        }
+
+        public static readonly DependencyProperty ResizeGripBrushProperty =
+            DependencyProperty.Register("ResizeGripBrush", typeof(SolidColorBrush), typeof(MessageBoxInternalDialog), new PropertyMetadata(Brushes.White));
+
+        /// <summary>Gets or sets the visibility of the resize grip. Visible = resizing enabled, Collapsed/Hidden = resizing disabled.</summary>
+        public Visibility ResizeGripVisibility
+        {
+            get { return (Visibility)GetValue(ResizeGripVisibilityProperty); }
+            set { SetValue(ResizeGripVisibilityProperty, value); }
+        }
+
+        public static readonly DependencyProperty ResizeGripVisibilityProperty =
+            DependencyProperty.Register("ResizeGripVisibility", typeof(Visibility), typeof(MessageBoxInternalDialog), new PropertyMetadata(Visibility.Visible));
 
         /// <summary>Gets or sets the title to the message box.</summary>
         public string Title
@@ -185,29 +219,46 @@ namespace WPF.InternalDialogs
         private void MessageBoxInternalDialog_LayoutUpdated(object? sender, EventArgs e)
         {
             /*
-             * Make it so the message box appears in the middle, we use LayoutUpdated because it fires
-             * frequently, we need to finese it so that it only gets us what we need then it stops 
-             * messing with the UI, a certain number of passes accomplishes that goal, this centers 
-             * when showing but then allows the user to move it freely afterwards (takes less than 
-             * one second for all iterations to occur).
+             * To make it so the message box appears in the middle we use LayoutUpdated because it 
+             * fires frequently, we need to finese it so that it only gets us what we need then it 
+             * stops messing with the UI, a certain number of passes accomplishes that goal. This 
+             * centers when showing but then allows the user to move it freely afterwards (takes less 
+             * than one second for all iterations to occur).
              * 
              * (this accounts for initial load and every show there after)
              * 
              * weird very specific bug:
-             * If the window where the MessageBoxInternalDialog is, is started on one monitor and is 
-             * moved to another monitor before the message box is shown then it always starts at the 
-             * top left no matter what action is taken unless we up this number to 100 or more...which 
-             * affects the users ability to move the message box around and we don't want that. It 
-             * only happens if the message box has never been shown. Once shown it's fine. If it is 
-             * shown on the same monitor where the window launched then it works the first time. It 
-             * is only before first show and moving monitors.
+             * If the window containing the MessageBoxInternalDialog moved monitors before the 
+             * MessageBoxInternalDialog is shown for the first time then it always starts at 
+             * the top left but only for the first show. It is fine every view afterwards. No 
+             * matter what action is taken except for the thing that breaks dragging completely, 
+             * which obviously we don't want. That thing is to comment out the counting of 
+             * iterations of LayoutUpdated so it is constantly called when visible. This makes 
+             * it so the message box it always centered and it cannot be moved/dragged. This 
+             * quirk only occurs if the message box has not been shown yet and if moving monitors 
+             * (this is even true if moving back to the original monitor) but only occurs on 
+             * first render). It also shows the resize gripper at position 0,0 because it wasn't 
+             * moved by our centering logic yet. 
+             * 
+             * The reason for this is because LayoutUpdated does not fire in this scenario. Not 
+             * sure why the WPF framework doesn't fire LayoutUpdated in this scenario but without 
+             * the event being called, sadly, our logic is not called. :(
+             * 
+             * another weird specific bug:
+             * If the message box has not been shown yet and the window is smaller then the needed space
+             * for the mesage box visually then it shows at the top left. It also shows the resize 
+             * gripper at position 0,0 because it wasn't moved by our centering logic yet. 
+             * 
+             * The reason for this is because LayoutUpdated does not fire in this scenario. Not 
+             * sure why the WPF framework doesn't fire LayoutUpdated in this scenario but without 
+             * the event being called, sadly, our logic is not called. :( (same reason)
              * 
              * potential solution:
              * Very quickly show the message box when your MainWindow loads then immediately hide it.
              * This is so the OnApplyTemplate can run and we can grab our runtime controls that make 
-             * up our ControlTemplate.
+             * up our ControlTemplate (we'll the ones we use).
              */
-            if (hasBeenUpdatedCount < 15)
+            if (hasBeenUpdatedCount < 20)
             {
                 CenterMessageBox();
 
@@ -242,12 +293,19 @@ namespace WPF.InternalDialogs
 
             if (visibility == Visibility.Visible)
             {
-                // do stuff
+                instance.ValidateMinAndMax();
             }
             else // Collapsed
             {
                 // just reset our visual update counter
                 instance.hasBeenUpdatedCount = 0;
+
+                // make sure reset the size of the message (fixes custom size set from user dragging)
+                if (instance.innerBorder != null)
+                {
+                    instance.innerBorder.Width = double.NaN;
+                    instance.innerBorder.Height = double.NaN;
+                }
             }
         }
 
@@ -256,6 +314,13 @@ namespace WPF.InternalDialogs
             if (canvas == null) return;
             if (innerBorder == null) return;
 
+            // if we are not visible then we do not need to manage our visuals, just leave
+            if (Visibility == Visibility.Collapsed)
+            {
+                return;
+            }
+
+            // center message box
             double totalWidth = canvas.ActualWidth;
             double totalHeight = canvas.ActualHeight;
 
@@ -267,6 +332,13 @@ namespace WPF.InternalDialogs
 
             Canvas.SetLeft(innerBorder, centerX);
             Canvas.SetTop(innerBorder, centerY);
+
+            // we are going to move the resizer too (bottom right of message box)
+            double resizerX = centerX + messageBoxWidth - 10;
+            double resizerY = centerY + messageBoxHeight - 10;
+
+            Canvas.SetLeft(resizeThumbContainer, resizerX);
+            Canvas.SetTop(resizeThumbContainer, resizerY);
         }
 
         public override void OnApplyTemplate()
@@ -304,73 +376,18 @@ namespace WPF.InternalDialogs
                 titleThumb.DragDelta += TitleThumb_DragDelta;
                 titleThumb.DragStarted += TitleThumb_DragStarted;
                 titleThumb.DragCompleted += TitleThumb_DragCompleted;
-            }            
-        }
-
-        private void TitleThumb_DragDelta(object sender, DragDeltaEventArgs e)
-        {
-            double yadjust = e.VerticalChange;
-            double xadjust = e.HorizontalChange;
-
-            if (innerBorder != null)
-            {
-                Canvas.SetLeft(innerBorder, Canvas.GetLeft(innerBorder) + e.HorizontalChange);
-                Canvas.SetTop(innerBorder, Canvas.GetTop(innerBorder) + e.VerticalChange);
-            }            
-        }
-
-        private void TitleThumb_DragStarted(object sender, DragStartedEventArgs e)
-        {
-            // should we do something here?
-        }
-
-        private void TitleThumb_DragCompleted(object sender, DragCompletedEventArgs e)
-        {
-            if (canvas == null) return;
-
-            // get visual data for spacial tracking
-            Point? topLeft = canvas.PointToScreen(new Point(0, 0));
-            if (topLeft == null) return;
-            
-            Point? bottomRight = new Point(topLeft.Value.X + canvas.ActualWidth, topLeft.Value.Y + canvas.ActualHeight);
-            if (bottomRight == null) return;
-
-            double left = canvas.PointToScreen(new Point(Canvas.GetLeft(innerBorder), 0.0)).X;
-            double? width = innerBorder?.ActualWidth;
-            
-            if (width == null) return;
-
-            double right = left + width.Value;
-            double top = canvas.PointToScreen(new Point(0.0, Canvas.GetTop(innerBorder))).Y;
-            double? height = innerBorder?.ActualHeight;
-
-            if (height == null) return;
-
-            double bottom = top + height.Value;
-
-            Rect canvasOnScreen = new Rect(topLeft.Value, bottomRight.Value);
-
-            // verify the user didn't drag the message box outside the view port, and if they did, move it some what back in view
-            if (right <= canvasOnScreen.Left)
-            {
-                Canvas.SetLeft(innerBorder, canvas.PointFromScreen(new Point(canvasOnScreen.Left + 100 - width.Value, 0)).X);
             }
 
-            if (left >= canvasOnScreen.Right)
-            {
-                Canvas.SetLeft(innerBorder, canvas.PointFromScreen(new Point(canvasOnScreen.Right - 100, 0)).X);
-            }
+            resizeThumbContainer = GetTemplateChild("PART_ResizeThumbContainer") as Grid;
+            resizeThumb = GetTemplateChild("PART_ResizeThumb") as Thumb;
 
-            if (top <= canvasOnScreen.Top)
+            if (resizeThumb != null)
             {
-                Canvas.SetTop(innerBorder, canvas.PointFromScreen(new Point(0, canvasOnScreen.Top)).Y);
+                resizeThumb.DragDelta += ResizeThumb_DragDelta;
+                resizeThumb.DragStarted += ResizeThumb_DragStarted;
+                resizeThumb.DragCompleted += ResizeThumb_DragCompleted;
             }
-
-            if (bottom >= canvasOnScreen.Bottom)
-            {
-                Canvas.SetTop(innerBorder, canvas.PointFromScreen(new Point(0, canvasOnScreen.Bottom - height.Value)).Y);
-            }
-        }
+        }        
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -399,6 +416,213 @@ namespace WPF.InternalDialogs
         {
             Result = MessageBoxResult.Yes;
             Visibility = Visibility.Collapsed;
+        }
+
+        private void TitleThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            double yadjust = e.VerticalChange;
+            double xadjust = e.HorizontalChange;
+
+            if (innerBorder != null)
+            {
+                Canvas.SetLeft(innerBorder, Canvas.GetLeft(innerBorder) + e.HorizontalChange);
+                Canvas.SetTop(innerBorder, Canvas.GetTop(innerBorder) + e.VerticalChange);
+
+                // we are going to move the resizer too (bottom right of message box)
+                double updatedX = Canvas.GetLeft(innerBorder);
+                double updatedY = Canvas.GetTop(innerBorder);
+
+                double width = innerBorder.ActualWidth;
+                double height = innerBorder.ActualHeight;
+
+                double resizerX = updatedX + width - 10;
+                double resizerY = updatedY + height - 10;
+
+                Canvas.SetLeft(resizeThumbContainer, resizerX);
+                Canvas.SetTop(resizeThumbContainer, resizerY);
+            }
+        }
+
+        private void TitleThumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            // should we do something here?
+        }
+
+        private void TitleThumb_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            if (canvas == null) return;
+
+            // get visual data for spacial tracking
+            Point? topLeft = canvas.PointToScreen(new Point(0, 0));
+            if (topLeft == null) return;
+
+            Point? bottomRight = new Point(topLeft.Value.X + canvas.ActualWidth, topLeft.Value.Y + canvas.ActualHeight);
+            if (bottomRight == null) return;
+
+            double left = canvas.PointToScreen(new Point(Canvas.GetLeft(innerBorder), 0.0)).X;
+            double? width = innerBorder?.ActualWidth;
+
+            if (width == null) return;
+
+            double right = left + width.Value;
+            double top = canvas.PointToScreen(new Point(0.0, Canvas.GetTop(innerBorder))).Y;
+            double? height = innerBorder?.ActualHeight;
+
+            if (height == null) return;
+
+            double bottom = top + height.Value;
+
+            Rect canvasOnScreen = new Rect(topLeft.Value, bottomRight.Value);
+
+            // verify the user didn't drag the message box outside the view port, and if they did, move it a little bit back into view
+            if (right <= canvasOnScreen.Left)
+            {
+                Canvas.SetLeft(innerBorder, canvas.PointFromScreen(new Point(canvasOnScreen.Left + 100 - width.Value, 0)).X);
+            }
+
+            if (left >= canvasOnScreen.Right)
+            {
+                Canvas.SetLeft(innerBorder, canvas.PointFromScreen(new Point(canvasOnScreen.Right - 100, 0)).X);
+            }
+
+            if (top <= canvasOnScreen.Top)
+            {
+                Canvas.SetTop(innerBorder, canvas.PointFromScreen(new Point(0, canvasOnScreen.Top)).Y);
+            }
+
+            if (bottom >= canvasOnScreen.Bottom)
+            {
+                Canvas.SetTop(innerBorder, canvas.PointFromScreen(new Point(0, canvasOnScreen.Bottom - height.Value)).Y);
+            }
+        }
+
+        private void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (innerBorder == null) return;
+
+            double xAdjust = innerBorder.Width + e.HorizontalChange;
+
+            if (double.IsNaN(xAdjust)) xAdjust = innerBorder.ActualWidth + e.HorizontalChange;
+            
+            double yAdjust = innerBorder.Height + e.VerticalChange;
+            
+            if (double.IsNaN(yAdjust)) yAdjust = innerBorder.ActualHeight + e.VerticalChange;
+
+            if (xAdjust >= 0 && yAdjust >= 0)
+            {
+                // make sure we are within are min and max sizes
+                if (xAdjust <= MessageBoxMinWidth) xAdjust = MessageBoxMinWidth;
+                if (xAdjust >= MessageBoxMaxWidth) xAdjust = MessageBoxMaxWidth;
+
+                if (yAdjust <= MessageBoxMinHeight) yAdjust = MessageBoxMinHeight;
+                if (yAdjust >= MessageBoxMaxHeight) yAdjust = MessageBoxMaxHeight;
+
+                innerBorder.Width = xAdjust;
+                innerBorder.Height = yAdjust;
+
+                // we are going to move the resizer too (bottom right of message box)
+                double left = Canvas.GetLeft(innerBorder);
+                double top = Canvas.GetTop(innerBorder);
+
+                double newWidth = left + innerBorder.Width - 10;
+                double newHeight = top + innerBorder.Height - 10;
+
+                // make sure we can only drag to the minimum and maximum size of the message box
+                if (innerBorder.Width <= MessageBoxMinWidth)
+                {
+                    newWidth = left + MessageBoxMinWidth - 10;
+                }
+
+                if (innerBorder.Width >= MessageBoxMaxWidth)
+                {
+                    newWidth = left + MessageBoxMaxWidth - 10;
+                }
+
+                if (innerBorder.Height <= MessageBoxMinHeight)
+                {
+                    newHeight = top + MessageBoxMinHeight - 10;
+                }
+
+                if (innerBorder.Height >= MessageBoxMaxHeight)
+                {
+                    newHeight = top + MessageBoxMaxHeight - 10;
+                }
+
+                Canvas.SetLeft(resizeThumbContainer, newWidth);
+                Canvas.SetTop(resizeThumbContainer, newHeight);
+            }
+        }
+
+        private void ResizeThumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            // should we do something here?
+        }
+
+        private void ResizeThumb_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            // should we do something here?
+        }
+
+        /// <summary>
+        /// Validates min and max are not 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN or are less than 0.0.
+        /// </summary>
+        private void ValidateMinAndMax()
+        {
+            switch (MessageBoxMaxHeight)
+            {
+                case 0.0:
+                case double.PositiveInfinity:
+                case double.NegativeInfinity:
+                case double.NaN:
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxHeight");
+            }
+
+            if (MessageBoxMaxHeight < 0.0)
+            {
+                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxHeight");
+            }
+
+            switch (MessageBoxMaxWidth)
+            {
+                case 0.0:
+                case double.PositiveInfinity:
+                case double.NegativeInfinity:
+                case double.NaN:
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxWidth");
+            }
+
+            if (MessageBoxMaxWidth < 0.0)
+            {
+                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxWidth");
+            }
+
+            switch (MessageBoxMinHeight)
+            {
+                case 0.0:
+                case double.PositiveInfinity:
+                case double.NegativeInfinity:
+                case double.NaN:
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinHeight");
+            }
+
+            if (MessageBoxMinHeight < 0.0)
+            {
+                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinHeight");
+            }
+
+            switch (MessageBoxMinWidth)
+            {
+                case 0.0:
+                case double.PositiveInfinity:
+                case double.NegativeInfinity:
+                case double.NaN:
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinWidth");
+            }
+
+            if (MessageBoxMinWidth < 0.0)
+            {
+                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinWidth");
+            }
         }
 
         #endregion

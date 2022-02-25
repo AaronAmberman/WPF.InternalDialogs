@@ -64,7 +64,11 @@
         <Setter Property="MessageBoxImage" Value="None" />
         <Setter Property="MessageBoxMaxHeight" Value="600" />
         <Setter Property="MessageBoxMaxWidth" Value="800" />
+        <Setter Property="MessageBoxMinHeight" Value="50" />
+        <Setter Property="MessageBoxMinWidth" Value="100" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="ResizeGripBrush" Value="White" />
+        <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <!-- does not work because of the convas -->
         <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
@@ -72,7 +76,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MessageBoxInternalDialog}">
-                    <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
+                    <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">                        
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding MessageBoxBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
@@ -96,7 +100,8 @@
                                                Background="{TemplateBinding TitleAreaBackground}" Style="{StaticResource MessageBoxInternalDialogTitleThumb}" />
                                         <TextBlock x:Name="titleHeader" Grid.Column="0" TextWrapping="Wrap" IsHitTestVisible="False"
                                                    Text="{TemplateBinding Title}" HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}" />
-                                        <Button x:Name="PART_CloseButton" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                                        <Button x:Name="PART_CloseButton" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
+                                                Style="{TemplateBinding CloseButtonStyle}">
                                             <Rectangle Width="16" Height="16">
                                                 <Rectangle.Fill>
                                                     <DrawingBrush>
@@ -507,8 +512,19 @@
                                         </StackPanel>
                                     </Grid>
                                 </Border>
-                            </Grid> 
+                            </Grid>
                         </Border>
+                        <Grid x:Name="PART_ResizeThumbContainer" Canvas.Left="0" Canvas.Top="0"
+                              Visibility="{TemplateBinding ResizeGripVisibility}">
+                            <Thumb x:Name="PART_ResizeThumb" Width="18" Height="18" 
+                                   Background="#01000000" Style="{StaticResource MessageBoxInternalDialogTitleThumb}" />
+                            <Grid IsHitTestVisible="False">
+                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="14" Y1="14" Y2="14" StrokeThickness="1" SnapsToDevicePixels="True" />
+                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="14" X2="14" Y1="0" Y2="15" StrokeThickness="1" SnapsToDevicePixels="True" />
+                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="0" X2="17" Y1="17" Y2="17" StrokeThickness="1" SnapsToDevicePixels="True" />
+                                <Line Stroke="{TemplateBinding ResizeGripBrush}" X1="17" X2="17" Y1="0" Y2="18" StrokeThickness="1" SnapsToDevicePixels="True" />
+                            </Grid>
+                        </Grid>
                     </Canvas>
                     <ControlTemplate.Triggers>
                         <!-- this gets it if Title = null; -->

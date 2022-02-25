@@ -17,9 +17,6 @@ using WPF.InternalDialogs;
 
 namespace Testing
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -108,63 +105,6 @@ namespace Testing
 
                 mbiDialog.Visibility = Visibility.Visible;
             }
-        }
-
-        private void onDragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
-        {
-            // move the Thumb to the mouse position during the drag operation
-            double yadjust = canvas.Height + e.VerticalChange;
-
-            if (double.IsNaN(yadjust)) yadjust = canvas.ActualHeight + e.VerticalChange;
-
-            double xadjust = canvas.Width + e.HorizontalChange;
-
-            if (double.IsNaN(xadjust)) xadjust = canvas.ActualWidth + e.HorizontalChange;
-
-            Debug.WriteLine($"X adjust: {xadjust} | Y adjust: {yadjust}");
-
-            if ((xadjust >= 0) && (yadjust >= 0))
-            {
-                canvas.Width = xadjust;
-                canvas.Height = yadjust;
-
-                Canvas.SetLeft(myThumb, Canvas.GetLeft(myThumb) + e.HorizontalChange);
-                Canvas.SetTop(myThumb, Canvas.GetTop(myThumb) + e.VerticalChange);
-
-                Debug.WriteLine($"Size: {canvas.Width}, {canvas.Height}");
-            }
-        }
-
-        private void onDragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
-        {
-            myThumb.Background = Brushes.Orange;
-        }
-
-        private void onDragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-        {
-            myThumb.Background = Brushes.Blue;
-        }
-
-        private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
-        {
-            // move the Thumb to the mouse position during the drag operation
-            double yadjust = e.VerticalChange;
-            double xadjust = e.HorizontalChange;
-
-            Debug.WriteLine($"X adjust: {xadjust} | Y adjust: {yadjust}");
-
-            Canvas.SetLeft(titleBorder, Canvas.GetLeft(titleBorder) + e.HorizontalChange);
-            Canvas.SetTop(titleBorder, Canvas.GetTop(titleBorder) + e.VerticalChange);
-        }
-
-        private void Thumb_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
-        {
-            titleBorder.Background = Brushes.Blue;
-        }
-
-        private void Thumb_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-        {
-            titleBorder.Background = Brushes.LightGray;
         }
     }
 }
