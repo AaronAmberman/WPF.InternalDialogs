@@ -80,6 +80,23 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ContentBackgroundProperty =
             DependencyProperty.Register("ContentBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
+        /// <summary>
+        /// Gets or sets the value we use to finese LayoutUpdated iterations. Default is 20.
+        /// </summary>
+        /// <remarks>
+        /// This counter is used to control how many times LayoutUpdated is fired before we stop trying to center the 
+        /// resizable area. This does affect performance so be wary of setting this passed the default. Setting it 100 
+        /// will cause a few seconds delay before the user can resize or drag the resizable area.
+        /// </remarks>
+        public int LayoutUpdateFineseCount
+        {
+            get { return (int)GetValue(LayoutUpdateFineseCountProperty); }
+            set { SetValue(LayoutUpdateFineseCountProperty, value); }
+        }
+
+        public static readonly DependencyProperty LayoutUpdateFineseCountProperty =
+            DependencyProperty.Register("LayoutUpdateFineseCount", typeof(int), typeof(MovableResizableInternalDialog), new PropertyMetadata(20));
+
         /// <summary>Gets or sets the movable resizable internal dialog maximum height. Default is 600.0.</summary>
         public double ResizableMaxHeight
         {
@@ -209,7 +226,7 @@ namespace WPF.InternalDialogs
         private void MovableResizableInternalDialog_LayoutUpdated(object? sender, EventArgs e)
         {
             /*
-             * To make it so the movable resizable internal dialog appears in the middle we use LayoutUpdated because it 
+             * To make it so the movable resizable box appears in the middle we use LayoutUpdated because it 
              * fires frequently, we need to finese it so that it only gets us what we need then it 
              * stops messing with the UI, a certain number of passes accomplishes that goal. This 
              * centers when showing but then allows the user to move it freely afterwards (takes less 
@@ -218,40 +235,19 @@ namespace WPF.InternalDialogs
              * (this accounts for initial load and every show there after)
              * 
              * weird very specific bug:
-             * If the window containing the MovableResizableInternalDialog moved monitors before the 
-             * MovableResizableInternalDialog is shown for the first time then it always starts at 
-             * the top left but only for the first show. It is fine every view afterwards. No 
-             * matter what action is taken except for the thing that breaks dragging completely, 
-             * which obviously we don't want. That thing is to comment out the counting of 
-             * iterations of LayoutUpdated so it is constantly called when visible. This makes 
-             * it so the movable resizable internal dialog it always centered and it cannot be moved/dragged. This 
-             * quirk only occurs if the movable resizable internal dialog has not been shown yet and if moving monitors 
-             * (this is even true if moving back to the original monitor) but only occurs on 
-             * first render). It also shows the resize gripper at position 0,0 because it wasn't 
-             * moved by our centering logic yet. 
-             * 
-             * The reason for this is because LayoutUpdated does not fire in this scenario. Not 
-             * sure why the WPF framework doesn't fire LayoutUpdated in this scenario but without 
-             * the event being called, sadly, our logic is not called. :(
-             * 
-             * another weird specific bug:
-             * If the movable resizable internal dialog has not been shown yet and the window is smaller then the needed space
-             * for the mesage box visually then it shows at the top left. It also shows the resize 
-             * gripper at position 0,0 because it wasn't moved by our centering logic yet. 
-             * 
-             * The reason for this is because LayoutUpdated does not fire in this scenario. Not 
-             * sure why the WPF framework doesn't fire LayoutUpdated in this scenario but without 
-             * the event being called, sadly, our logic is not called. :( (same reason)
-             * 
-             * Both of these can also seem to occur (again, on first show) if the computer is running
-             * slow or processing a heavy load. Seems rare even here.
+             * If the window containing the MovableResizableInternalDialog is moved before the 
+             * MovableResizableInternalDialog is shown then for some reason LayoutUpdated isn't triggering 
+             * or triggering enough for our logic to move the resizable area to the center. We can up 
+             * that number to something around 100 and the problem still occurs but when it is this 
+             * high we see affects on usability. Such as, its takes a few seconds before the user is 
+             * able to drag or resize the resizable area.
              * 
              * potential solution:
              * Very quickly show the movable resizable internal dialog when your MainWindow loads then immediately hide it.
              * This is so the OnApplyTemplate can run and we can grab our runtime controls that make 
              * up our ControlTemplate (we'll the ones we use).
              */
-            if (hasBeenUpdatedCount < 20)
+            if (hasBeenUpdatedCount < LayoutUpdateFineseCount)
             {
                 CenterMessageBox();
 
