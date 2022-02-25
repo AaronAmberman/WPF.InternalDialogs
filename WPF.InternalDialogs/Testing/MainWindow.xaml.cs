@@ -163,6 +163,7 @@ namespace Testing
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            mrid.Result = MessageBoxResult.OK;
             mrid.Visibility = Visibility.Collapsed;
         }
     }
