@@ -40,9 +40,14 @@ namespace Testing
                 //    mbiDialog.Visibility = Visibility.Visible;
                 //}
 
-                if (ibid.Visibility == Visibility.Collapsed)
+                //if (ibid.Visibility == Visibility.Collapsed)
+                //{
+                //    ibid.Visibility = Visibility.Visible;
+                //}
+
+                if (mrid.Visibility == Visibility.Collapsed)
                 {
-                    ibid.Visibility = Visibility.Visible;
+                    mrid.Visibility = Visibility.Visible;
                 }
             }
         }
@@ -59,9 +64,14 @@ namespace Testing
             //    mbiDialog.Visibility = Visibility.Visible;
             //}
 
-            if (!ibid.IsModal)
+            //if (!ibid.IsModal)
+            //{
+            //    ibid.Visibility = Visibility.Visible;
+            //}
+
+            if (!mrid.IsModal)
             {
-                ibid.Visibility = Visibility.Visible;
+                mrid.Visibility = Visibility.Visible;
             }
         }
 
@@ -73,8 +83,11 @@ namespace Testing
             //mbiDialog.Result = MessageBoxResult.OK;
             //mbiDialog.Visibility = Visibility.Collapsed;
 
-            ibid.Result = MessageBoxResult.OK;
-            ibid.Visibility = Visibility.Collapsed;
+            //ibid.Result = MessageBoxResult.OK;
+            //ibid.Visibility = Visibility.Collapsed;
+
+            mrid.Result = MessageBoxResult.OK;
+            mrid.Visibility = Visibility.Collapsed;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -119,38 +132,38 @@ namespace Testing
             //    mbiDialog.Visibility = Visibility.Visible;
             //}
 
-            if (ibid.IsModal)
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    Debug.WriteLine(i);
+            //}
+
+            //ibid.Visibility = Visibility.Visible;
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    Debug.WriteLine(i);
+            //}
+
+            //Debug.WriteLine(ibid.Result);
+
+            for (int i = 0; i < 10; i++)
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    Debug.WriteLine(i);
-                }
-
-                ibid.Visibility = Visibility.Visible;
-
-                for (int i = 0; i < 10; i++)
-                {
-                    Debug.WriteLine(i);
-                }
-
-                Debug.WriteLine(ibid.Result);
+                Debug.WriteLine(i);
             }
-            else
+
+            mrid.Visibility = Visibility.Visible;
+
+            for (int i = 0; i < 10; i++)
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    Debug.WriteLine(i);
-                }
-
-                ibid.Visibility = Visibility.Visible;
-
-                for (int i = 0; i < 10; i++)
-                {
-                    Debug.WriteLine(i);
-                }
-
-                Debug.WriteLine(ibid.Result);
+                Debug.WriteLine(i);
             }
+
+            Debug.WriteLine(mrid.Result);
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            mrid.Visibility = Visibility.Collapsed;
         }
     }
 }

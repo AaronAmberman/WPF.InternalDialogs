@@ -1,30 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace WPF.InternalDialogs
 {
-    /// <summary>A simple input box to gather basic user input.</summary>
+    /// <summary>A movable and resizable internal dialog that can display whatever content.</summary>
     [TemplatePart(Name = "PART_Canvas", Type = typeof(Canvas))]
     [TemplatePart(Name = "PART_InnerBorder", Type = typeof(Border))]
-    [TemplatePart(Name = "PART_CancelButton", Type = typeof(Button))]
     [TemplatePart(Name = "PART_CloseButton", Type = typeof(Button))]
-    [TemplatePart(Name = "PART_OkButton", Type = typeof(Button))]
     [TemplatePart(Name = "PART_TitleThumb", Type = typeof(Thumb))]
     [TemplatePart(Name = "PART_ResizeThumbContainer", Type = typeof(Grid))]
     [TemplatePart(Name = "PART_ResizeThumb", Type = typeof(Thumb))]
-    public sealed class InputBoxInternalDialog : InternalDialog
+    public sealed class MovableResizableInternalDialog : InternalDialog
     {
         #region Fields
 
         private Canvas? canvas;
         private Border? innerBorder;
-        private Button? cancelButton;
         private Button? closeButton;
-        private Button? okButton;
         private Thumb? titleThumb;
         private Grid? resizeThumbContainer;
         private Thumb? resizeThumb;
@@ -36,24 +41,24 @@ namespace WPF.InternalDialogs
         #region Properties
 
         /// <summary>Gets or sets the background for the button area.</summary>
-        public SolidColorBrush ButtonAreaBackground
+        public SolidColorBrush AnswerAreaBackground
         {
-            get { return (SolidColorBrush)GetValue(ButtonAreaBackgroundProperty); }
-            set { SetValue(ButtonAreaBackgroundProperty, value); }
+            get { return (SolidColorBrush)GetValue(AnswerAreaBackgroundProperty); }
+            set { SetValue(AnswerAreaBackgroundProperty, value); }
         }
 
-        public static readonly DependencyProperty ButtonAreaBackgroundProperty =
-            DependencyProperty.Register("ButtonAreaBackground", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
+        public static readonly DependencyProperty AnswerAreaBackgroundProperty =
+            DependencyProperty.Register("AnswerAreaBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>gets or sets the style to use for the buttons in the input box.</summary>
-        public Style ButtonStyle
+        /// <summary>Gets or sets the answer area content.</summary>
+        public object AnswerAreaContent
         {
-            get { return (Style)GetValue(ButtonStyleProperty); }
-            set { SetValue(ButtonStyleProperty, value); }
+            get { return (object)GetValue(AnswerAreaContentProperty); }
+            set { SetValue(AnswerAreaContentProperty, value); }
         }
 
-        public static readonly DependencyProperty ButtonStyleProperty =
-            DependencyProperty.Register("ButtonStyle", typeof(Style), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
+        public static readonly DependencyProperty AnswerAreaContentProperty =
+            DependencyProperty.Register("AnswerAreaContent", typeof(object), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
         /// <summary>gets or sets the style to use for the close button at the top right.</summary>
         public Style CloseButtonStyle
@@ -63,97 +68,57 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty CloseButtonStyleProperty =
-            DependencyProperty.Register("CloseButtonStyle", typeof(Style), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("CloseButtonStyle", typeof(Style), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>Gets or sets the input to display in the text box portion of the input box.</summary>
-        public string Input
+        /// <summary>Gets or sets the background for the content part of the movable resizable internal dialog. Not the same as Background.</summary>
+        public SolidColorBrush ContentBackground
         {
-            get { return (string)GetValue(InputProperty); }
-            set { SetValue(InputProperty, value); }
+            get { return (SolidColorBrush)GetValue(ContentBackgroundProperty); }
+            set { SetValue(ContentBackgroundProperty, value); }
         }
 
-        public static readonly DependencyProperty InputProperty =
-            DependencyProperty.Register("Input", typeof(string), typeof(InputBoxInternalDialog), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty ContentBackgroundProperty =
+            DependencyProperty.Register("ContentBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>Gets or sets whether or not the input text box accepts return. Default is false.</summary>
-        public bool InputBoxAcceptsReturn
+        /// <summary>Gets or sets the movable resizable internal dialog maximum height. Default is 600.0.</summary>
+        public double ResizableMaxHeight
         {
-            get { return (bool)GetValue(InputBoxAcceptsReturnProperty); }
-            set { SetValue(InputBoxAcceptsReturnProperty, value); }
+            get { return (double)GetValue(ResizableMaxHeightProperty); }
+            set { SetValue(ResizableMaxHeightProperty, value); }
         }
 
-        public static readonly DependencyProperty InputBoxAcceptsReturnProperty =
-            DependencyProperty.Register("InputBoxAcceptsReturn", typeof(bool), typeof(InputBoxInternalDialog), new PropertyMetadata(false));
+        public static readonly DependencyProperty ResizableMaxHeightProperty =
+            DependencyProperty.Register("ResizableMaxHeight", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(600.0));
 
-        /// <summary>Gets or sets whether or not the input text box accepts tabs. Default is false.</summary>
-        public bool InputBoxAcceptsTab
+        /// <summary>Gets or sets the movable resizable internal dialog maximum width. Default is 800.0</summary>
+        public double ResizableMaxWidth
         {
-            get { return (bool)GetValue(InputBoxAcceptsTabProperty); }
-            set { SetValue(InputBoxAcceptsTabProperty, value); }
+            get { return (double)GetValue(ResizableMaxWidthProperty); }
+            set { SetValue(ResizableMaxWidthProperty, value); }
         }
 
-        public static readonly DependencyProperty InputBoxAcceptsTabProperty =
-            DependencyProperty.Register("InputBoxAcceptsTab", typeof(bool), typeof(InputBoxInternalDialog), new PropertyMetadata(false));
+        public static readonly DependencyProperty ResizableMaxWidthProperty =
+            DependencyProperty.Register("ResizableMaxWidth", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(800.0));
 
-        /// <summary>Gets or sets the background for the input box part of the input box internal dialog. Not the same as Background.</summary>
-        public SolidColorBrush InputBoxBackground
+        /// <summary>Gets or sets the movable resizable internal dialog minimum height. Default is 50.0.</summary>
+        public double ResizableMinHeight
         {
-            get { return (SolidColorBrush)GetValue(InputBoxBackgroundProperty); }
-            set { SetValue(InputBoxBackgroundProperty, value); }
+            get { return (double)GetValue(ResizableMinHeightProperty); }
+            set { SetValue(ResizableMinHeightProperty, value); }
         }
 
-        public static readonly DependencyProperty InputBoxBackgroundProperty =
-            DependencyProperty.Register("InputBoxBackground", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
+        public static readonly DependencyProperty ResizableMinHeightProperty =
+            DependencyProperty.Register("ResizableMinHeight", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(50.0));
 
-        /// <summary>Gets or sets the input box maximum height. Default is 600.0.</summary>
-        public double InputBoxMaxHeight
+        /// <summary>Gets or sets the movable resizable internal dialog minimum width. default is 100.0.</summary>
+        public double ResizableMinWidth
         {
-            get { return (double)GetValue(InputBoxMaxHeightProperty); }
-            set { SetValue(InputBoxMaxHeightProperty, value); }
+            get { return (double)GetValue(ResizableMinWidthProperty); }
+            set { SetValue(ResizableMinWidthProperty, value); }
         }
 
-        public static readonly DependencyProperty InputBoxMaxHeightProperty =
-            DependencyProperty.Register("InputBoxMaxHeight", typeof(double), typeof(InputBoxInternalDialog), new PropertyMetadata(600.0));
-
-        /// <summary>Gets or sets the input box maximum width. Default is 800.0</summary>
-        public double InputBoxMaxWidth
-        {
-            get { return (double)GetValue(InputBoxMaxWidthProperty); }
-            set { SetValue(InputBoxMaxWidthProperty, value); }
-        }
-
-        public static readonly DependencyProperty InputBoxMaxWidthProperty =
-            DependencyProperty.Register("InputBoxMaxWidth", typeof(double), typeof(InputBoxInternalDialog), new PropertyMetadata(800.0));
-
-        /// <summary>Gets or sets the input box minimum height. Default is 50.0.</summary>
-        public double InputBoxMinHeight
-        {
-            get { return (double)GetValue(InputBoxMinHeightProperty); }
-            set { SetValue(InputBoxMinHeightProperty, value); }
-        }
-
-        public static readonly DependencyProperty InputBoxMinHeightProperty =
-            DependencyProperty.Register("InputBoxMinHeight", typeof(double), typeof(InputBoxInternalDialog), new PropertyMetadata(50.0));
-
-        /// <summary>Gets or sets the input box minimum width. default is 100.0.</summary>
-        public double InputBoxMinWidth
-        {
-            get { return (double)GetValue(InputBoxMinWidthProperty); }
-            set { SetValue(InputBoxMinWidthProperty, value); }
-        }
-
-        public static readonly DependencyProperty InputBoxMinWidthProperty =
-            DependencyProperty.Register("InputBoxMinWidth", typeof(double), typeof(InputBoxInternalDialog), new PropertyMetadata(100.0));
-
-        /// <summary>Gets or sets the message to display to the user.</summary>
-        public string InputBoxMessage
-        {
-            get { return (string)GetValue(InputBoxMessageProperty); }
-            set { SetValue(InputBoxMessageProperty, value); }
-        }
-
-        public static readonly DependencyProperty InputBoxMessageProperty =
-            DependencyProperty.Register("InputBoxMessage", typeof(string), typeof(InputBoxInternalDialog), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty ResizableMinWidthProperty =
+            DependencyProperty.Register("ResizableMinWidth", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(100.0));
 
         /// <summary>Gets or sets the brush for the gripper section at the bottom right.</summary>
         public SolidColorBrush ResizeGripBrush
@@ -163,7 +128,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty ResizeGripBrushProperty =
-            DependencyProperty.Register("ResizeGripBrush", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(Brushes.White));
+            DependencyProperty.Register("ResizeGripBrush", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(Brushes.White));
 
         /// <summary>Gets or sets the cursor for the resize gripper.</summary>
         public Cursor ResizeGripCursor
@@ -173,7 +138,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty ResizeGripCursorProperty =
-            DependencyProperty.Register("ResizeGripCursor", typeof(Cursor), typeof(InputBoxInternalDialog), new PropertyMetadata(Cursors.SizeNWSE));
+            DependencyProperty.Register("ResizeGripCursor", typeof(Cursor), typeof(MovableResizableInternalDialog), new PropertyMetadata(Cursors.SizeNWSE));
 
         /// <summary>Gets or sets the visibility of the resize grip. Visible = resizing enabled, Collapsed/Hidden = resizing disabled.</summary>
         public Visibility ResizeGripVisibility
@@ -183,27 +148,27 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty ResizeGripVisibilityProperty =
-            DependencyProperty.Register("ResizeGripVisibility", typeof(Visibility), typeof(InputBoxInternalDialog), new PropertyMetadata(Visibility.Visible));
-
-        /// <summary>Gets or sets the title to the input box.</summary>
-        public string Title
-        {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
-        }
-
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(InputBoxInternalDialog), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("ResizeGripVisibility", typeof(Visibility), typeof(MovableResizableInternalDialog), new PropertyMetadata(Visibility.Visible));
 
         /// <summary>Gets or sets the background for the title area.</summary>
-        public SolidColorBrush TitleAreaBackground
+        public SolidColorBrush TitleBackground
         {
-            get { return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty); }
-            set { SetValue(TitleAreaBackgroundProperty, value); }
+            get { return (SolidColorBrush)GetValue(TitleBackgroundProperty); }
+            set { SetValue(TitleBackgroundProperty, value); }
         }
 
-        public static readonly DependencyProperty TitleAreaBackgroundProperty =
-            DependencyProperty.Register("TitleAreaBackground", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
+        public static readonly DependencyProperty TitleBackgroundProperty =
+            DependencyProperty.Register("TitleBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
+
+        /// <summary>Gets or sets the title content.</summary>
+        public object TitleContent
+        {
+            get { return (object)GetValue(TitleContentProperty); }
+            set { SetValue(TitleContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty TitleContentProperty =
+            DependencyProperty.Register("TitleContent", typeof(object), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
         public Cursor TitleCursor
@@ -213,7 +178,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty TitleCursorProperty =
-            DependencyProperty.Register("TitleCursor", typeof(Cursor), typeof(InputBoxInternalDialog), new PropertyMetadata(Cursors.SizeAll));
+            DependencyProperty.Register("TitleCursor", typeof(Cursor), typeof(MovableResizableInternalDialog), new PropertyMetadata(Cursors.SizeAll));
 
         /// <summary>Gets or sets the horizontal alignment of the title.</summary>
         public HorizontalAlignment TitleHorizontalAlignment
@@ -223,28 +188,28 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty TitleHorizontalAlignmentProperty =
-            DependencyProperty.Register("TitleHorizontalAlignment", typeof(HorizontalAlignment), typeof(InputBoxInternalDialog),
+            DependencyProperty.Register("TitleHorizontalAlignment", typeof(HorizontalAlignment), typeof(MovableResizableInternalDialog),
                 new PropertyMetadata(HorizontalAlignment.Left));
 
         #endregion
 
         #region Constructors
 
-        static InputBoxInternalDialog()
+        static MovableResizableInternalDialog()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(InputBoxInternalDialog), new FrameworkPropertyMetadata(typeof(InputBoxInternalDialog)));
-            VisibilityProperty.OverrideMetadata(typeof(InputBoxInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, VisibilityChangedCallback));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MovableResizableInternalDialog), new FrameworkPropertyMetadata(typeof(MovableResizableInternalDialog)));
+            VisibilityProperty.OverrideMetadata(typeof(MovableResizableInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, VisibilityChangedCallback));
         }
 
-        public InputBoxInternalDialog()
+        public MovableResizableInternalDialog()
         {
-            LayoutUpdated += InputBoxInternalDialog_LayoutUpdated;
+            LayoutUpdated += MovableResizableInternalDialog_LayoutUpdated;
         }
 
-        private void InputBoxInternalDialog_LayoutUpdated(object? sender, EventArgs e)
+        private void MovableResizableInternalDialog_LayoutUpdated(object? sender, EventArgs e)
         {
             /*
-             * To make it so the input box appears in the middle we use LayoutUpdated because it 
+             * To make it so the movable resizable internal dialog appears in the middle we use LayoutUpdated because it 
              * fires frequently, we need to finese it so that it only gets us what we need then it 
              * stops messing with the UI, a certain number of passes accomplishes that goal. This 
              * centers when showing but then allows the user to move it freely afterwards (takes less 
@@ -253,14 +218,14 @@ namespace WPF.InternalDialogs
              * (this accounts for initial load and every show there after)
              * 
              * weird very specific bug:
-             * If the window containing the InputBoxInternalDialog moved monitors before the 
-             * InputBoxInternalDialog is shown for the first time then it always starts at 
+             * If the window containing the MovableResizableInternalDialog moved monitors before the 
+             * MovableResizableInternalDialog is shown for the first time then it always starts at 
              * the top left but only for the first show. It is fine every view afterwards. No 
              * matter what action is taken except for the thing that breaks dragging completely, 
              * which obviously we don't want. That thing is to comment out the counting of 
              * iterations of LayoutUpdated so it is constantly called when visible. This makes 
-             * it so the input box it always centered and it cannot be moved/dragged. This 
-             * quirk only occurs if the input box has not been shown yet and if moving monitors 
+             * it so the movable resizable internal dialog it always centered and it cannot be moved/dragged. This 
+             * quirk only occurs if the movable resizable internal dialog has not been shown yet and if moving monitors 
              * (this is even true if moving back to the original monitor) but only occurs on 
              * first render). It also shows the resize gripper at position 0,0 because it wasn't 
              * moved by our centering logic yet. 
@@ -270,7 +235,7 @@ namespace WPF.InternalDialogs
              * the event being called, sadly, our logic is not called. :(
              * 
              * another weird specific bug:
-             * If the input box has not been shown yet and the window is smaller then the needed space
+             * If the movable resizable internal dialog has not been shown yet and the window is smaller then the needed space
              * for the mesage box visually then it shows at the top left. It also shows the resize 
              * gripper at position 0,0 because it wasn't moved by our centering logic yet. 
              * 
@@ -282,7 +247,7 @@ namespace WPF.InternalDialogs
              * slow or processing a heavy load. Seems rare even here.
              * 
              * potential solution:
-             * Very quickly show the input box when your MainWindow loads then immediately hide it.
+             * Very quickly show the movable resizable internal dialog when your MainWindow loads then immediately hide it.
              * This is so the OnApplyTemplate can run and we can grab our runtime controls that make 
              * up our ControlTemplate (we'll the ones we use).
              */
@@ -300,7 +265,7 @@ namespace WPF.InternalDialogs
 
         new private static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            InputBoxInternalDialog? instance = d as InputBoxInternalDialog;
+            MovableResizableInternalDialog? instance = d as MovableResizableInternalDialog;
 
             if (instance == null) return;
 
@@ -348,7 +313,7 @@ namespace WPF.InternalDialogs
                 return;
             }
 
-            // center input box
+            // center movable resizable internal dialog
             double totalWidth = canvas.ActualWidth;
             double totalHeight = canvas.ActualHeight;
 
@@ -361,7 +326,7 @@ namespace WPF.InternalDialogs
             Canvas.SetLeft(innerBorder, centerX);
             Canvas.SetTop(innerBorder, centerY);
 
-            // we are going to move the resizer too (bottom right of input box)
+            // we are going to move the resizer too (bottom right of movable resizable internal dialog)
             double resizerX = centerX + messageBoxWidth - 5;
             double resizerY = centerY + messageBoxHeight - 5;
 
@@ -376,18 +341,10 @@ namespace WPF.InternalDialogs
             canvas = GetTemplateChild("PART_Canvas") as Canvas;
             innerBorder = GetTemplateChild("PART_InnerBorder") as Border;
 
-            cancelButton = GetTemplateChild("PART_CancelButton") as Button;
             closeButton = GetTemplateChild("PART_CloseButton") as Button;
-            okButton = GetTemplateChild("PART_OkButton") as Button;
-
-            if (cancelButton != null)
-                cancelButton.Click += CancelButton_Click;
 
             if (closeButton != null)
                 closeButton.Click += CloseButton_Click;
-
-            if (okButton != null)
-                okButton.Click += OkButton_Click;
 
             titleThumb = GetTemplateChild("PART_TitleThumb") as Thumb;
 
@@ -409,21 +366,9 @@ namespace WPF.InternalDialogs
             }
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Result = MessageBoxResult.Cancel;
-            Visibility = Visibility.Collapsed;
-        }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Result = MessageBoxResult.Cancel;
-            Visibility = Visibility.Collapsed;
-        }
-
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-        {
-            Result = MessageBoxResult.OK;
             Visibility = Visibility.Collapsed;
         }
 
@@ -434,7 +379,7 @@ namespace WPF.InternalDialogs
                 Canvas.SetLeft(innerBorder, Canvas.GetLeft(innerBorder) + e.HorizontalChange);
                 Canvas.SetTop(innerBorder, Canvas.GetTop(innerBorder) + e.VerticalChange);
 
-                // we are going to move the resizer too (bottom right of input box)
+                // we are going to move the resizer too (bottom right of movable resizable internal dialog)
                 double updatedX = Canvas.GetLeft(innerBorder);
                 double updatedY = Canvas.GetTop(innerBorder);
 
@@ -480,7 +425,7 @@ namespace WPF.InternalDialogs
 
             Rect canvasOnScreen = new Rect(topLeft.Value, bottomRight.Value);
 
-            // verify the user didn't drag the input box outside the view port, and if they did, move it a little bit back into view
+            // verify the user didn't drag the movable resizable internal dialog outside the view port, and if they did, move it a little bit back into view
             if (right <= canvasOnScreen.Left)
             {
                 Canvas.SetLeft(innerBorder, canvas.PointFromScreen(new Point(canvasOnScreen.Left + 100 - width.Value, 0)).X);
@@ -517,41 +462,41 @@ namespace WPF.InternalDialogs
             if (xAdjust >= 0 && yAdjust >= 0)
             {
                 // make sure we are within are min and max sizes
-                if (xAdjust <= InputBoxMinWidth) xAdjust = InputBoxMinWidth;
-                if (xAdjust >= InputBoxMaxWidth) xAdjust = InputBoxMaxWidth;
+                if (xAdjust <= ResizableMinWidth) xAdjust = ResizableMinWidth;
+                if (xAdjust >= ResizableMaxWidth) xAdjust = ResizableMaxWidth;
 
-                if (yAdjust <= InputBoxMinHeight) yAdjust = InputBoxMinHeight;
-                if (yAdjust >= InputBoxMaxHeight) yAdjust = InputBoxMaxHeight;
+                if (yAdjust <= ResizableMinHeight) yAdjust = ResizableMinHeight;
+                if (yAdjust >= ResizableMaxHeight) yAdjust = ResizableMaxHeight;
 
                 innerBorder.Width = xAdjust;
                 innerBorder.Height = yAdjust;
 
-                // we are going to move the resizer too (bottom right of input box)
+                // we are going to move the resizer too (bottom right of movable resizable internal dialog)
                 double left = Canvas.GetLeft(innerBorder);
                 double top = Canvas.GetTop(innerBorder);
 
                 double newWidth = left + innerBorder.Width - 5;
                 double newHeight = top + innerBorder.Height - 5;
 
-                // make sure we can only drag to the minimum and maximum size of the input box
-                if (innerBorder.Width <= InputBoxMinWidth)
+                // make sure we can only drag to the minimum and maximum size of the movable resizable internal dialog
+                if (innerBorder.Width <= ResizableMinWidth)
                 {
-                    newWidth = left + InputBoxMinWidth - 5;
+                    newWidth = left + ResizableMinWidth - 5;
                 }
 
-                if (innerBorder.Width >= InputBoxMaxWidth)
+                if (innerBorder.Width >= ResizableMaxWidth)
                 {
-                    newWidth = left + InputBoxMaxWidth - 5;
+                    newWidth = left + ResizableMaxWidth - 5;
                 }
 
-                if (innerBorder.Height <= InputBoxMinHeight)
+                if (innerBorder.Height <= ResizableMinHeight)
                 {
-                    newHeight = top + InputBoxMinHeight - 5;
+                    newHeight = top + ResizableMinHeight - 5;
                 }
 
-                if (innerBorder.Height >= InputBoxMaxHeight)
+                if (innerBorder.Height >= ResizableMaxHeight)
                 {
-                    newHeight = top + InputBoxMaxHeight - 5;
+                    newHeight = top + ResizableMaxHeight - 5;
                 }
 
                 Canvas.SetLeft(resizeThumbContainer, newWidth);
@@ -574,7 +519,7 @@ namespace WPF.InternalDialogs
         /// </summary>
         private void ValidateMinAndMax()
         {
-            switch (InputBoxMaxHeight)
+            switch (ResizableMaxHeight)
             {
                 case 0.0:
                 case double.PositiveInfinity:
@@ -583,12 +528,12 @@ namespace WPF.InternalDialogs
                     throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxHeight");
             }
 
-            if (InputBoxMaxHeight < 0.0)
+            if (ResizableMaxHeight < 0.0)
             {
                 throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxHeight");
             }
 
-            switch (InputBoxMaxWidth)
+            switch (ResizableMaxWidth)
             {
                 case 0.0:
                 case double.PositiveInfinity:
@@ -597,12 +542,12 @@ namespace WPF.InternalDialogs
                     throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxWidth");
             }
 
-            if (InputBoxMaxWidth < 0.0)
+            if (ResizableMaxWidth < 0.0)
             {
                 throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxWidth");
             }
 
-            switch (InputBoxMinHeight)
+            switch (ResizableMinHeight)
             {
                 case 0.0:
                 case double.PositiveInfinity:
@@ -611,12 +556,12 @@ namespace WPF.InternalDialogs
                     throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinHeight");
             }
 
-            if (InputBoxMinHeight < 0.0)
+            if (ResizableMinHeight < 0.0)
             {
                 throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinHeight");
             }
 
-            switch (InputBoxMinWidth)
+            switch (ResizableMinWidth)
             {
                 case 0.0:
                 case double.PositiveInfinity:
@@ -625,7 +570,7 @@ namespace WPF.InternalDialogs
                     throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinWidth");
             }
 
-            if (InputBoxMinWidth < 0.0)
+            if (ResizableMinWidth < 0.0)
             {
                 throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinWidth");
             }

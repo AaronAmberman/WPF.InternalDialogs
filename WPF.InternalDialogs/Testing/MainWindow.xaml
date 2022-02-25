@@ -45,8 +45,18 @@
                                      Message="This is a message box!!!" 
                                      Title="Message Box Title" MessageBoxImage="Information" CornerRadius="0" IsModal="False"
                                      FocusParent="{Binding ElementName=rootGrid}" />-->
-        <id:InputBoxInternalDialog x:Name="ibid" Grid.Row="0" Grid.RowSpan="4"
+        <!--<id:InputBoxInternalDialog x:Name="ibid" Grid.Row="0" Grid.RowSpan="4"
                                    InputBoxMessage="Message to the user." Title="The Title" CornerRadius="0" IsModal="False" 
-                                   FocusParent="{Binding ElementName=rootGrid}" />
+                                   FocusParent="{Binding ElementName=rootGrid}" />-->
+        <id:MovableResizableInternalDialog x:Name="mrid" Grid.Row="0" Grid.RowSpan="4"
+                                           FocusParent="{Binding ElementName=rootGrid}">
+            <id:MovableResizableInternalDialog.TitleContent>
+                <TextBlock Text="Simple Title Example" />
+            </id:MovableResizableInternalDialog.TitleContent>
+            <TextBlock Text="Simple Example" />
+            <id:MovableResizableInternalDialog.AnswerAreaContent>
+                <Button Content="OK" HorizontalAlignment="Right" Click="Button_Click_3" />
+            </id:MovableResizableInternalDialog.AnswerAreaContent>
+        </id:MovableResizableInternalDialog>
     </Grid>
 </Window>
