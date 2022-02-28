@@ -3,7 +3,7 @@ Easy to use LightBox-esque dialog "boxes" for WPF.
 
 Inspired by https://github.com/BenjaminGale/ModalContentPresenter/blob/master/ModalContentPresenter/ModalContentPresenter.cs! Just built a whole message box suite on top of it.
 
-##Why
+## Why
 1. Very easy to use!
 2. Works like normal message boxes do...just no separate window.
     - We use the Visibility property. There is no Show or ShowDialog.
