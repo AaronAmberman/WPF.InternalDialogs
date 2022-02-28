@@ -130,5 +130,5 @@ We use a ContentPresenter to paint the resize gripper so that you can put whatev
 #### Custom Cursors
 We thought as a part of styling you might want to change the drag cursor for the title and the resize gripper. *TitleCursor* and *ResizeGripCursor*, respectively, allow you to do that.
 
-#### Custom Button Style
+#### Custom Button Styles
 We also thought that you'd want the buttons in the InternDialogs to be restylable without having to retemplate the entire controls...so we added *CloseButtonStyle* and *ButtonStyle* to allow you to do just that.
