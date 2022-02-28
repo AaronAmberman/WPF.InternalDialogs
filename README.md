@@ -34,14 +34,19 @@ See, very easy to use!
 ### Types
 - **InternalDialog**
     - This is the base class for all the other types. This type allows content to be displayed in a light box modally. It just uses a ContentPresenter so there is no special visual management here.
+    - Remember the properties HorizontalContentAlignment and VerticalContentAlignment as they help a lot.
 - **MovableResizableInternalDialog**
     - This class allows developers to design and develop their own movable resizable content.
+    - HorizontalContentAlignment and VerticalContentAlignment have no effect.
 - **InputBoxInternalDialog**
     - This class allows developers to capture basic user input.
+    - HorizontalContentAlignment and VerticalContentAlignment have no effect.
 - **MessageBoxInternalDialog**
     - This is a message box that is an internal dialog.
+    - HorizontalContentAlignment and VerticalContentAlignment have no effect.
 - **ProgressInternalDialog**
     - This class displays a simple message with a progress bar.
+    - HorizontalContentAlignment and VerticalContentAlignment have no effect.
 
 
 ### Class Overviews
