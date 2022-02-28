@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -33,7 +34,7 @@ namespace WPF.InternalDialogs
         private Grid? resizeThumbContainer;
         private Thumb? resizeThumb;
 
-        private int hasBeenUpdatedCount = 0;
+        private bool hasBeenUpdated;
 
         #endregion
 
@@ -68,23 +69,6 @@ namespace WPF.InternalDialogs
 
         public static readonly DependencyProperty CloseButtonStyleProperty =
             DependencyProperty.Register("CloseButtonStyle", typeof(Style), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
-
-        /// <summary>
-        /// Gets or sets the value we use to finese LayoutUpdated iterations. Default is 20.
-        /// </summary>
-        /// <remarks>
-        /// This counter is used to control how many times LayoutUpdated is fired before we stop trying to center the 
-        /// resizable area. This does affect performance so be wary of setting this passed the default. Setting it 100 
-        /// will cause a few seconds delay before the user can resize or drag the resizable area.
-        /// </remarks>
-        public int LayoutUpdateFineseCount
-        {
-            get { return (int)GetValue(LayoutUpdateFineseCountProperty); }
-            set { SetValue(LayoutUpdateFineseCountProperty, value); }
-        }
-
-        public static readonly DependencyProperty LayoutUpdateFineseCountProperty =
-            DependencyProperty.Register("LayoutUpdateFineseCount", typeof(int), typeof(MessageBoxInternalDialog), new PropertyMetadata(20));
 
         /// <summary>Gets or sets the message to display in the dialog.</summary>
         public string Message
@@ -260,33 +244,13 @@ namespace WPF.InternalDialogs
 
         private void MessageBoxInternalDialog_LayoutUpdated(object? sender, EventArgs e)
         {
-            /*
-             * To make it so the message box appears in the middle we use LayoutUpdated because it 
-             * fires frequently, we need to finese it so that it only gets us what we need then it 
-             * stops messing with the UI, a certain number of passes accomplishes that goal. This 
-             * centers when showing but then allows the user to move it freely afterwards (takes less 
-             * than one second for all iterations to occur).
-             * 
-             * (this accounts for initial load and every show there after)
-             * 
-             * weird very specific bug:
-             * If the window containing the MessageBoxInternalDialog is moved before the 
-             * MessageBoxInternalDialog is shown then for some reason LayoutUpdated isn't triggering 
-             * or triggering enough for our logic to move the resizable area to the center. We can up 
-             * that number to something around 100 and the problem still occurs but when it is this 
-             * high we see affects on usability. Such as, its takes a few seconds before the user is 
-             * able to drag or resize the resizable area.
-             * 
-             * potential solution:
-             * Very quickly show the message box when your MainWindow loads then immediately hide it.
-             * This is so the OnApplyTemplate can run and we can grab our runtime controls that make 
-             * up our ControlTemplate (we'll the ones we use).
-             */
-            if (hasBeenUpdatedCount < LayoutUpdateFineseCount)
+            if (Visibility == Visibility.Collapsed) return;
+
+            if (!hasBeenUpdated)
             {
                 CenterMessageBox();
 
-                hasBeenUpdatedCount++;
+                hasBeenUpdated = true;
             }
         }
 
@@ -294,6 +258,7 @@ namespace WPF.InternalDialogs
 
         #region Methods
 
+        // base class VisibilityChanged still fires, no need to call
         new private static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MessageBoxInternalDialog? instance = d as MessageBoxInternalDialog;
@@ -312,9 +277,6 @@ namespace WPF.InternalDialogs
                 return;
             }
 
-            // call our base
-            InternalDialog.VisibilityChangedCallback(instance, e);
-
             if (visibility == Visibility.Visible)
             {
                 instance.ValidateMinAndMax();
@@ -322,7 +284,7 @@ namespace WPF.InternalDialogs
             else // Collapsed
             {
                 // just reset our visual update counter
-                instance.hasBeenUpdatedCount = 0;
+                instance.hasBeenUpdated = false;
 
                 // make sure reset the size of the message (fixes custom size set from user dragging)
                 if (instance.innerBorder != null)
@@ -337,12 +299,6 @@ namespace WPF.InternalDialogs
         {
             if (canvas == null) return;
             if (innerBorder == null) return;
-
-            // if we are not visible then we do not need to manage our visuals, just leave
-            if (Visibility == Visibility.Collapsed)
-            {
-                return;
-            }
 
             // center message box
             double totalWidth = canvas.ActualWidth;
@@ -516,6 +472,19 @@ namespace WPF.InternalDialogs
             {
                 Canvas.SetTop(innerBorder, canvas.PointFromScreen(new Point(0, canvasOnScreen.Bottom - height.Value)).Y);
             }
+
+            // we are going to move the resizer too (bottom right of message box)
+            double updatedX = Canvas.GetLeft(innerBorder);
+            double updatedY = Canvas.GetTop(innerBorder);
+
+            width = innerBorder?.ActualWidth;
+            height = innerBorder?.ActualHeight;
+
+            double? resizerX = updatedX + width - 5;
+            double? resizerY = updatedY + height - 5;
+
+            Canvas.SetLeft(resizeThumbContainer, resizerX.HasValue ? resizerX.Value : 0.0);
+            Canvas.SetTop(resizeThumbContainer, resizerY.HasValue ? resizerY.Value : 0.0);
         }
 
         private void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)

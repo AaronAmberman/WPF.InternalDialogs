@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace WPF.InternalDialogs
 {
-    /// <summary>A simple input box to gather basic user input.</summary>
+    /// <summary>A simple input box to gather basic user input. This class cannot be inherited.</summary>
     [TemplatePart(Name = "PART_Canvas", Type = typeof(Canvas))]
     [TemplatePart(Name = "PART_InnerBorder", Type = typeof(Border))]
     [TemplatePart(Name = "PART_CancelButton", Type = typeof(Button))]
@@ -29,7 +29,7 @@ namespace WPF.InternalDialogs
         private Grid? resizeThumbContainer;
         private Thumb? resizeThumb;
 
-        private int hasBeenUpdatedCount = 0;
+        private bool hasBeenUpdated = false;
 
         #endregion
 
@@ -155,23 +155,6 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty InputBoxMessageProperty =
             DependencyProperty.Register("InputBoxMessage", typeof(string), typeof(InputBoxInternalDialog), new PropertyMetadata(string.Empty));
 
-        /// <summary>
-        /// Gets or sets the value we use to finese LayoutUpdated iterations. Default is 20.
-        /// </summary>
-        /// <remarks>
-        /// This counter is used to control how many times LayoutUpdated is fired before we stop trying to center the 
-        /// resizable area. This does affect performance so be wary of setting this passed the default. Setting it 100 
-        /// will cause a few seconds delay before the user can resize or drag the resizable area.
-        /// </remarks>
-        public int LayoutUpdateFineseCount
-        {
-            get { return (int)GetValue(LayoutUpdateFineseCountProperty); }
-            set { SetValue(LayoutUpdateFineseCountProperty, value); }
-        }
-
-        public static readonly DependencyProperty LayoutUpdateFineseCountProperty =
-            DependencyProperty.Register("LayoutUpdateFineseCount", typeof(int), typeof(InputBoxInternalDialog), new PropertyMetadata(20));
-
         /// <summary>Gets or sets the content for the resize grip.</summary>
         /// <remarks>
         /// Resize Grip is 18x18 and the top left slightly overlays the bottom right of the resizable area. Plan your visuals accordingly. There 
@@ -265,33 +248,13 @@ namespace WPF.InternalDialogs
 
         private void InputBoxInternalDialog_LayoutUpdated(object? sender, EventArgs e)
         {
-            /*
-             * To make it so the input box appears in the middle we use LayoutUpdated because it 
-             * fires frequently, we need to finese it so that it only gets us what we need then it 
-             * stops messing with the UI, a certain number of passes accomplishes that goal. This 
-             * centers when showing but then allows the user to move it freely afterwards (takes less 
-             * than one second for all iterations to occur).
-             * 
-             * (this accounts for initial load and every show there after)
-             * 
-             * weird very specific bug:
-             * If the window containing the InputBoxInternalDialog is moved before the 
-             * InputBoxInternalDialog is shown then for some reason LayoutUpdated isn't triggering 
-             * or triggering enough for our logic to move the resizable area to the center. We can up 
-             * that number to something around 100 and the problem still occurs but when it is this 
-             * high we see affects on usability. Such as, its takes a few seconds before the user is 
-             * able to drag or resize the resizable area.
-             * 
-             * potential solution:
-             * Very quickly show the input box when your MainWindow loads then immediately hide it.
-             * This is so the OnApplyTemplate can run and we can grab our runtime controls that make 
-             * up our ControlTemplate (we'll the ones we use).
-             */
-            if (hasBeenUpdatedCount < LayoutUpdateFineseCount)
+            if (Visibility == Visibility.Collapsed) return;
+
+            if (!hasBeenUpdated)
             {
                 CenterMessageBox();
 
-                hasBeenUpdatedCount++;
+                hasBeenUpdated = true;
             }
         }
 
@@ -299,6 +262,7 @@ namespace WPF.InternalDialogs
 
         #region Methods
 
+        // base class VisibilityChanged still fires, no need to call
         new private static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             InputBoxInternalDialog? instance = d as InputBoxInternalDialog;
@@ -317,9 +281,6 @@ namespace WPF.InternalDialogs
                 return;
             }
 
-            // call our base
-            InternalDialog.VisibilityChangedCallback(instance, e);
-
             if (visibility == Visibility.Visible)
             {
                 instance.ValidateMinAndMax();
@@ -327,7 +288,7 @@ namespace WPF.InternalDialogs
             else // Collapsed
             {
                 // just reset our visual update counter
-                instance.hasBeenUpdatedCount = 0;
+                instance.hasBeenUpdated = false;
 
                 // make sure reset the size of the message (fixes custom size set from user dragging)
                 if (instance.innerBorder != null)

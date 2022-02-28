@@ -41,6 +41,12 @@
         </Setter>
     </Style>
 
+    <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="#00000000" />
+        <Setter Property="BorderBrush" Value="#00000000" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
     <Style TargetType="{x:Type local:InputBoxInternalDialog}">
         <Setter Property="Background" Value="#AA000000" />
         <Setter Property="BorderBrush" Value="#FF333333" />
@@ -53,15 +59,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="ButtonAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
-        <Setter Property="CloseButtonStyle">
-            <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                    <Setter Property="Background" Value="#00000000" />
-                    <Setter Property="BorderBrush" Value="#00000000" />
-                    <Setter Property="BorderThickness" Value="0" />
-                </Style>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="CloseButtonStyle" Value="{StaticResource CloseButtonStyle}" />
         <Setter Property="CloseFocusBehavior" Value="FocusPreviousFocusedIInputElement" />
         <Setter Property="CloseOnEscape" Value="True" />
         <Setter Property="ContentPadding" Value="0" />
@@ -203,15 +201,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="ButtonAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
-        <Setter Property="CloseButtonStyle">
-            <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                    <Setter Property="Background" Value="#00000000" />
-                    <Setter Property="BorderBrush" Value="#00000000" />
-                    <Setter Property="BorderThickness" Value="0" />
-                </Style>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="CloseButtonStyle" Value="{StaticResource CloseButtonStyle}" />
         <Setter Property="CloseFocusBehavior" Value="FocusPreviousFocusedIInputElement" />
         <Setter Property="CloseOnEscape" Value="True" />
         <Setter Property="ContentPadding" Value="0" />
@@ -808,15 +798,7 @@
         <Setter Property="BorderBrush" Value="#FF333333" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="AnswerAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
-        <Setter Property="CloseButtonStyle">
-            <Setter.Value>
-                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                    <Setter Property="Background" Value="#00000000" />
-                    <Setter Property="BorderBrush" Value="#00000000" />
-                    <Setter Property="BorderThickness" Value="0" />
-                </Style>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="CloseButtonStyle" Value="{StaticResource CloseButtonStyle}" />
         <Setter Property="CloseFocusBehavior" Value="FocusPreviousFocusedIInputElement" />
         <Setter Property="CloseOnEscape" Value="True" />
         <Setter Property="ContentBackground" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />

@@ -30,177 +30,159 @@ namespace Testing
         {
             if (e.Key == Key.Enter)
             {
-                //if (internalDialog.Visibility == Visibility.Collapsed)
-                //{
-                //    internalDialog.Visibility = Visibility.Visible;
-                //}
-
-
-
-
-                //if (mbiDialog.Visibility == Visibility.Collapsed)
-                //{
-                //    mbiDialog.Visibility = Visibility.Visible;
-                //}
-
-
-
-
-                //if (ibid.Visibility == Visibility.Collapsed)
-                //{
-                //    ibid.Visibility = Visibility.Visible;
-                //}
-
-
-
-
-                //if (mrid.Visibility == Visibility.Collapsed)
-                //{
-                //    mrid.Visibility = Visibility.Visible;
-                //}
+                
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void InternalDialogCloseButton(object sender, RoutedEventArgs e)
         {
-            //if (!internalDialog.IsModal)
-            //{
-            //    internalDialog.Visibility = Visibility.Visible;
-            //}
-
-
-
-
-            //if (!mbiDialog.IsModal)
-            //{
-            //    mbiDialog.Visibility = Visibility.Visible;
-            //}
-
-
-
-
-            //if (!ibid.IsModal)
-            //{
-            //    ibid.Visibility = Visibility.Visible;
-            //}
-
-
-
-
-            if (!mrid.IsModal)
-            {
-                mrid.Visibility = Visibility.Visible;
-            }
+            internalDialog.Visibility = Visibility.Collapsed;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void MovableResizableCloseButton(object sender, RoutedEventArgs e)
         {
-            //internalDialog.Result = MessageBoxResult.OK;
-            //internalDialog.Visibility = Visibility.Collapsed;
-
-
-
-
-            //mbiDialog.Result = MessageBoxResult.OK;
-            //mbiDialog.Visibility = Visibility.Collapsed;
-
-
-
-
-            //ibid.Result = MessageBoxResult.OK;
-            //ibid.Visibility = Visibility.Collapsed;
-
-
-
-
-            //mrid.Result = MessageBoxResult.OK;
-            //mrid.Visibility = Visibility.Collapsed;
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            //if (internalDialog.IsModal)
-            //{
-            //    for (int i = 0; i < 10; i++)
-            //    {
-            //        Debug.WriteLine(i);
-            //    }
-
-            //    internalDialog.Visibility = Visibility.Visible;
-
-            //    for (int i = 0; i < 10; i++)
-            //    {
-            //        Debug.WriteLine(i);
-            //    }
-
-            //    Debug.WriteLine(internalDialog.Result);
-            //}
-
-
-
-
-            //if (mbiDialog.IsModal)
-            //{
-            //    for (int i = 0; i < 10; i++)
-            //    {
-            //        Debug.WriteLine(i);
-            //    }
-
-            //    mbiDialog.Visibility = Visibility.Visible;
-
-            //    for (int i = 0; i < 10; i++)
-            //    {
-            //        Debug.WriteLine(i);
-            //    }
-
-            //    Debug.WriteLine(mbiDialog.Result);
-            //}
-            //else
-            //{
-            //    mbiDialog.Message = "Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application. Some other message about your application.Some other message about your application.Some other message about your application. Some other message about your application. Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.Some other message about your application.";
-
-            //    mbiDialog.Visibility = Visibility.Visible;
-            //}
-
-
-
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    Debug.WriteLine(i);
-            //}
-
-            //ibid.Visibility = Visibility.Visible;
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    Debug.WriteLine(i);
-            //}
-
-            //Debug.WriteLine(ibid.Result);
-
-
-
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    Debug.WriteLine(i);
-            //}
-
-            //mrid.Visibility = Visibility.Visible;
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    Debug.WriteLine(i);
-            //}
-
-            //Debug.WriteLine(mrid.Result);
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            mrid.Result = MessageBoxResult.OK;
             mrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void InternalDialogExample1(object sender, RoutedEventArgs e)
+        {
+            internalDialog.Visibility = Visibility.Visible;
+        }
+
+        private void InternalDialogExample2(object sender, RoutedEventArgs e)
+        {
+            internalDialog.HorizontalContentAlignment = HorizontalAlignment.Center;
+            internalDialog.VerticalContentAlignment = VerticalAlignment.Center;
+            internalDialog.BorderThickness = new Thickness(5);
+            internalDialog.BorderBrush = Brushes.Red;
+            internalDialog.Visibility = Visibility.Visible;
+        }
+
+        private void InternalDialogExample3(object sender, RoutedEventArgs e)
+        {
+            internalDialog.Background = new SolidColorBrush(new Color { A = 33, R = 0, G = 0, B = 0 });
+            internalDialog.BorderThickness = new Thickness(10);
+            internalDialog.BorderBrush = Brushes.Green;
+            internalDialog.ContentPadding = new Thickness(50);
+            internalDialog.CornerRadius = new CornerRadius(0);
+            internalDialog.Padding = new Thickness(50);
+            internalDialog.Foreground = Brushes.Green;
+            internalDialog.Visibility = Visibility.Visible;
+        }
+
+        private void InternalDialogExample4(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.WriteLine($"Before : {i}");
+            }
+
+            internalDialog.Content = "Showing modal. Press escape to close.";
+            internalDialog.IsModal = true;
+            internalDialog.Visibility = Visibility.Visible;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.WriteLine($"After : {i}");
+            }
+        }
+
+        private void MessageBoxExample1(object sender, RoutedEventArgs e)
+        {
+            mbiDialog.Title = "Message Box Example 1";
+            mbiDialog.Message = "This is a simple message box.";
+            mbiDialog.MessageBoxImage = MessageBoxInternalDialogImage.Information;
+            mbiDialog.MessageBoxButton = MessageBoxButton.OKCancel;
+            mbiDialog.Visibility = Visibility.Visible;
+        }
+
+        private void MessageBoxExample2(object sender, RoutedEventArgs e)
+        {
+            mbiDialog.Title = "Message Box Example 2";
+            mbiDialog.Message = "The user was asked a question. Something something question?";
+            mbiDialog.MessageBoxImage = MessageBoxInternalDialogImage.Help;
+            mbiDialog.MessageBoxButton = MessageBoxButton.YesNo;
+            mbiDialog.Visibility = Visibility.Visible;
+        }
+
+        private void MessageBoxExample3(object sender, RoutedEventArgs e)
+        {
+            mbiDialog.Title = "Message Box Example 3";
+            mbiDialog.TitleAreaBackground = Brushes.Green;
+            mbiDialog.Message = "A security check was successful.";
+            mbiDialog.MessageBoxImage = MessageBoxInternalDialogImage.SecurityOK;
+            mbiDialog.MessageBoxButton = MessageBoxButton.OK;
+            mbiDialog.ButtonAreaBackground = Brushes.ForestGreen;
+            mbiDialog.Visibility = Visibility.Visible;
+        }
+
+        private void MessageBoxExample4(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.WriteLine($"Before : {i}");
+            }
+
+            mbiDialog.Title = "Message Box Example 4";
+            mbiDialog.TitleAreaBackground = Brushes.Red;
+            mbiDialog.Message = "Some security critical thing occurred. Tell the user. Add modal-ness so code executes after we close.";
+            mbiDialog.MessageBoxImage = MessageBoxInternalDialogImage.SecurityCritical;
+            mbiDialog.MessageBoxButton = MessageBoxButton.YesNoCancel;
+            mbiDialog.MessageBoxBackground = Brushes.Orange;
+            mbiDialog.ButtonAreaBackground = Brushes.Red;
+            mbiDialog.IsModal = true;
+            mbiDialog.Visibility = Visibility.Visible;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.WriteLine($"After : {i}");
+            }
+        }
+
+        private void InputBoxExample1(object sender, RoutedEventArgs e)
+        {
+            ibid.Input = "Feed in input.";
+            ibid.InputBoxMessage = "Some message to the user";
+            ibid.Visibility = Visibility.Visible;
+        }
+
+        private void InputBoxExample2(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.WriteLine($"Before : {i}");
+            }
+
+            ibid.Input = "";
+            ibid.InputBoxMessage = "This is blocking input.";
+            ibid.IsModal = true;
+            ibid.Visibility = Visibility.Visible;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.WriteLine($"After : {i}");
+            }
+        }
+
+        private void MovableResizableExample1(object sender, RoutedEventArgs e)
+        {
+            mrid.Visibility = Visibility.Visible;
+        }
+
+        private void MovableResizableExample2(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.WriteLine($"Before : {i}");
+            }
+
+            mrid.IsModal = true;
+            mrid.Visibility = Visibility.Visible;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.WriteLine($"After : {i}");
+            }
         }
     }
 }

@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -22,32 +22,94 @@
             <TextBlock Grid.Column="0" Text="Name" Margin="0,0,5,0" />
             <TextBox Grid.Column="1" Width="150" />
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="Something" Margin="0,0,5,0" />
-            <CheckBox Grid.Column="1" Content="A ChckBox" />
+            <CheckBox Grid.Column="1" Content="A CheckBox" />
         </Grid>
-        <Button Grid.Row="2" Content="Non-Modal" HorizontalAlignment="Center" Click="Button_Click"/>
-        <Button Grid.Row="2" Content="Modal" HorizontalAlignment="Center" Margin="200,0,0,0" Click="Button_Click_2"/>
-        <!--<id:InternalDialog x:Name="internalDialog" Grid.Row="0" Grid.RowSpan="4" Padding="5" 
+        <Grid Grid.Row="2" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Internal Dialog" FontSize="16" />
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="Message Box Internal Dialog" FontSize="16" />
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="Input Box Internal Dialog" FontSize="16" />
+            <TextBlock Grid.Column="3" Grid.Row="0" Text="Movable Resizable Internal Dialog" FontSize="16" />
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="Example 1" HorizontalAlignment="Left" Click="InternalDialogExample1" />
+                <Button Grid.Row="1" Content="Example 2" HorizontalAlignment="Left" Margin="0,5,0,0" Click="InternalDialogExample2" />
+                <Button Grid.Row="2" Content="Example 3" HorizontalAlignment="Left" Margin="0,5,0,0" Click="InternalDialogExample3" />
+                <Button Grid.Row="3" Content="Example 4" HorizontalAlignment="Left" Margin="0,5,0,0" Click="InternalDialogExample4" />
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="Example 1" HorizontalAlignment="Left" Click="MessageBoxExample1" />
+                <Button Grid.Row="1" Content="Example 2" HorizontalAlignment="Left" Margin="0,5,0,0" Click="MessageBoxExample2" />
+                <Button Grid.Row="2" Content="Example 3" HorizontalAlignment="Left" Margin="0,5,0,0" Click="MessageBoxExample3" />
+                <Button Grid.Row="3" Content="Example 4" HorizontalAlignment="Left" Margin="0,5,0,0" Click="MessageBoxExample4" />
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="Example 1" HorizontalAlignment="Left" Click="InputBoxExample1" />
+                <Button Grid.Row="1" Content="Example 2" HorizontalAlignment="Left" Margin="0,5,0,0" Click="InputBoxExample2" />
+            </Grid>
+            <Grid Grid.Column="3" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="Example 1" HorizontalAlignment="Left" Click="MovableResizableExample1" />
+                <Button Grid.Row="1" Content="Example 2" HorizontalAlignment="Left" Margin="0,5,0,0" Click="MovableResizableExample2" />
+            </Grid>
+        </Grid>
+        <id:InternalDialog x:Name="internalDialog" Grid.Row="0" Grid.RowSpan="4" Padding="5" 
                            Background="#AA000000" BorderBrush="#FF0066FF" BorderThickness="3" Foreground="White"
                            CornerRadius="5" CloseOnEscape="True" CloseFocusBehavior="FocusPreviousFocusedIInputElement" IsModal="False"
                            FocusParent="{Binding ElementName=rootGrid}">
             <Grid>
-                <TextBlock Text="My Content" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
-                <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Click_1" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="My Content" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Grid.Row="0" />
+                <Button Content="Close" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="InternalDialogCloseButton" Grid.Row="1" />
             </Grid>
-        </id:InternalDialog>-->
-        <!--<id:MessageBoxInternalDialog x:Name="mbiDialog" Grid.Row="0" Grid.RowSpan="4"
+        </id:InternalDialog>
+        <id:MessageBoxInternalDialog x:Name="mbiDialog" Grid.Row="0" Grid.RowSpan="4"
                                      Message="This is a message box!!!" 
                                      Title="Message Box Title" MessageBoxImage="Information" CornerRadius="0" IsModal="False"
-                                     FocusParent="{Binding ElementName=rootGrid}" />-->
-        <!--<id:InputBoxInternalDialog x:Name="ibid" Grid.Row="0" Grid.RowSpan="4"
+                                     FocusParent="{Binding ElementName=rootGrid}" />
+        <id:InputBoxInternalDialog x:Name="ibid" Grid.Row="0" Grid.RowSpan="4"
                                    InputBoxMessage="Message to the user." Title="The Title" CornerRadius="0" IsModal="False" 
-                                   FocusParent="{Binding ElementName=rootGrid}" />-->
+                                   FocusParent="{Binding ElementName=rootGrid}" />
         <id:MovableResizableInternalDialog x:Name="mrid" Grid.Row="0" Grid.RowSpan="4" IsModal="False"
                                            ResizableMinHeight="100" ResizableMinWidth="100"
                                            FocusParent="{Binding ElementName=rootGrid}">
@@ -73,7 +135,7 @@
                 </Rectangle>
             </Grid>
             <id:MovableResizableInternalDialog.AnswerAreaContent>
-                <Button Content="Alert!" HorizontalAlignment="Right" Click="Button_Click_3" />
+                <Button Content="Alert!" HorizontalAlignment="Right" Click="MovableResizableCloseButton" />
             </id:MovableResizableInternalDialog.AnswerAreaContent>
             <id:MovableResizableInternalDialog.ResizeGripContent>
                 <Rectangle Width="16" Height="16">

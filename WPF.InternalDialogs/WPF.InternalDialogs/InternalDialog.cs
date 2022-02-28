@@ -81,7 +81,12 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty FocusParentProperty =
             DependencyProperty.Register("FocusParent", typeof(UIElement), typeof(InternalDialog), new PropertyMetadata(null));
 
-        /// <summary>Gets or sets whether or not the dialog will block upon opening (similar to ShowDialog). Default is false.</summary>
+        /// <summary>
+        /// Gets or sets whether or not the dialog will block upon opening (similar to ShowDialog). Default is false.
+        /// </summary>
+        /// <remarks>
+        /// This will block code execution but will not feeze the UI.
+        /// </remarks>
         public bool IsModal
         {
             get { return (bool)GetValue(IsModalProperty); }
