@@ -117,7 +117,7 @@ This property is required for every InternalDialog. It will throw an exception a
 #### IsModal
 This property does what you would think and blocks code execution until returned. If you have a potential for multiple instances of InternalDialogs to show at the same time that are both modal then just be sure of the effects of entering another event loop when you already have one running. This is doable but might have unintended consequences for you. How IsModal works...
 
-We push a DispatcherFrame onto the Dispatcher so that it enters a new event loop. So just be wary when showing multiple InternalDialogs of its affects on your code.
+We push a DispatcherFrame onto the Dispatcher so that it enters a new event loop. So just be wary when showing multiple InternalDialogs of its effects on your code.
 
 ##### Multiple Instances
 Another thing to is that you should strive to have 1 InternalDialog per window that is used to represent the same thing. MessageBoxInternalDialog doesn't need to have 2 instances in the same window. You should just put it as the top most item in your XAML (so it covers all other visual objects). You only need one generic InternalDialog at runtime because its content can be dynamic and it should just be assigned programmatically or it should be bound to. Here is the thing, you can have as many as you want but if you try to pop open 2 that have IsModal on then you might start getting behavior you might not want to occur. Just be aware of how DispatcherFrames affect your code.
