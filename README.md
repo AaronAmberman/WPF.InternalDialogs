@@ -22,9 +22,11 @@ Inspired by https://github.com/BenjaminGale/ModalContentPresenter/blob/master/Mo
 
 ![DraggableMessageBox](https://user-images.githubusercontent.com/23512394/156051059-286e3e62-69a4-4089-8d26-3aea36da3c3c.gif)
 
+```xml
 <id:MessageBoxInternalDialog x:Name="mbiDialog" Grid.Row="0" Grid.RowSpan="4"
                              Message="This is a simple message box!!!" 
                              Title="Message Box Example 1" MessageBoxImage="Information" MessageBoxButton="OK"
                              FocusParent="{Binding ElementName=rootGrid}" />
-                             
+```      
+
 See, very easy to use!
