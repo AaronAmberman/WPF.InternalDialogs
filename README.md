@@ -41,7 +41,7 @@ See, very easy to use!
 - **MessageBoxInternalDialog**
     - This is a message box that is an internal dialog.
 - **ProgressInternalDialog**
-    - This class display a simple message with a progress bar.
+    - This class displays a simple message with a progress bar.
 
 
 ### Class Overviews
