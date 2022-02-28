@@ -14,7 +14,7 @@ Inspired by https://github.com/BenjaminGale/ModalContentPresenter/blob/master/Mo
 5. Proper look-less control template design so can be used in EDA or MVVM development.
     - Dependency properties make it so they can be assigned or bound to.
 6. Can be dragged by user.
-    - Bounds checking so the user cannot drag the internal dialogs off screen.
+    - Bounds checking so the user if the user drags the dialog off screen then it snaps back into the interface a little bit. Enough to grab and move again.
 7. Can be resized by user.
 8. The MessageBoxInternalDialog has 23 different icons...not just 4.
 9. The MovableResizableInternalDialog makes it very easy to make your own movable resizable internal dialog if you want completely custom user interfaces.
