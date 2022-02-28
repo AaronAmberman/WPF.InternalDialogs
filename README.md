@@ -115,7 +115,7 @@ See, very easy to use!
 This property is required for every InternalDialog. It will throw an exception at runtime if this value is null. This property should be some kind of root Grid, Border or Panel that contains the other focusable children. It should NOT be a singular IInputElement to pass focus back to or steal it from. You can choose various types of "re-focusing" strategies by setting *CloseFocusBehavior*. The default is to focus back to the control that had focus previously but you can choose first, last, next or step backwards as well.
 
 #### IsModal
-This property does what you would think and blocks code execution until returned. If you have a potential for multiple instances to of InternalDialogs to show at the same time that are both modal then just be sure of the effects of entering another event loop when you already have one running. This is doable but might have unintended consequences for you. How IsModal works...
+This property does what you would think and blocks code execution until returned. If you have a potential for multiple instances of InternalDialogs to show at the same time that are both modal then just be sure of the effects of entering another event loop when you already have one running. This is doable but might have unintended consequences for you. How IsModal works...
 
 We push a DispatcherFrame onto the Dispatcher so that it enters a new event loop. So just be wary when showing multiple InternalDialogs of its affects on your code.
 
