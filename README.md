@@ -42,3 +42,32 @@ See, very easy to use!
     - This is a message box that is an internal dialog.
 - **ProgressInternalDialog**
     - This class display a simple message with a progress bar.
+
+
+### Class Overviews
+- **InternalDialog**
+    - *CloseFocusBehavior* - Gets or sets the behavior to take when closing the dialog in regards to setting focus to content underneath.
+    - *CloseOnEscape* - Gets or sets whether or not the dialog will close on escape key up. Default is true.
+    - *ContentPadding* - Gets or sets the padding for the content inside the border.
+    - *CornerRadius* - Gets or sets the corner radius for the border.
+    - *FocusParent* - Gets or sets the UIElement used to borrow focus from / pass focus back to upon open / close (Visibility.Visible / Visibility.Collapsed). Not the IInputElement from Keyboard.FocusedElement. **Generally a root Grid, Panel or Border**. This UIElement is not used for positioning. UI placement is up to the front-end designer using the instance of InternalDialog.
+    - *IsModal* - Gets or sets whether or not the dialog will block upon opening (similar to ShowDialog vs Show). Default is false.
+    - *Result* - Gets or sets the result of the internal dialog.
+        - For example the MessageBoxInternalDialog will set this to OK, Cancel, Yes or No accordingly.
+- **MovableResizableInternalDialog**
+    - *AnswerAreaBackground* - Gets or sets the background for the answer area.
+        - This would be where the buttons are
+    - *AnswerAreaContent* - Gets or sets the answer area content.
+    - *CloseButtonStyle* - Gets or sets the style to use for the close button at the top right.
+    - *ContentBackground* - Gets or sets the background for the content part of the movable resizable internal dialog. Not the same as Background.
+    - *ResizableMaxHeight* - Gets or sets the movable resizable internal dialog maximum height. Default is 600.0.
+    - *ResizableMaxWidth* - Gets or sets the movable resizable internal dialog maximum width. Default is 800.0.
+    - *ResizableMinHeight* - Gets or sets the movable resizable internal dialog minimum height. Default is 50.0.
+    - *ResizableMinWidth* - Gets or sets the movable resizable internal dialog minimum width. Default is 100.0.
+    - *ResizeGripContent* - Gets or sets the content for the resize grip. Resize Grip is 18x18 and the top left slightly overlays the bottom right of the resizable area. Plan your visuals accordingly. There is also sometihng to know, the opacity for the whole resize grip area is .8 or 80% and on mouse over goes to 1.0 or 100%. This is so we can generically achieve a mouse over look. Plan your visuals accordingly.
+    - *ResizeGripCursor* - Gets or sets the cursor for the resize gripper.
+    - *ResizeGripVisibility* - Gets or sets the visibility of the resize grip. Visible = resizing enabled, Collapsed/Hidden = resizing disabled.
+    - *TitleBackground* - Gets or sets the background for the title area.
+    - *TitleContent* - Gets or sets the title content. The title content has IsHitTestVisible="False" set so the underlying Thumb can work.
+    - *TitleCursor* - Gets or sets the cursor for the title area. Default is Cursors.SizeNWSE.
+    - *TitleHorizontalAlignment* - Gets or sets the horizontal alignment of the title.
