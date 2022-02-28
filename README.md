@@ -111,3 +111,24 @@ See, very easy to use!
     - *TitleCursor* - Gets or sets the cursor for the title area. Default is Cursors.SizeAll.
     - *TitleHorizontalAlignment* - Gets or sets the horizontal alignment of the title.
 
+#### FocusParent
+This property is required for every InternalDialog. It will throw an exception at runtime if this value is null. This property should be some kinf of root Grid, Border or Panel that contains the other focusable children. It should NOT be a singular IInputElement to pass focus back to or steal it from. You can choose various types of "re-focusing" strategies by setting *CloseFocusBehavior*. The default is to focus back to the control that had focus previously but you can choose first, last, next or previous as well.
+
+#### IsModal
+This property does what you would think and blocks code execution until returned. If you have a potential for multiple instances to of InternalDialogs to show at the same time that are both modal then just be sure of the effects of entering another event loop when you already have one running. This is doable but might have unintended consequences for you. How IsModal works...
+
+We push a DispatcherFrame onto the Dispatcher so that it enters a new event loop. So just be wary when showing multiple InternalDialogs of its affects on your code.
+
+##### Multiple Instances
+Another thing to is that you should strive to have 1 InternalDialog per window that is used to represent the same thing. MessageBoxInternalDialog doesn't need to have 2 instances in the same window. You should just put it as the top most item in your XAML (so it covers all other visual objects). You only need one generic InternalDialog at runtime because its content can be dynamic and it should just be assigned programmatically or it should be bound to. Here is the thing, you can have as many as you want but if you try to pop open 2 that have IsModal on then you might start getting behavior you might not want to occur. Just be aware of how DispatcherFrames affect your code.
+
+#### Customer Gripper Made Easy
+We use a ContentPresenter to paint the resize gripper so that you can put whatever kind of content you'd like for the gripper. Just be mindful that it is an 18x18 area that ever so slightly overlays the bottom right of the content with its top left points.
+
+![CustomGrip](https://user-images.githubusercontent.com/23512394/156063732-c20dbf8a-aa29-4545-91ee-dd72ea9374b2.png)
+
+#### Custom Cursors
+We thought as a part of styling you might want to change the drag cursor for the title and the resize gripper. *TitleCursor* and *ResizeGripCursor*, respectively, allow you to do that.
+
+#### Custom Button Style
+We also thought that you'd want the buttons in the InternDialogs to be restylable without having to retemplate the entire controls...so we added *CloseButtonStyle* and *ButtonStyle* to allow you to do just that.
