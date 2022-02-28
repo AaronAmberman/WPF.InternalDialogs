@@ -184,5 +184,17 @@ namespace Testing
                 Debug.WriteLine($"After : {i}");
             }
         }
+
+        private void ProgressInternalDialogExample1(object sender, RoutedEventArgs e)
+        {
+            pid2.Visibility = Visibility.Visible;
+        }
+
+        private void ProgressInternalDialogExample2(object sender, RoutedEventArgs e)
+        {
+            pid.ProgressDialogMessage = "This is a normal progress bar. Max: 100, Min:0, Value 75.";
+            pid.ProgressValue = 75.0;
+            pid.Visibility = Visibility.Visible;
+        }
     }
 }
