@@ -45,7 +45,7 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ButtonAreaBackgroundProperty =
             DependencyProperty.Register("ButtonAreaBackground", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>gets or sets the style to use for the buttons in the input box.</summary>
+        /// <summary>Gets or sets the style to use for the buttons in the input box.</summary>
         public Style ButtonStyle
         {
             get { return (Style)GetValue(ButtonStyleProperty); }
@@ -55,7 +55,7 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ButtonStyleProperty =
             DependencyProperty.Register("ButtonStyle", typeof(Style), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>gets or sets the style to use for the close button at the top right.</summary>
+        /// <summary>Gets or sets the style to use for the close button at the top right.</summary>
         public Style CloseButtonStyle
         {
             get { return (Style)GetValue(CloseButtonStyleProperty); }
@@ -170,7 +170,7 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ResizeGripContentProperty =
             DependencyProperty.Register("ResizeGripContent", typeof(object), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>Gets or sets the cursor for the resize gripper.</summary>
+        /// <summary>Gets or sets the cursor for the resize gripper. Default is Cursors.NWSE.</summary>
         public Cursor ResizeGripCursor
         {
             get { return (Cursor)GetValue(ResizeGripCursorProperty); }

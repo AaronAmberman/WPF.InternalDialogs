@@ -166,7 +166,7 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ResizeGripContentProperty =
             DependencyProperty.Register("ResizeGripContent", typeof(object), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>Gets or sets the cursor for the resize gripper.</summary>
+        /// <summary>Gets or sets the cursor for the resize gripper. Default is Cursors.NWSE.</summary>
         public Cursor ResizeGripCursor
         {
             get { return (Cursor)GetValue(ResizeGripCursorProperty); }

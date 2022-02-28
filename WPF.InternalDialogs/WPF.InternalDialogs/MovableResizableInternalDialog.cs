@@ -40,7 +40,7 @@ namespace WPF.InternalDialogs
 
         #region Properties
 
-        /// <summary>Gets or sets the background for the button area.</summary>
+        /// <summary>Gets or sets the background for the answer area.</summary>
         public SolidColorBrush AnswerAreaBackground
         {
             get { return (SolidColorBrush)GetValue(AnswerAreaBackgroundProperty); }
@@ -60,7 +60,7 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty AnswerAreaContentProperty =
             DependencyProperty.Register("AnswerAreaContent", typeof(object), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>gets or sets the style to use for the close button at the top right.</summary>
+        /// <summary>Gets or sets the style to use for the close button at the top right.</summary>
         public Style CloseButtonStyle
         {
             get { return (Style)GetValue(CloseButtonStyleProperty); }
@@ -90,7 +90,7 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ResizableMaxHeightProperty =
             DependencyProperty.Register("ResizableMaxHeight", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(600.0));
 
-        /// <summary>Gets or sets the movable resizable internal dialog maximum width. Default is 800.0</summary>
+        /// <summary>Gets or sets the movable resizable internal dialog maximum width. Default is 800.0.</summary>
         public double ResizableMaxWidth
         {
             get { return (double)GetValue(ResizableMaxWidthProperty); }
@@ -135,7 +135,7 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ResizeGripContentProperty =
             DependencyProperty.Register("ResizeGripContent", typeof(object), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
-        /// <summary>Gets or sets the cursor for the resize gripper.</summary>
+        /// <summary>Gets or sets the cursor for the resize gripper. Default is Cursors.NWSE.</summary>
         public Cursor ResizeGripCursor
         {
             get { return (Cursor)GetValue(ResizeGripCursorProperty); }
