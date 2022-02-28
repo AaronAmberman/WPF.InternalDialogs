@@ -153,4 +153,4 @@ We also thought that you'd want the buttons in the InternDialogs to be restylabl
 #### ProgressInternalDialog
 We gave you a *ProgressBarStyle* property so custom styling can be applied to the progress bar as well. The thing to note about the ProgressInternalDialog is that even though you can set the style for progress bar the value for it (it not IsIndererminate) is still managed by the PorgressInternalDialog. Use the *ProgressValue* property to manage this.
 
-### Hope you enjoy. Happy coding!
+#### Hope you enjoy. Happy coding!
