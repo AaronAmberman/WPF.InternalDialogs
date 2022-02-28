@@ -156,7 +156,7 @@ We thought as a part of styling you might want to change the drag cursor for the
 We also thought that you'd want the buttons in the InternDialogs to be restylable without having to retemplate the entire control...so we added *CloseButtonStyle* and *ButtonStyle* to allow you to do just that.
 
 #### ProgressInternalDialog
-We gave you a *ProgressBarStyle* property so custom styling can be applied to the progress bar as well. The thing to note about the ProgressInternalDialog is that even though you can set the style for progress bar the value for it (it not IsIndererminate) is still managed by the PorgressInternalDialog. Use the *ProgressValue* property to manage this.
+We gave you a *ProgressBarStyle* property so custom styling can be applied to the progress bar as well. The thing to note about the ProgressInternalDialog is that even though you can set the style for progress bar the value for it (if not IsIndererminate) is still managed by the PorgressInternalDialog. Use the *ProgressValue* property to manage this.
 
 #### Hope you enjoy. Happy coding!
 ![MBID-Example1](https://user-images.githubusercontent.com/23512394/156067308-d8b9651f-8248-497d-9235-ffd9cad4cf39.png)
