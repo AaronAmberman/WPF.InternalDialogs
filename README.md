@@ -25,7 +25,7 @@ Inspired by https://github.com/BenjaminGale/ModalContentPresenter/blob/master/Mo
 ```xml
 <id:MessageBoxInternalDialog x:Name="mbiDialog" Grid.Row="0" Grid.RowSpan="4"
                              Message="This is a simple message box." 
-                             Title="Message Box Example 1" MessageBoxImage="Information" MessageBoxButton="OK"
+                             Title="Message Box Example 1" MessageBoxImage="Information" MessageBoxButton="OKCancel"
                              FocusParent="{Binding ElementName=rootGrid}" />
 ```      
 
