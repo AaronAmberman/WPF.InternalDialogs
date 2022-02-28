@@ -20,3 +20,4 @@ Inspired by https://github.com/BenjaminGale/ModalContentPresenter/blob/master/Mo
 9. The MovableResizableInternalDialog makes it very easy to make your own movable resizable internal dialog if you want completely custom user interfaces.
 10. The resize gripper content can be whatever you want it to be as it is just a ContentPresenter. :) 
 
+![DraggableMessageBox](https://user-images.githubusercontent.com/23512394/156051059-286e3e62-69a4-4089-8d26-3aea36da3c3c.gif)
