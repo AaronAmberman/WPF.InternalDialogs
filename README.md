@@ -50,7 +50,7 @@ See, very easy to use!
     - *CloseOnEscape* - Gets or sets whether or not the dialog will close on escape key up. Default is true.
     - *ContentPadding* - Gets or sets the padding for the content inside the border.
     - *CornerRadius* - Gets or sets the corner radius for the border.
-    - *FocusParent* - Gets or sets the UIElement used to borrow focus from / pass focus back to upon open / close (Visibility.Visible / Visibility.Collapsed). Not the IInputElement from Keyboard.FocusedElement. **Generally a root Grid, Panel or Border**. This UIElement is not used for positioning. UI placement is up to the front-end designer using the instance of InternalDialog.
+    - ***FocusParent - Gets or sets the UIElement used to borrow focus from / pass focus back to upon open / close (Visibility.Visible / Visibility.Collapsed). Not the IInputElement from Keyboard.FocusedElement. Generally a root Grid, Panel or Border. This UIElement is not used for positioning. UI placement is up to the front-end designer using the instance of InternalDialog.***
     - *IsModal* - Gets or sets whether or not the dialog will block upon opening (similar to ShowDialog vs Show). Default is false.
     - *Result* - Gets or sets the result of the internal dialog.
         - For example the MessageBoxInternalDialog will set this to OK, Cancel, Yes or No accordingly.
