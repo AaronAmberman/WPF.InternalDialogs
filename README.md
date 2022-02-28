@@ -30,3 +30,15 @@ Inspired by https://github.com/BenjaminGale/ModalContentPresenter/blob/master/Mo
 ```      
 
 See, very easy to use!
+
+### Types
+- InternalDialog
+    - This is the base class for all the other types. This type allows content to be displayed in a light box modally. It just uses a ContentPresenter so there is no special visual management here.
+- MovableResizableInternalDialog
+    - This class allows developers to design and develop their own movable resizable content.
+- InputBoxInternalDialog
+    - This class allows developers to capture basic user input.
+- MessageBoxInternalDialog
+    - This is a message box that is an internal dialog.
+- ProgressInternalDialog
+    - This class display a simple message with a progress bar.
