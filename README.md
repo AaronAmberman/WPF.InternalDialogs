@@ -153,7 +153,7 @@ We use a ContentPresenter to paint the resize gripper so that you can put whatev
 We thought as a part of styling you might want to change the drag cursor for the title and the resize gripper. *TitleCursor* and *ResizeGripCursor*, respectively, allow you to do that.
 
 #### Custom Button Styles
-We also thought that you'd want the buttons in the InternDialogs to be restylable without having to retemplate the entire control...so we added *CloseButtonStyle* and *ButtonStyle* to allow you to do just that.
+We also thought that you'd want the buttons in the InternDialogs to be restylable without having to retemplate the entire control...so we added *CloseButtonStyle* and *ButtonStyle* to allow you to do just that. Please be aware that when you change the CloseButtonStyle you will have to specify your own content.
 
 #### ProgressInternalDialog
 We gave you a *ProgressBarStyle* property so custom styling can be applied to the progress bar as well. The thing to note about the ProgressInternalDialog is that even though you can set the style for progress bar the value for it (if not IsIndererminate) is still managed by the PorgressInternalDialog. Use the *ProgressValue* property to manage this.
