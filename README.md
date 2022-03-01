@@ -144,6 +144,9 @@ We push a DispatcherFrame onto the Dispatcher so that it enters a new event loop
 ##### Multiple Instances
 Another thing to is that you should strive to have 1 InternalDialog per window that is used to represent the same thing. MessageBoxInternalDialog doesn't need to have 2 instances in the same window. You should just put it as the top most item in your XAML (so it covers all other visual objects). You only need one generic InternalDialog at runtime because its content can be dynamic and it should just be assigned programmatically or it should be bound to. Here is the thing, you can have as many as you want but if you try to pop open 2 that have IsModal on then you might start getting behavior you might not want to occur. Just be aware of how DispatcherFrames affect your code.
 
+#### Visibility
+***Visibility of internal dialogs binds two way by default.***
+
 #### Customer Gripper Made Easy
 We use a ContentPresenter to paint the resize gripper so that you can put whatever kind of content you'd like for the gripper. Just be mindful that it is an 18x18 area that ever so slightly overlays the bottom right of the content with its top left points.
 
