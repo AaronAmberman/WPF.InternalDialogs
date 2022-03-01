@@ -194,7 +194,7 @@ namespace WPF.InternalDialogs
         static MovableResizableInternalDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MovableResizableInternalDialog), new FrameworkPropertyMetadata(typeof(MovableResizableInternalDialog)));
-            VisibilityProperty.OverrideMetadata(typeof(MovableResizableInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, VisibilityChangedCallback));
+            VisibilityProperty.OverrideMetadata(typeof(MovableResizableInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, VisibilityChangedCallback));
         }
 
         public MovableResizableInternalDialog()

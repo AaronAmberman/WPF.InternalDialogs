@@ -238,7 +238,7 @@ namespace WPF.InternalDialogs
         static InputBoxInternalDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(InputBoxInternalDialog), new FrameworkPropertyMetadata(typeof(InputBoxInternalDialog)));
-            VisibilityProperty.OverrideMetadata(typeof(InputBoxInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, VisibilityChangedCallback));
+            VisibilityProperty.OverrideMetadata(typeof(InputBoxInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, VisibilityChangedCallback));
         }
 
         public InputBoxInternalDialog()

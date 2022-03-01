@@ -204,7 +204,7 @@ namespace WPF.InternalDialogs
         static ProgressInternalDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressInternalDialog), new FrameworkPropertyMetadata(typeof(ProgressInternalDialog)));
-            VisibilityProperty.OverrideMetadata(typeof(ProgressInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, VisibilityChangedCallback));
+            VisibilityProperty.OverrideMetadata(typeof(ProgressInternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, VisibilityChangedCallback));
         }
 
         public ProgressInternalDialog()
