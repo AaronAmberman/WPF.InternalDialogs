@@ -257,7 +257,6 @@ namespace WPF.InternalDialogs
 
         #region Methods
 
-        // base class VisibilityChanged still fires, no need to call
         new private static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MessageBoxInternalDialog? instance = d as MessageBoxInternalDialog;
