@@ -153,7 +153,7 @@ namespace WPF.InternalDialogs
             // we will have Visible and Collapsed states, no Hidden
             if (visibility == Visibility.Hidden)
             {
-                instance.Visibility = Visibility.Collapsed;
+                instance.SetValue(VisibilityProperty, Visibility.Collapsed);
 
                 // kick out and let us setting the new value make the below logic run,
                 // we'll leave our callback (this if will not be hit next callback)
@@ -257,8 +257,8 @@ namespace WPF.InternalDialogs
         {
             if (e.Key == Key.Escape && CloseOnEscape)
             {
-                Result = MessageBoxResult.Cancel;
-                Visibility = Visibility.Collapsed;
+                SetValue(ResultProperty, MessageBoxResult.Cancel);
+                SetValue(VisibilityProperty, Visibility.Collapsed);
             }
         }
 
