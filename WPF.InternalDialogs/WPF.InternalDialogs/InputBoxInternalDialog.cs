@@ -281,6 +281,8 @@ namespace WPF.InternalDialogs
                 return;
             }
 
+            InternalDialog.VisibilityChangedCallback(instance, e);
+
             if (visibility == Visibility.Visible)
             {
                 instance.ValidateMinAndMax();

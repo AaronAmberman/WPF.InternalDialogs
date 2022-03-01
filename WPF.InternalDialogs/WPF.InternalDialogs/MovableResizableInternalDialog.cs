@@ -218,7 +218,6 @@ namespace WPF.InternalDialogs
 
         #region Methods
 
-        // base class VisibilityChanged still fires, no need to call
         new private static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MovableResizableInternalDialog? instance = d as MovableResizableInternalDialog;
@@ -236,6 +235,8 @@ namespace WPF.InternalDialogs
                 // we'll leave our callback (this if will not be hit next callback)
                 return;
             }
+
+            InternalDialog.VisibilityChangedCallback(instance, e);
 
             if (visibility == Visibility.Visible)
             {

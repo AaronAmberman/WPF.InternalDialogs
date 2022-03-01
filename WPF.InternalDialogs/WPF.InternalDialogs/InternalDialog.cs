@@ -6,8 +6,6 @@ using System.Windows.Threading;
 
 namespace WPF.InternalDialogs
 {
-    // https://github.com/BenjaminGale/ModalContentPresenter/blob/master/ModalContentPresenter/ModalContentPresenter.cs
-
     /// <summary>Provides a base class for all other Internal Dialog types. However, it is still usable by itself, just add your own content.</summary>
     public class InternalDialog : ContentControl
     {
