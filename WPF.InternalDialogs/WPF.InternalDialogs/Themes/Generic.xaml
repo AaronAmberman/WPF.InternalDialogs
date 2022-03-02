@@ -917,7 +917,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="ResizeGripCursor" Value="SizeNWSE" />
-        <Setter Property="ResizeGripVisibility" Value="Collapsed" />
+        <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <Setter Property="TitleCursor" Value="SizeAll" />
         <!-- does not work because of the canvas -->
