@@ -147,14 +147,14 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("ResizeGripVisibility", typeof(Visibility), typeof(MovableResizableInternalDialog), new PropertyMetadata(Visibility.Visible));
 
         /// <summary>Gets or sets the background for the title area.</summary>
-        public SolidColorBrush TitleBackground
+        public SolidColorBrush TitleAreaBackground
         {
-            get { return (SolidColorBrush)GetValue(TitleBackgroundProperty); }
-            set { SetValue(TitleBackgroundProperty, value); }
+            get { return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty); }
+            set { SetValue(TitleAreaBackgroundProperty, value); }
         }
 
-        public static readonly DependencyProperty TitleBackgroundProperty =
-            DependencyProperty.Register("TitleBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
+        public static readonly DependencyProperty TitleAreaBackgroundProperty =
+            DependencyProperty.Register("TitleAreaBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the title content. The title content has IsHitTestVisible="False" set so the underlying Thumb can work.</summary>
         public object TitleContent

@@ -811,7 +811,7 @@
         </Setter>
         <Setter Property="ResizeGripCursor" Value="SizeNWSE" />
         <Setter Property="ResizeGripVisibility" Value="Visible" />
-        <Setter Property="TitleBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+        <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <Setter Property="TitleCursor" Value="SizeAll" />
         <!-- does not work because of the canvas -->
         <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
@@ -832,7 +832,7 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Border Grid.Row="0" Background="{TemplateBinding TitleBackground}"
+                                <Border Grid.Row="0" Background="{TemplateBinding TitleAreaBackground}"
                                         CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource CornerRadiusConverter}, ConverterParameter=TL|TR}">
                                     <Grid Margin="5">
                                         <Grid.ColumnDefinitions>
@@ -840,7 +840,7 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Thumb x:Name="PART_TitleThumb" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,-5"
-                                               Background="{TemplateBinding TitleBackground}" Style="{StaticResource InternalDialogThumb}"
+                                               Background="{TemplateBinding TitleAreaBackground}" Style="{StaticResource InternalDialogThumb}"
                                                Cursor="{TemplateBinding TitleCursor}" />
                                         <ContentPresenter x:Name="titleContent" Grid.Column="0" IsHitTestVisible="False"
                                                           HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}"
