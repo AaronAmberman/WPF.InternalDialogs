@@ -159,7 +159,7 @@ We thought as a part of styling you might want to change the drag cursor for the
 We also thought that you'd want the buttons in the InternDialogs to be restylable without having to retemplate the entire control...so we added *CloseButtonStyle* and *ButtonStyle* to allow you to do just that. Please be aware that when you change the *CloseButtonStyle* you will have to specify your own content. This is not true for *ButtonStyle*. The bottom buttons will always have the content they have. If you'd like custom buttons then please consider using MovableResizableInternalDialog that allows for custom *AnswerAreaContent*.
 
 #### ProgressInternalDialog
-We gave you a *ProgressBarStyle* property so custom styling can be applied to the progress bar as well. The thing to note about the ProgressInternalDialog is that even though you can set the style for progress bar the value for it (if not IsIndererminate) is still managed by the PorgressInternalDialog. Use the *ProgressValue* property to manage this.
+We gave you a *ProgressBarStyle* property so custom styling can be applied to the progress bar as well. The thing to note about the ProgressInternalDialog is that even though you can set the style for progress bar the value for it (if not IsIndeterminate) is still managed by the PorgressInternalDialog. Use the *ProgressValue* property to manage this.
 
 #### Close On Escape Key Push?
 Yup, we got that!
