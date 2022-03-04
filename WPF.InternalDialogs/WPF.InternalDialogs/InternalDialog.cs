@@ -135,7 +135,7 @@ namespace WPF.InternalDialogs
         static InternalDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(InternalDialog), new FrameworkPropertyMetadata(typeof(InternalDialog)));
-            VisibilityProperty.OverrideMetadata(typeof(InternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault ,VisibilityChangedCallback));            
+            VisibilityProperty.OverrideMetadata(typeof(InternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, VisibilityChangedCallback));            
         }
 
         #endregion
