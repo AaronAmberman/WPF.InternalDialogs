@@ -280,7 +280,7 @@ namespace WPF.InternalDialogs
                 return;
             }
 
-            InternalDialog.VisibilityChangedCallback(instance, e);
+            //InternalDialog.VisibilityChangedCallback(instance, e);
 
             if (visibility == Visibility.Visible)
             {
