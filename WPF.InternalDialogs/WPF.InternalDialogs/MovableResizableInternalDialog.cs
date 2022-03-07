@@ -236,6 +236,14 @@ namespace WPF.InternalDialogs
                 return;
             }
 
+            /*
+             * Odd Bug:
+             * Not sure why but this type, versus all the other types that inherit InternalDialog, does not fire
+             * the base class' VisibiltyChanged event so the logic there never runs. Seems odd that this type 
+             * versus all the other types behaves differently.
+             */
+            InternalDialog.VisibilityChangedCallback(instance, e);
+
             if (visibility == Visibility.Visible)
             {
                 instance.ValidateMinAndMax();
