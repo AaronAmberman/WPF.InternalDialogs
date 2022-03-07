@@ -175,9 +175,6 @@ namespace WPF.InternalDialogs
 
                 instance.RaiseEvent(args);
 
-                // set key up for escape on close
-                //instance.KeyUp += instance.InternalDialog_KeyUp;
-
                 // handle focus management
                 instance.cachedTabNavigationMode = KeyboardNavigation.GetTabNavigation(instance.FocusParent);
                 instance.cachedDirectionalNavigationMode = KeyboardNavigation.GetDirectionalNavigation(instance.FocusParent);
@@ -221,9 +218,6 @@ namespace WPF.InternalDialogs
                 RoutedEventArgs args = new RoutedEventArgs(PreviewVisibilityChangedEvent);
 
                 instance.RaiseEvent(args);
-
-                // remove escape key up handler
-                //instance.KeyUp -= instance.InternalDialog_KeyUp;
 
                 // reset focus to what it was before we were shown
                 KeyboardNavigation.SetTabNavigation(instance.FocusParent, instance.cachedTabNavigationMode);
