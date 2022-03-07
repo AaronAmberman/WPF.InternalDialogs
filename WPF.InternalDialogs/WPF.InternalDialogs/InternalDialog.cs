@@ -184,7 +184,19 @@ namespace WPF.InternalDialogs
                 KeyboardNavigation.SetTabNavigation(instance.FocusParent, KeyboardNavigationMode.None);
                 KeyboardNavigation.SetDirectionalNavigation(instance.FocusParent, KeyboardNavigationMode.None);
 
-                instance.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+                bool success = instance.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+
+                if (!success)
+                {
+                    // if First failed we'll try Next
+                    success = instance.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+
+                    // if Next failed then we'll try last as a last resort
+                    if (!success)
+                    {
+                        instance.MoveFocus(new TraversalRequest(FocusNavigationDirection.Last));
+                    }
+                }
 
                 // raise non preview event (bubbling)
                 if (!args.Handled)
