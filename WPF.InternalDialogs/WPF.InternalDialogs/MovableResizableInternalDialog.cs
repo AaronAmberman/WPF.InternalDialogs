@@ -35,7 +35,12 @@ namespace WPF.InternalDialogs
         public SolidColorBrush AnswerAreaBackground
         {
             get { return (SolidColorBrush)GetValue(AnswerAreaBackgroundProperty); }
-            set { SetValue(AnswerAreaBackgroundProperty, value); }
+            set 
+            { 
+                SetValue(AnswerAreaBackgroundProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty AnswerAreaBackgroundProperty =
@@ -45,7 +50,12 @@ namespace WPF.InternalDialogs
         public object AnswerAreaContent
         {
             get { return (object)GetValue(AnswerAreaContentProperty); }
-            set { SetValue(AnswerAreaContentProperty, value); }
+            set 
+            { 
+                SetValue(AnswerAreaContentProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty AnswerAreaContentProperty =
@@ -55,7 +65,12 @@ namespace WPF.InternalDialogs
         public Style CloseButtonStyle
         {
             get { return (Style)GetValue(CloseButtonStyleProperty); }
-            set { SetValue(CloseButtonStyleProperty, value); }
+            set 
+            { 
+                SetValue(CloseButtonStyleProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty CloseButtonStyleProperty =
@@ -65,7 +80,12 @@ namespace WPF.InternalDialogs
         public SolidColorBrush ContentBackground
         {
             get { return (SolidColorBrush)GetValue(ContentBackgroundProperty); }
-            set { SetValue(ContentBackgroundProperty, value); }
+            set 
+            {
+                SetValue(ContentBackgroundProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ContentBackgroundProperty =
@@ -75,7 +95,12 @@ namespace WPF.InternalDialogs
         public double ResizableMaxHeight
         {
             get { return (double)GetValue(ResizableMaxHeightProperty); }
-            set { SetValue(ResizableMaxHeightProperty, value); }
+            set 
+            {
+                SetValue(ResizableMaxHeightProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizableMaxHeightProperty =
@@ -85,7 +110,12 @@ namespace WPF.InternalDialogs
         public double ResizableMaxWidth
         {
             get { return (double)GetValue(ResizableMaxWidthProperty); }
-            set { SetValue(ResizableMaxWidthProperty, value); }
+            set 
+            {
+                SetValue(ResizableMaxWidthProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizableMaxWidthProperty =
@@ -95,7 +125,12 @@ namespace WPF.InternalDialogs
         public double ResizableMinHeight
         {
             get { return (double)GetValue(ResizableMinHeightProperty); }
-            set { SetValue(ResizableMinHeightProperty, value); }
+            set 
+            {
+                SetValue(ResizableMinHeightProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizableMinHeightProperty =
@@ -105,7 +140,12 @@ namespace WPF.InternalDialogs
         public double ResizableMinWidth
         {
             get { return (double)GetValue(ResizableMinWidthProperty); }
-            set { SetValue(ResizableMinWidthProperty, value); }
+            set 
+            {
+                SetValue(ResizableMinWidthProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizableMinWidthProperty =
@@ -120,7 +160,12 @@ namespace WPF.InternalDialogs
         public object ResizeGripContent
         {
             get { return (object)GetValue(ResizeGripContentProperty); }
-            set { SetValue(ResizeGripContentProperty, value); }
+            set 
+            {
+                SetValue(ResizeGripContentProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizeGripContentProperty =
@@ -130,7 +175,12 @@ namespace WPF.InternalDialogs
         public Cursor ResizeGripCursor
         {
             get { return (Cursor)GetValue(ResizeGripCursorProperty); }
-            set { SetValue(ResizeGripCursorProperty, value); }
+            set 
+            {
+                SetValue(ResizeGripCursorProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizeGripCursorProperty =
@@ -140,7 +190,12 @@ namespace WPF.InternalDialogs
         public Visibility ResizeGripVisibility
         {
             get { return (Visibility)GetValue(ResizeGripVisibilityProperty); }
-            set { SetValue(ResizeGripVisibilityProperty, value); }
+            set 
+            {
+                SetValue(ResizeGripVisibilityProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizeGripVisibilityProperty =
@@ -150,7 +205,12 @@ namespace WPF.InternalDialogs
         public SolidColorBrush TitleAreaBackground
         {
             get { return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty); }
-            set { SetValue(TitleAreaBackgroundProperty, value); }
+            set 
+            {
+                SetValue(TitleAreaBackgroundProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
@@ -160,7 +220,12 @@ namespace WPF.InternalDialogs
         public object TitleContent
         {
             get { return (object)GetValue(TitleContentProperty); }
-            set { SetValue(TitleContentProperty, value); }
+            set 
+            {
+                SetValue(TitleContentProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty TitleContentProperty =
@@ -170,7 +235,12 @@ namespace WPF.InternalDialogs
         public Cursor TitleCursor
         {
             get { return (Cursor)GetValue(TitleCursorProperty); }
-            set { SetValue(TitleCursorProperty, value); }
+            set 
+            {
+                SetValue(TitleCursorProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty TitleCursorProperty =
@@ -180,7 +250,12 @@ namespace WPF.InternalDialogs
         public HorizontalAlignment TitleHorizontalAlignment
         {
             get { return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); }
-            set { SetValue(TitleHorizontalAlignmentProperty, value); }
+            set 
+            {
+                SetValue(TitleHorizontalAlignmentProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty TitleHorizontalAlignmentProperty =

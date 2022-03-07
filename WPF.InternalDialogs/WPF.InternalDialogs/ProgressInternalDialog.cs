@@ -35,7 +35,12 @@ namespace WPF.InternalDialogs
         public Style CloseButtonStyle
         {
             get { return (Style)GetValue(CloseButtonStyleProperty); }
-            set { SetValue(CloseButtonStyleProperty, value); }
+            set 
+            {
+                SetValue(CloseButtonStyleProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty CloseButtonStyleProperty =
@@ -45,7 +50,12 @@ namespace WPF.InternalDialogs
         public Style ProgressBarStyle
         {
             get { return (Style)GetValue(ProgressBarStyleProperty); }
-            set { SetValue(ProgressBarStyleProperty, value); }
+            set 
+            {
+                SetValue(ProgressBarStyleProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ProgressBarStyleProperty =
@@ -55,7 +65,12 @@ namespace WPF.InternalDialogs
         public SolidColorBrush ProgressDialogBackground
         {
             get { return (SolidColorBrush)GetValue(ProgressDialogBackgroundProperty); }
-            set { SetValue(ProgressDialogBackgroundProperty, value); }
+            set 
+            {
+                SetValue(ProgressDialogBackgroundProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ProgressDialogBackgroundProperty =
@@ -65,7 +80,12 @@ namespace WPF.InternalDialogs
         public double ProgressDialogMaxHeight
         {
             get { return (double)GetValue(ProgressDialogMaxHeightProperty); }
-            set { SetValue(ProgressDialogMaxHeightProperty, value); }
+            set 
+            {
+                SetValue(ProgressDialogMaxHeightProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ProgressDialogMaxHeightProperty =
@@ -75,7 +95,12 @@ namespace WPF.InternalDialogs
         public double ProgressDialogMaxWidth
         {
             get { return (double)GetValue(ProgressDialogMaxWidthProperty); }
-            set { SetValue(ProgressDialogMaxWidthProperty, value); }
+            set 
+            {
+                SetValue(ProgressDialogMaxWidthProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ProgressDialogMaxWidthProperty =
@@ -85,7 +110,12 @@ namespace WPF.InternalDialogs
         public double ProgressDialogMinHeight
         {
             get { return (double)GetValue(ProgressDialogMinHeightProperty); }
-            set { SetValue(ProgressDialogMinHeightProperty, value); }
+            set 
+            {
+                SetValue(ProgressDialogMinHeightProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ProgressDialogMinHeightProperty =
@@ -95,7 +125,12 @@ namespace WPF.InternalDialogs
         public double ProgressDialogMinWidth
         {
             get { return (double)GetValue(ProgressDialogMinWidthProperty); }
-            set { SetValue(ProgressDialogMinWidthProperty, value); }
+            set 
+            {
+                SetValue(ProgressDialogMinWidthProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ProgressDialogMinWidthProperty =
@@ -105,7 +140,12 @@ namespace WPF.InternalDialogs
         public string ProgressDialogMessage
         {
             get { return (string)GetValue(ProgressDialogMessageProperty); }
-            set { SetValue(ProgressDialogMessageProperty, value); }
+            set 
+            {
+                SetValue(ProgressDialogMessageProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ProgressDialogMessageProperty =
@@ -115,7 +155,12 @@ namespace WPF.InternalDialogs
         public double ProgressValue
         {
             get { return (double)GetValue(ProgressValueProperty); }
-            set { SetValue(ProgressValueProperty, value); }
+            set 
+            {
+                SetValue(ProgressValueProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ProgressValueProperty =
@@ -130,7 +175,12 @@ namespace WPF.InternalDialogs
         public object ResizeGripContent
         {
             get { return (object)GetValue(ResizeGripContentProperty); }
-            set { SetValue(ResizeGripContentProperty, value); }
+            set 
+            {
+                SetValue(ResizeGripContentProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizeGripContentProperty =
@@ -140,7 +190,12 @@ namespace WPF.InternalDialogs
         public Cursor ResizeGripCursor
         {
             get { return (Cursor)GetValue(ResizeGripCursorProperty); }
-            set { SetValue(ResizeGripCursorProperty, value); }
+            set 
+            {
+                SetValue(ResizeGripCursorProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizeGripCursorProperty =
@@ -150,7 +205,12 @@ namespace WPF.InternalDialogs
         public Visibility ResizeGripVisibility
         {
             get { return (Visibility)GetValue(ResizeGripVisibilityProperty); }
-            set { SetValue(ResizeGripVisibilityProperty, value); }
+            set 
+            {
+                SetValue(ResizeGripVisibilityProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty ResizeGripVisibilityProperty =
@@ -160,7 +220,12 @@ namespace WPF.InternalDialogs
         public string Title
         {
             get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            set 
+            {
+                SetValue(TitleProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty TitleProperty =
@@ -170,7 +235,12 @@ namespace WPF.InternalDialogs
         public SolidColorBrush TitleAreaBackground
         {
             get { return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty); }
-            set { SetValue(TitleAreaBackgroundProperty, value); }
+            set 
+            {
+                SetValue(TitleAreaBackgroundProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
@@ -180,7 +250,12 @@ namespace WPF.InternalDialogs
         public Cursor TitleCursor
         {
             get { return (Cursor)GetValue(TitleCursorProperty); }
-            set { SetValue(TitleCursorProperty, value); }
+            set 
+            {
+                SetValue(TitleCursorProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty TitleCursorProperty =
@@ -190,7 +265,12 @@ namespace WPF.InternalDialogs
         public HorizontalAlignment TitleHorizontalAlignment
         {
             get { return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); }
-            set { SetValue(TitleHorizontalAlignmentProperty, value); }
+            set 
+            {
+                SetValue(TitleHorizontalAlignmentProperty, value);
+
+                hasBeenUpdated = false;
+            }
         }
 
         public static readonly DependencyProperty TitleHorizontalAlignmentProperty =
