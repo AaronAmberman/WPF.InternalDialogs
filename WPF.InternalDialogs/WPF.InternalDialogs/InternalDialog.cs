@@ -138,6 +138,11 @@ namespace WPF.InternalDialogs
             VisibilityProperty.OverrideMetadata(typeof(InternalDialog), new FrameworkPropertyMetadata(Visibility.Collapsed, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, VisibilityChangedCallback));            
         }
 
+        public InternalDialog()
+        {
+            KeyUp += InternalDialog_KeyUp;
+        }
+
         #endregion
 
         #region Methods
@@ -171,7 +176,7 @@ namespace WPF.InternalDialogs
                 instance.RaiseEvent(args);
 
                 // set key up for escape on close
-                instance.KeyUp += instance.InternalDialog_KeyUp;
+                //instance.KeyUp += instance.InternalDialog_KeyUp;
 
                 // handle focus management
                 instance.cachedTabNavigationMode = KeyboardNavigation.GetTabNavigation(instance.FocusParent);
@@ -218,7 +223,7 @@ namespace WPF.InternalDialogs
                 instance.RaiseEvent(args);
 
                 // remove escape key up handler
-                instance.KeyUp -= instance.InternalDialog_KeyUp;
+                //instance.KeyUp -= instance.InternalDialog_KeyUp;
 
                 // reset focus to what it was before we were shown
                 KeyboardNavigation.SetTabNavigation(instance.FocusParent, instance.cachedTabNavigationMode);
