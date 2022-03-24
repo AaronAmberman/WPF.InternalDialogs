@@ -34,6 +34,7 @@ namespace WPF.InternalDialogs
         private Thumb? resizeThumb;
 
         private bool hasBeenUpdated;
+        private bool disposedValue;
 
         #endregion
 
@@ -702,6 +703,27 @@ namespace WPF.InternalDialogs
             {
                 throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinWidth");
             }
+        }
+
+        new private void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    LayoutUpdated += MessageBoxInternalDialog_LayoutUpdated;
+                }
+
+                disposedValue=true;
+            }
+        }
+
+        new public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion

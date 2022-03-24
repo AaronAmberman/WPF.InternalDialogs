@@ -7,7 +7,7 @@ using System.Windows.Threading;
 namespace WPF.InternalDialogs
 {
     /// <summary>Provides a base class for all other Internal Dialog types. However, it is still usable by itself, just add your own content.</summary>
-    public class InternalDialog : ContentControl
+    public class InternalDialog : ContentControl, IDisposable
     {
         #region Fields
 
@@ -15,11 +15,12 @@ namespace WPF.InternalDialogs
         private KeyboardNavigationMode cachedDirectionalNavigationMode;
         private IInputElement? cachedFocusedElement;
         private DispatcherFrame? frame;
+        private bool disposedValue;
 
         #endregion
 
         #region Properties
-        
+
         /// <summary>Gets or sets the behavior to take when closing the dialog in regards to setting focus to content underneath.</summary>
         public InternalDialogCloseFocusBehavior CloseFocusBehavior
         {
@@ -259,6 +260,25 @@ namespace WPF.InternalDialogs
                 SetValue(ResultProperty, MessageBoxResult.Cancel);
                 SetValue(VisibilityProperty, Visibility.Collapsed);
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    KeyUp -= InternalDialog_KeyUp;
+                }
+
+                disposedValue=true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion

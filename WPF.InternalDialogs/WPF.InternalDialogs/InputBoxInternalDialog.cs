@@ -16,7 +16,7 @@ namespace WPF.InternalDialogs
     [TemplatePart(Name = "PART_TitleThumb", Type = typeof(Thumb))]
     [TemplatePart(Name = "PART_ResizeThumbContainer", Type = typeof(Grid))]
     [TemplatePart(Name = "PART_ResizeThumb", Type = typeof(Thumb))]
-    public sealed class InputBoxInternalDialog : InternalDialog
+    public sealed class InputBoxInternalDialog : InternalDialog, IDisposable
     {
         #region Fields
 
@@ -30,6 +30,7 @@ namespace WPF.InternalDialogs
         private Thumb? resizeThumb;
 
         private bool hasBeenUpdated = false;
+        private bool disposedValue;
 
         #endregion
 
@@ -685,6 +686,27 @@ namespace WPF.InternalDialogs
             {
                 throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinWidth");
             }
+        }
+
+        new private void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    LayoutUpdated -= InputBoxInternalDialog_LayoutUpdated;
+                }
+
+                disposedValue=true;
+            }
+        }
+
+        new public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion
