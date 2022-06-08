@@ -67,6 +67,8 @@ See, very easy to use!
     - *InputBoxAcceptsReturn* - Gets or sets whether or not the input text box accepts return. Default is false.
     - *InputBoxAcceptsTab* - Gets or sets whether or not the input text box accepts tabs. Default is false.
     - *InputBoxBackground* - Gets or sets the background for the content part of the movable resizable internal dialog. Not the same as Background.
+	- *InputBoxDefaultHeight* - Gets or sets the default height of the resizable portion.
+	- *InputBoxDefaultWidth* - Gets or sets the default width of the resizable portion.
     - *InputBoxMaxHeight* - Gets or sets the input box internal dialog maximum height. Default is 600.0.
     - *InputBoxMaxWidth* - Gets or sets the input box internal dialog maximum width. Default is 800.0.
     - *InputBoxMinHeight* - Gets or sets the input box internal dialog minimum height. Default is 50.0.
@@ -85,6 +87,8 @@ See, very easy to use!
     - *AnswerAreaContent* - Gets or sets the answer area content.
     - *CloseButtonStyle* - Gets or sets the style to use for the close button at the top right.
     - *ContentBackground* - Gets or sets the background for the content part of the movable resizable internal dialog. Not the same as Background.
+	- *ResizableDefaultHeight* - Gets or sets the default height of the resizable portion.
+	- *ResizableDefaultWidth* - Gets or sets the default width of the resizable portion.
     - *ResizableMaxHeight* - Gets or sets the movable resizable internal dialog maximum height. Default is 600.0.
     - *ResizableMaxWidth* - Gets or sets the movable resizable internal dialog maximum width. Default is 800.0.
     - *ResizableMinHeight* - Gets or sets the movable resizable internal dialog minimum height. Default is 50.0.
@@ -104,6 +108,8 @@ See, very easy to use!
     - *MessageBoxBackground* - Gets or sets the background for the message box part of the message box internal dialog. Not the same as Background.
     - *MessageBoxButton* - Gets or sets the message box buttons shown.
     - *MessageBoxImage* - Gets or sets the image for the message. This is not the same as System.Windows.MessageBoxImage so be careful to use WPF.InternalDialogs.MessageBoxInternalDialogImage.
+	- *MessageBoxDefaultHeight* - Gets or sets the default height of the resizable portion.
+	- *MessageBoxDefaultWidth* - Gets or sets the default width of the resizable portion.
     - *MessageBoxMaxHeight* - Gets or sets the message box internal dialog maximum height. Default is 600.0.
     - *MessageBoxMaxWidth* - Gets or sets the message box internal dialog maximum width. Default is 800.0.
     - *MessageBoxMinHeight* - Gets or sets the message box internal dialog minimum height. Default is 50.0.
@@ -119,6 +125,8 @@ See, very easy to use!
     - *CloseButtonStyle* - Gets or sets the style to use for the close button at the top right.
     - *ProgressBarStyle* - Gets or sets the style for the progress bar in the progress dialog.
     - *ProgressDialogBackground* - Gets or sets the background for the message box part of the message box internal dialog. Not the same as Background.
+	- *ProgressDialogDefaultHeight* - Gets or sets the default height of the resizable portion.
+	- *ProgressDialogDefaultWidth* - Gets or sets the default width of the resizable portion.
     - *ProgressDialogMaxHeight* - Gets or sets the progress internal dialog maximum height. Default is 600.0.
     - *ProgressDialogMaxWidth* - Gets or sets the progress internal dialog maximum width. Default is 800.0.
     - *ProgressDialogMinHeight* - Gets or sets the progress internal dialog minimum height. Default is 50.0.
