@@ -92,6 +92,26 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ContentBackgroundProperty =
             DependencyProperty.Register("ContentBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
+        /// <summary>Gets or sets the default height of the resizable portion.</summary>
+        public double ResizableDefaultHeight
+        {
+            get { return (double)GetValue(ResizableDefaultHeightProperty); }
+            set { SetValue(ResizableDefaultHeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty ResizableDefaultHeightProperty =
+            DependencyProperty.Register("ResizableDefaultHeight", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(double.NaN));
+
+        /// <summary>Gets or sets the default width of the resizable portion.</summary>
+        public double ResizableDefaultWidth
+        {
+            get { return (double)GetValue(ResizableDefaultWidthProperty); }
+            set { SetValue(ResizableDefaultWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty ResizableDefaultWidthProperty =
+            DependencyProperty.Register("ResizableDefaultWidth", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(double.NaN));
+
         /// <summary>Gets or sets the movable resizable internal dialog maximum height. Default is 600.0.</summary>
         public double ResizableMaxHeight
         {
@@ -349,12 +369,26 @@ namespace WPF.InternalDialogs
                 return;
             }
 
+            // set the inner border to the default size
+            innerBorder.Width = ResizableDefaultWidth;
+            innerBorder.Height = ResizableDefaultHeight;
+
             // center movable resizable internal dialog
             double totalWidth = canvas.ActualWidth;
             double totalHeight = canvas.ActualHeight;
 
             double messageBoxWidth = innerBorder.ActualWidth;
             double messageBoxHeight = innerBorder.ActualHeight;
+
+            if (!double.IsNaN(ResizableDefaultHeight))
+            {
+                messageBoxHeight = ResizableDefaultHeight;
+            }
+
+            if (!double.IsNaN(ResizableDefaultWidth))
+            {
+                messageBoxWidth = ResizableDefaultWidth;
+            }
 
             double centerX = (totalWidth / 2) - (messageBoxWidth / 2);
             double centerY = (totalHeight / 2) - (messageBoxHeight / 2);

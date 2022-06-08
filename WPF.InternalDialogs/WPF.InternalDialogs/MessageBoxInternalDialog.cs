@@ -146,6 +146,26 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("MessageBoxImage", typeof(MessageBoxInternalDialogImage), typeof(MessageBoxInternalDialog), 
                 new PropertyMetadata(MessageBoxInternalDialogImage.None));
 
+        /// <summary>Gets or sets the default height of the resizable portion.</summary>
+        public double MessageBoxDefaultHeight
+        {
+            get { return (double)GetValue(MessageBoxDefaultHeightProperty); }
+            set { SetValue(MessageBoxDefaultHeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty MessageBoxDefaultHeightProperty =
+            DependencyProperty.Register("MessageBoxDefaultHeight", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(double.NaN));
+
+        /// <summary>Gets or sets the default width of the resizable portion.</summary>
+        public double MessageBoxDefaultWidth
+        {
+            get { return (double)GetValue(MessageBoxDefaultWidthProperty); }
+            set { SetValue(MessageBoxDefaultWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty MessageBoxDefaultWidthProperty =
+            DependencyProperty.Register("MessageBoxDefaultWidth", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(double.NaN));
+
         /// <summary>Gets or sets the message box maximum height. Default is 600.0.</summary>
         public double MessageBoxMaxHeight
         {
@@ -389,12 +409,32 @@ namespace WPF.InternalDialogs
             if (canvas == null) return;
             if (innerBorder == null) return;
 
+            // if we are not visible then we do not need to manage our visuals, just leave
+            if (Visibility == Visibility.Collapsed)
+            {
+                return;
+            }
+
+            // set the inner border to the default size
+            innerBorder.Width = MessageBoxDefaultWidth;
+            innerBorder.Height = MessageBoxDefaultHeight;
+
             // center message box
             double totalWidth = canvas.ActualWidth;
             double totalHeight = canvas.ActualHeight;
 
             double messageBoxWidth = innerBorder.ActualWidth;
             double messageBoxHeight = innerBorder.ActualHeight;
+
+            if (!double.IsNaN(MessageBoxDefaultHeight))
+            {
+                messageBoxHeight = MessageBoxDefaultHeight;
+            }
+
+            if (!double.IsNaN(MessageBoxDefaultWidth))
+            {
+                messageBoxWidth = MessageBoxDefaultWidth;
+            }
 
             double centerX = (totalWidth / 2) - (messageBoxWidth / 2);
             double centerY = (totalHeight / 2) - (messageBoxHeight / 2);

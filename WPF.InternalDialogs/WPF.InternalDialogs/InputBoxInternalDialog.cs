@@ -141,6 +141,26 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty InputBoxBackgroundProperty =
             DependencyProperty.Register("InputBoxBackground", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
 
+        /// <summary>Gets or sets the default height of the resizable portion.</summary>
+        public double InputBoxDefaultHeight
+        {
+            get { return (double)GetValue(InputBoxDefaultHeightProperty); }
+            set { SetValue(InputBoxDefaultHeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty InputBoxDefaultHeightProperty =
+            DependencyProperty.Register("InputBoxDefaultHeight", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(double.NaN));
+
+        /// <summary>Gets or sets the default width of the resizable portion.</summary>
+        public double InputBoxDefaultWidth
+        {
+            get { return (double)GetValue(InputBoxDefaultWidthProperty); }
+            set { SetValue(InputBoxDefaultWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty InputBoxDefaultWidthProperty =
+            DependencyProperty.Register("InputBoxDefaultWidth", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(double.NaN));
+
         /// <summary>Gets or sets the input box maximum height. Default is 600.0.</summary>
         public double InputBoxMaxHeight
         {
@@ -405,12 +425,26 @@ namespace WPF.InternalDialogs
                 return;
             }
 
+            // set the inner border to the default size
+            innerBorder.Width = InputBoxDefaultWidth;
+            innerBorder.Height = InputBoxDefaultHeight;
+
             // center input box
             double totalWidth = canvas.ActualWidth;
             double totalHeight = canvas.ActualHeight;
 
             double messageBoxWidth = innerBorder.ActualWidth;
             double messageBoxHeight = innerBorder.ActualHeight;
+
+            if (!double.IsNaN(InputBoxDefaultHeight))
+            {
+                messageBoxHeight = InputBoxDefaultHeight;
+            }
+
+            if (!double.IsNaN(InputBoxDefaultWidth))
+            {
+                messageBoxWidth = InputBoxDefaultWidth;
+            }
 
             double centerX = (totalWidth / 2) - (messageBoxWidth / 2);
             double centerY = (totalHeight / 2) - (messageBoxHeight / 2);

@@ -77,6 +77,26 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ProgressDialogBackgroundProperty =
             DependencyProperty.Register("ProgressDialogBackground", typeof(SolidColorBrush), typeof(ProgressInternalDialog), new PropertyMetadata(null));
 
+        /// <summary>Gets or sets the default height of the resizable portion.</summary>
+        public double ProgressDialogDefaultHeight
+        {
+            get { return (double)GetValue(ProgressDialogDefaultHeightProperty); }
+            set { SetValue(ProgressDialogDefaultHeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty ProgressDialogDefaultHeightProperty =
+            DependencyProperty.Register("ProgressDialogDefaultHeight", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(double.NaN));
+
+        /// <summary>Gets or sets the default width of the resizable portion.</summary>
+        public double ProgressDialogDefaultWidth
+        {
+            get { return (double)GetValue(ProgressDialogDefaultWidthProperty); }
+            set { SetValue(ProgressDialogDefaultWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty ProgressDialogDefaultWidthProperty =
+            DependencyProperty.Register("ProgressDialogDefaultWidth", typeof(double), typeof(MovableResizableInternalDialog), new PropertyMetadata(double.NaN));
+
         /// <summary>Gets or sets the input box maximum height. Default is 600.0.</summary>
         public double ProgressDialogMaxHeight
         {
@@ -356,12 +376,26 @@ namespace WPF.InternalDialogs
                 return;
             }
 
+            // set the inner border to the default size
+            innerBorder.Width = ProgressDialogDefaultWidth;
+            innerBorder.Height = ProgressDialogDefaultHeight;
+
             // center input box
             double totalWidth = canvas.ActualWidth;
             double totalHeight = canvas.ActualHeight;
 
             double messageBoxWidth = innerBorder.ActualWidth;
             double messageBoxHeight = innerBorder.ActualHeight;
+
+            if (!double.IsNaN(ProgressDialogDefaultHeight))
+            {
+                messageBoxHeight = ProgressDialogDefaultHeight;
+            }
+
+            if (!double.IsNaN(ProgressDialogDefaultWidth))
+            {
+                messageBoxWidth = ProgressDialogDefaultWidth;
+            }
 
             double centerX = (totalWidth / 2) - (messageBoxWidth / 2);
             double centerY = (totalHeight / 2) - (messageBoxHeight / 2);
