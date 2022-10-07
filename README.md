@@ -102,7 +102,11 @@ See, very easy to use!
     - *TitleHorizontalAlignment* - Gets or sets the horizontal alignment of the title.
 - **MessageBoxInternalDialog**
     - *ButtonAreaBackground* - Gets or sets the background for the button area.
-    - *ButtonStyle* - Gets or sets the style to use for the buttons in the input box.
+    - *ButtonStyle* - Gets or sets the style to use for the buttons in the message box.
+    - *ButtonTextCancel* - Gets or sets the text for the Cancel button.
+    - *ButtonTextNo* - Gets or sets the text for the No button.
+    - *ButtonTextOk* - Gets or sets the text for the OK button.
+    - *ButtonTextYes* - Gets or sets the text for the Yes button.
     - *CloseButtonStyle* - Gets or sets the style to use for the close button at the top right.
     - *Message* - Gets or sets the message to display in the dialog.
     - *MessageBoxBackground* - Gets or sets the background for the message box part of the message box internal dialog. Not the same as Background.
