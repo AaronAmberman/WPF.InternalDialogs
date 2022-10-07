@@ -649,13 +649,13 @@
                                         CornerRadius="{TemplateBinding CornerRadius, Converter={StaticResource CornerRadiusConverter}, ConverterParameter=BL|BR}">
                                     <Grid Margin="5">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Grid.Column="0" x:Name="PART_YesButton" Content="Yes"
+                                            <Button Grid.Column="0" x:Name="PART_YesButton" Content="{TemplateBinding ButtonTextYes}"
                                                     Style="{TemplateBinding ButtonStyle}" />
-                                            <Button Grid.Column="1" x:Name="PART_NoButton" Content="No" Margin="5,0,0,0"
+                                            <Button Grid.Column="1" x:Name="PART_NoButton" Content="{TemplateBinding ButtonTextNo}" Margin="5,0,0,0"
                                                     Style="{TemplateBinding ButtonStyle}" />
-                                            <Button Grid.Column="2" x:Name="PART_OkButton" Content="OK" 
+                                            <Button Grid.Column="2" x:Name="PART_OkButton" Content="{TemplateBinding ButtonTextOk}" 
                                                     Style="{TemplateBinding ButtonStyle}" />
-                                            <Button Grid.Column="3" x:Name="PART_CancelButton" Content="Cancel" Margin="5,0,0,0"
+                                            <Button Grid.Column="3" x:Name="PART_CancelButton" Content="{TemplateBinding ButtonTextCancel}" Margin="5,0,0,0"
                                                     Style="{TemplateBinding ButtonStyle}" />
                                         </StackPanel>
                                     </Grid>

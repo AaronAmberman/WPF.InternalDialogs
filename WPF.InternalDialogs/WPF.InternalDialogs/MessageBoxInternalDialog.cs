@@ -70,6 +70,46 @@ namespace WPF.InternalDialogs
         public static readonly DependencyProperty ButtonStyleProperty =
             DependencyProperty.Register("ButtonStyle", typeof(Style), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
+        /// <summary>Gets or sets the text to use for the Cancel button.</summary>
+        public string ButtonTextCancel
+        {
+            get { return (string)GetValue(ButtonTextCancelProperty); }
+            set { SetValue(ButtonTextCancelProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonTextCancelProperty =
+            DependencyProperty.Register("ButtonTextCancel", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata("Cancel"));
+
+        /// <summary>Gets or sets the text to use for the No button.</summary>
+        public string ButtonTextNo
+        {
+            get { return (string)GetValue(ButtonTextNoProperty); }
+            set { SetValue(ButtonTextNoProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonTextNoProperty =
+            DependencyProperty.Register("ButtonTextNo", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata("No"));
+
+        /// <summary>Gets or sets the text to use for the OK button.</summary>
+        public string ButtonTextOk
+        {
+            get { return (string)GetValue(ButtonTextOkProperty); }
+            set { SetValue(ButtonTextOkProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonTextOkProperty =
+            DependencyProperty.Register("ButtonTextOk", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata("OK"));
+
+        /// <summary>Gets or sets the text to use for the Yes button.</summary>
+        public string ButtonTextYes
+        {
+            get { return (string)GetValue(ButtonTextYesProperty); }
+            set { SetValue(ButtonTextYesProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonTextYesProperty =
+            DependencyProperty.Register("ButtonTextYes", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata("Yes"));
+
         /// <summary>gets or sets the style to use for the close button at the top right.</summary>
         public Style CloseButtonStyle
         {
