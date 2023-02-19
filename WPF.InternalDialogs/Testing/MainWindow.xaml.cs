@@ -166,6 +166,7 @@ namespace Testing
 
         private void MovableResizableExample1(object sender, RoutedEventArgs e)
         {
+            mrid.IsModal = false;
             mrid.Visibility = Visibility.Visible;
         }
 

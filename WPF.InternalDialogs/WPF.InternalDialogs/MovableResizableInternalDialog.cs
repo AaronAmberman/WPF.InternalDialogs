@@ -321,36 +321,7 @@ namespace WPF.InternalDialogs
             if (canvas == null) return;
             if (innerBorder == null) return;
 
-            Point? topLeft = canvas.PointToScreen(new Point(0, 0));
-            if (topLeft == null) return;
-
-            Point? bottomRight = new Point(topLeft.Value.X + canvas.ActualWidth, topLeft.Value.Y + canvas.ActualHeight);
-            if (bottomRight == null) return;
-
-            Rect canvasRect = new Rect(topLeft.Value, bottomRight.Value);
-
-            Point? borderTopLeft = innerBorder.PointToScreen(new Point(0, 0));
-            if (borderTopLeft == null) return;
-
-            Point? borderBottomRight = new Point(borderTopLeft.Value.X + innerBorder.ActualWidth, borderTopLeft.Value.Y + innerBorder.ActualHeight);
-            if (borderBottomRight == null) return;
-
-            Rect borderRect = new Rect(borderTopLeft.Value, borderBottomRight.Value);
-
-            // re-center message box if lost on resize (we only need to worry about
-            // the right and bottom because the top left is our origin point, meaning
-            // if the window is resized then we cannot lose the inner border on the
-            // left or top sides (this can only be done via a drag event and that is
-            // handled some where else) 
-            if (borderRect.Left >= canvasRect.Right)
-            {
-                CenterMessageBox();
-            }
-
-            if (borderRect.Top >= canvasRect.Bottom)
-            {
-                CenterMessageBox();
-            }
+            CenterMessageBox();
         }
 
         new private static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -370,14 +341,6 @@ namespace WPF.InternalDialogs
                 // we'll leave our callback (this if will not be hit next callback)
                 return;
             }
-
-            /*
-             * Odd Bug:
-             * Not sure why but this type, versus all the other types that inherit InternalDialog, does not fire
-             * the base class' VisibiltyChanged event so the logic there never runs. Seems odd that this type 
-             * versus all the other types behaves differently.
-             */
-            InternalDialog.VisibilityChangedCallback(instance, e);
 
             if (visibility == Visibility.Visible)
             {
@@ -694,6 +657,7 @@ namespace WPF.InternalDialogs
                 if (disposing)
                 {
                     LayoutUpdated -= MovableResizableInternalDialog_LayoutUpdated;
+                    SizeChanged -= MovableResizableInternalDialog_SizeChanged;
                 }
 
                 disposedValue=true;
