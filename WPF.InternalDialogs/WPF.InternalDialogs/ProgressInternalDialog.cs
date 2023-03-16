@@ -742,12 +742,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxHeight");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "ProgressDialogMaxHeight");
             }
 
             if (ProgressDialogMaxHeight < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxHeight");
+                throw new ArgumentException("Cannot be less than 0.0.", "ProgressDialogMaxHeight");
             }
 
             switch (ProgressDialogMaxWidth)
@@ -756,12 +756,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxWidth");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "ProgressDialogMaxWidth");
             }
 
             if (ProgressDialogMaxWidth < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxWidth");
+                throw new ArgumentException("Cannot be less than 0.0.", "ProgressDialogMaxWidth");
             }
 
             switch (ProgressDialogMinHeight)
@@ -770,12 +770,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinHeight");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "ProgressDialogMinHeight");
             }
 
             if (ProgressDialogMinHeight < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinHeight");
+                throw new ArgumentException("Cannot be less than 0.0.", "ProgressDialogMinHeight");
             }
 
             switch (ProgressDialogMinWidth)
@@ -784,12 +784,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinWidth");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "ProgressDialogMinWidth");
             }
 
             if (ProgressDialogMinWidth < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinWidth");
+                throw new ArgumentException("Cannot be less than 0.0.", "ProgressDialogMinWidth");
             }
         }
 

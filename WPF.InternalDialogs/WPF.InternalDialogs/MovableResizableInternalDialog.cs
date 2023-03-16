@@ -711,12 +711,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxHeight");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "ResizableMaxHeight");
             }
 
             if (ResizableMaxHeight < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxHeight");
+                throw new ArgumentException("Cannot be less than 0.0.", "ResizableMaxHeight");
             }
 
             switch (ResizableMaxWidth)
@@ -725,12 +725,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxWidth");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "ResizableMaxWidth");
             }
 
             if (ResizableMaxWidth < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxWidth");
+                throw new ArgumentException("Cannot be less than 0.0.", "ResizableMaxWidth");
             }
 
             switch (ResizableMinHeight)
@@ -739,12 +739,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinHeight");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "ResizableMinHeight");
             }
 
             if (ResizableMinHeight < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinHeight");
+                throw new ArgumentException("Cannot be less than 0.0.", "ResizableMinHeight");
             }
 
             switch (ResizableMinWidth)
@@ -753,12 +753,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinWidth");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "ResizableMinWidth");
             }
 
             if (ResizableMinWidth < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinWidth");
+                throw new ArgumentException("Cannot be less than 0.0.", "ResizableMinWidth");
             }
         }
 
