@@ -19,15 +19,14 @@ namespace WPF.InternalDialogs
     {
         #region Fields
 
-        private Canvas? canvas;
-        private Border? innerBorder;
-        private Button? closeButton;
-        private Thumb? titleThumb;
-        private Grid? resizeThumbContainer;
-        private Thumb? resizeThumb;
+        private Canvas canvas;
+        private Border innerBorder;
+        private Button closeButton;
+        private Thumb titleThumb;
+        private Grid resizeThumbContainer;
+        private Thumb resizeThumb;
 
-        private bool hasBeenUpdated = false;
-        private bool disposedValue;
+        private bool initialLayoutComplete;
 
         #endregion
 
@@ -36,12 +35,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the answer area.</summary>
         public SolidColorBrush AnswerAreaBackground
         {
-            get { return (SolidColorBrush)GetValue(AnswerAreaBackgroundProperty); }
-            set 
-            { 
-                SetValue(AnswerAreaBackgroundProperty, value);
+            get 
+            {
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                return (SolidColorBrush)GetValue(AnswerAreaBackgroundProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(AnswerAreaBackgroundProperty, value);
             }
         }
 
@@ -51,12 +55,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the answer area content.</summary>
         public object AnswerAreaContent
         {
-            get { return (object)GetValue(AnswerAreaContentProperty); }
-            set 
-            { 
-                SetValue(AnswerAreaContentProperty, value);
+            get 
+            {
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                return (object)GetValue(AnswerAreaContentProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(AnswerAreaContentProperty, value);
             }
         }
 
@@ -66,12 +75,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the style to use for the close button at the top right.</summary>
         public Style CloseButtonStyle
         {
-            get { return (Style)GetValue(CloseButtonStyleProperty); }
-            set 
-            { 
-                SetValue(CloseButtonStyleProperty, value);
+            get 
+            {
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                return (Style)GetValue(CloseButtonStyleProperty); 
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(CloseButtonStyleProperty, value);
             }
         }
 
@@ -81,23 +95,58 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the content part of the movable resizable internal dialog. Not the same as Background.</summary>
         public SolidColorBrush ContentBackground
         {
-            get { return (SolidColorBrush)GetValue(ContentBackgroundProperty); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (SolidColorBrush)GetValue(ContentBackgroundProperty);
+            }
             set 
             {
-                SetValue(ContentBackgroundProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(ContentBackgroundProperty, value);
             }
         }
 
         public static readonly DependencyProperty ContentBackgroundProperty =
             DependencyProperty.Register("ContentBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
+        /// <summary>Gets or sets whether or not the dialog is re-centered when the container is resized (not the dialog itself).</summary>
+        public bool KeepDialogCenteredOnContainerResize
+        {
+            get
+            {
+                VerifyDisposed();
+
+                return (bool)GetValue(KeepDialogCenteredOnContainerResizeProperty);
+            }
+            set
+            {
+                VerifyDisposed();
+
+                SetValue(KeepDialogCenteredOnContainerResizeProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty KeepDialogCenteredOnContainerResizeProperty =
+            DependencyProperty.Register("KeepDialogCenteredOnContainerResize", typeof(bool), typeof(MovableResizableInternalDialog), new PropertyMetadata(false));
+
         /// <summary>Gets or sets the default height of the resizable portion.</summary>
         public double ResizableDefaultHeight
         {
-            get { return (double)GetValue(ResizableDefaultHeightProperty); }
-            set { SetValue(ResizableDefaultHeightProperty, value); }
+            get
+            {
+                VerifyDisposed();
+
+                return (double)GetValue(ResizableDefaultHeightProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(ResizableDefaultHeightProperty, value);
+            }
         }
 
         public static readonly DependencyProperty ResizableDefaultHeightProperty =
@@ -106,8 +155,18 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the default width of the resizable portion.</summary>
         public double ResizableDefaultWidth
         {
-            get { return (double)GetValue(ResizableDefaultWidthProperty); }
-            set { SetValue(ResizableDefaultWidthProperty, value); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (double)GetValue(ResizableDefaultWidthProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(ResizableDefaultWidthProperty, value); 
+            }
         }
 
         public static readonly DependencyProperty ResizableDefaultWidthProperty =
@@ -116,12 +175,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the movable resizable internal dialog maximum height. Default is 600.0.</summary>
         public double ResizableMaxHeight
         {
-            get { return (double)GetValue(ResizableMaxHeightProperty); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (double)GetValue(ResizableMaxHeightProperty);
+            }
             set 
             {
-                SetValue(ResizableMaxHeightProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(ResizableMaxHeightProperty, value);
             }
         }
 
@@ -131,12 +195,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the movable resizable internal dialog maximum width. Default is 800.0.</summary>
         public double ResizableMaxWidth
         {
-            get { return (double)GetValue(ResizableMaxWidthProperty); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (double)GetValue(ResizableMaxWidthProperty);
+            }
             set 
             {
-                SetValue(ResizableMaxWidthProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(ResizableMaxWidthProperty, value);
             }
         }
 
@@ -146,12 +215,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the movable resizable internal dialog minimum height. Default is 50.0.</summary>
         public double ResizableMinHeight
         {
-            get { return (double)GetValue(ResizableMinHeightProperty); }
+            get
+            {
+                VerifyDisposed();
+
+                return (double)GetValue(ResizableMinHeightProperty);
+            }
             set 
             {
-                SetValue(ResizableMinHeightProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(ResizableMinHeightProperty, value);
             }
         }
 
@@ -161,12 +235,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the movable resizable internal dialog minimum width. default is 100.0.</summary>
         public double ResizableMinWidth
         {
-            get { return (double)GetValue(ResizableMinWidthProperty); }
+            get
+            {
+                VerifyDisposed();
+
+                return (double)GetValue(ResizableMinWidthProperty);
+            }
             set 
             {
-                SetValue(ResizableMinWidthProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(ResizableMinWidthProperty, value);
             }
         }
 
@@ -181,12 +260,17 @@ namespace WPF.InternalDialogs
         /// </remarks>
         public object ResizeGripContent
         {
-            get { return (object)GetValue(ResizeGripContentProperty); }
+            get
+            {
+                VerifyDisposed();
+
+                return (object)GetValue(ResizeGripContentProperty);
+            }
             set 
             {
-                SetValue(ResizeGripContentProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(ResizeGripContentProperty, value);
             }
         }
 
@@ -196,12 +280,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the cursor for the resize gripper. Default is Cursors.NWSE.</summary>
         public Cursor ResizeGripCursor
         {
-            get { return (Cursor)GetValue(ResizeGripCursorProperty); }
+            get
+            {
+                VerifyDisposed();
+
+                return (Cursor)GetValue(ResizeGripCursorProperty); 
+            }
             set 
             {
-                SetValue(ResizeGripCursorProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(ResizeGripCursorProperty, value);
             }
         }
 
@@ -211,12 +300,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the visibility of the resize grip. Visible = resizing enabled, Collapsed/Hidden = resizing disabled.</summary>
         public Visibility ResizeGripVisibility
         {
-            get { return (Visibility)GetValue(ResizeGripVisibilityProperty); }
+            get
+            {
+                VerifyDisposed();
+
+                return (Visibility)GetValue(ResizeGripVisibilityProperty);
+            }
             set 
             {
-                SetValue(ResizeGripVisibilityProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(ResizeGripVisibilityProperty, value);
             }
         }
 
@@ -226,12 +320,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the title area.</summary>
         public SolidColorBrush TitleAreaBackground
         {
-            get { return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty);
+            }
             set 
             {
-                SetValue(TitleAreaBackgroundProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(TitleAreaBackgroundProperty, value);
             }
         }
 
@@ -241,12 +340,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the title content. The title content has IsHitTestVisible="False" set so the underlying Thumb can work.</summary>
         public object TitleContent
         {
-            get { return (object)GetValue(TitleContentProperty); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (object)GetValue(TitleContentProperty);
+            }
             set 
             {
-                SetValue(TitleContentProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(TitleContentProperty, value);
             }
         }
 
@@ -256,12 +360,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
         public Cursor TitleCursor
         {
-            get { return (Cursor)GetValue(TitleCursorProperty); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (Cursor)GetValue(TitleCursorProperty);
+            }
             set 
             {
-                SetValue(TitleCursorProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(TitleCursorProperty, value);
             }
         }
 
@@ -271,12 +380,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the horizontal alignment of the title.</summary>
         public HorizontalAlignment TitleHorizontalAlignment
         {
-            get { return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); }
+            get
+            {
+                VerifyDisposed();
+
+                return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); 
+            }
             set 
             {
-                SetValue(TitleHorizontalAlignmentProperty, value);
+                VerifyDisposed();
 
-                hasBeenUpdated = false;
+                SetValue(TitleHorizontalAlignmentProperty, value);
             }
         }
 
@@ -308,11 +422,18 @@ namespace WPF.InternalDialogs
         {
             if (Visibility == Visibility.Collapsed) return;
 
-            if (!hasBeenUpdated)
+            if (initialLayoutComplete && KeepDialogCenteredOnContainerResize)
             {
                 CenterMessageBox();
 
-                hasBeenUpdated = true;
+                return;
+            }
+
+            if (!initialLayoutComplete)
+            {
+                CenterMessageBox();
+
+                initialLayoutComplete = true;
             }
         }
 
@@ -320,15 +441,19 @@ namespace WPF.InternalDialogs
         {
             if (canvas == null) return;
             if (innerBorder == null) return;
+            if (Visibility == Visibility.Collapsed) return;
 
-            CenterMessageBox();
+            EnsureVisibility();
+            SizeContent();
         }
 
         new private static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            MovableResizableInternalDialog? instance = d as MovableResizableInternalDialog;
+            MovableResizableInternalDialog instance = d as MovableResizableInternalDialog;
 
             if (instance == null) return;
+
+            instance.VerifyDisposed();
 
             Visibility visibility = (Visibility)e.NewValue;
 
@@ -348,8 +473,7 @@ namespace WPF.InternalDialogs
             }
             else // Collapsed
             {
-                // just reset our visual update counter
-                instance.hasBeenUpdated = false;
+                instance.initialLayoutComplete = false;
 
                 // make sure reset the size of the message (fixes custom size set from user dragging)
                 if (instance.innerBorder != null)
@@ -362,20 +486,11 @@ namespace WPF.InternalDialogs
 
         private void CenterMessageBox()
         {
-            if (canvas == null) return;
-            if (innerBorder == null) return;
-
-            // if we are not visible then we do not need to manage our visuals, just leave
-            if (Visibility == Visibility.Collapsed)
-            {
-                return;
-            }
-
             // set the inner border to the default size
             innerBorder.Width = ResizableDefaultWidth;
             innerBorder.Height = ResizableDefaultHeight;
 
-            // center movable resizable internal dialog
+            // center input box
             double totalWidth = canvas.ActualWidth;
             double totalHeight = canvas.ActualHeight;
 
@@ -383,14 +498,10 @@ namespace WPF.InternalDialogs
             double messageBoxHeight = innerBorder.ActualHeight;
 
             if (!double.IsNaN(ResizableDefaultHeight))
-            {
                 messageBoxHeight = ResizableDefaultHeight;
-            }
 
             if (!double.IsNaN(ResizableDefaultWidth))
-            {
                 messageBoxWidth = ResizableDefaultWidth;
-            }
 
             double centerX = (totalWidth / 2) - (messageBoxWidth / 2);
             double centerY = (totalHeight / 2) - (messageBoxHeight / 2);
@@ -398,9 +509,59 @@ namespace WPF.InternalDialogs
             Canvas.SetLeft(innerBorder, centerX);
             Canvas.SetTop(innerBorder, centerY);
 
-            // we are going to move the resizer too (bottom right of movable resizable internal dialog)
-            double resizerX = centerX + messageBoxWidth - 5;
-            double resizerY = centerY + messageBoxHeight - 5;
+            PlaceResizer();
+        }
+
+        private void EnsureVisibility()
+        {
+            double left = Canvas.GetLeft(innerBorder);
+            double top = Canvas.GetTop(innerBorder);
+
+            Point borderTopLeft = canvas.PointToScreen(new Point(left, top));
+
+            Rect borderOnScreen = new Rect(borderTopLeft, new Size(innerBorder.ActualWidth, innerBorder.ActualHeight));
+            Rect canvasOnScreen = new Rect(canvas.PointToScreen(new Point(0, 0)), new Size(canvas.ActualWidth, canvas.ActualHeight));
+
+            // we only need to manage pushing the border if it is too far right or down
+            if (borderOnScreen.Right > canvasOnScreen.Right)
+            {
+                double newLeft = canvasOnScreen.Right - innerBorder.ActualWidth;
+                double newLeftActual = canvas.PointFromScreen(new Point(newLeft, 0)).X;
+
+                // make sure we aren't pushing left out of view
+                if (newLeft >= canvasOnScreen.Left)
+                {
+                    Canvas.SetLeft(innerBorder, newLeftActual);
+
+                    PlaceResizer();
+                }
+            }
+
+            if (borderOnScreen.Bottom > canvasOnScreen.Bottom)
+            {
+                double newTop = canvasOnScreen.Bottom - innerBorder.ActualHeight;
+                double newTopActual = canvas.PointFromScreen(new Point(0, newTop)).Y;
+
+                // make sure we aren't pushing up out of view
+                if (newTop >= canvasOnScreen.Top)
+                {
+                    Canvas.SetTop(innerBorder, newTopActual);
+
+                    PlaceResizer();
+                }
+            }
+        }
+
+        private void PlaceResizer()
+        {
+            double updatedX = Canvas.GetLeft(innerBorder);
+            double updatedY = Canvas.GetTop(innerBorder);
+
+            double width = innerBorder.ActualWidth;
+            double height = innerBorder.ActualHeight;
+
+            double resizerX = updatedX + width - 5;
+            double resizerY = updatedY + height - 5;
 
             Canvas.SetLeft(resizeThumbContainer, resizerX);
             Canvas.SetTop(resizeThumbContainer, resizerY);
@@ -423,8 +584,6 @@ namespace WPF.InternalDialogs
             if (titleThumb != null)
             {
                 titleThumb.DragDelta += TitleThumb_DragDelta;
-                titleThumb.DragStarted += TitleThumb_DragStarted;
-                titleThumb.DragCompleted += TitleThumb_DragCompleted;
             }
 
             resizeThumbContainer = GetTemplateChild("PART_ResizeThumbContainer") as Grid;
@@ -433,8 +592,6 @@ namespace WPF.InternalDialogs
             if (resizeThumb != null)
             {
                 resizeThumb.DragDelta += ResizeThumb_DragDelta;
-                resizeThumb.DragStarted += ResizeThumb_DragStarted;
-                resizeThumb.DragCompleted += ResizeThumb_DragCompleted;
             }
         }
 
@@ -446,82 +603,33 @@ namespace WPF.InternalDialogs
 
         private void TitleThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
-            if (innerBorder != null)
-            {
-                Canvas.SetLeft(innerBorder, Canvas.GetLeft(innerBorder) + e.HorizontalChange);
-                Canvas.SetTop(innerBorder, Canvas.GetTop(innerBorder) + e.VerticalChange);
-
-                // we are going to move the resizer too (bottom right of movable resizable internal dialog)
-                double updatedX = Canvas.GetLeft(innerBorder);
-                double updatedY = Canvas.GetTop(innerBorder);
-
-                double width = innerBorder.ActualWidth;
-                double height = innerBorder.ActualHeight;
-
-                double resizerX = updatedX + width - 5;
-                double resizerY = updatedY + height - 5;
-
-                Canvas.SetLeft(resizeThumbContainer, resizerX);
-                Canvas.SetTop(resizeThumbContainer, resizerY);
-            }
-        }
-
-        private void TitleThumb_DragStarted(object sender, DragStartedEventArgs e)
-        {
-            // should we do something here?
-        }
-
-        private void TitleThumb_DragCompleted(object sender, DragCompletedEventArgs e)
-        {
             if (canvas == null) return;
+            if (innerBorder == null) return;
 
-            // get visual data for spacial tracking
-            Point? topLeft = canvas.PointToScreen(new Point(0, 0));
-            if (topLeft == null) return;
+            Rect canvasOnScreen = new Rect(canvas.PointToScreen(new Point(0, 0)), new Size(canvas.ActualWidth, canvas.ActualHeight));
 
-            Point? bottomRight = new Point(topLeft.Value.X + canvas.ActualWidth, topLeft.Value.Y + canvas.ActualHeight);
-            if (bottomRight == null) return;
+            double newX = Canvas.GetLeft(innerBorder) + e.HorizontalChange;
+            double newY = Canvas.GetTop(innerBorder) + e.VerticalChange;
+            double newXOnScreen = canvas.PointToScreen(new Point(newX, 0)).X;
+            double newYOnScreen = canvas.PointToScreen(new Point(0, newY)).Y;
+            double newXRightOnScreen = newXOnScreen + innerBorder.ActualWidth;
+            double newYBottomOnScreen = newYOnScreen + innerBorder.ActualHeight;
 
-            double left = canvas.PointToScreen(new Point(Canvas.GetLeft(innerBorder), 0.0)).X;
-            double? width = innerBorder?.ActualWidth;
+            if (newXOnScreen > canvasOnScreen.Left && newXRightOnScreen < canvasOnScreen.Right)
+                Canvas.SetLeft(innerBorder, newX);
 
-            if (width == null) return;
+            if (newYOnScreen > canvasOnScreen.Top && newYBottomOnScreen < canvasOnScreen.Bottom)
+                Canvas.SetTop(innerBorder, newY);
 
-            double right = left + width.Value;
-            double top = canvas.PointToScreen(new Point(0.0, Canvas.GetTop(innerBorder))).Y;
-            double? height = innerBorder?.ActualHeight;
-
-            if (height == null) return;
-
-            double bottom = top + height.Value;
-
-            Rect canvasOnScreen = new Rect(topLeft.Value, bottomRight.Value);
-
-            // verify the user didn't drag the movable resizable internal dialog outside the view port, and if they did, move it a little bit back into view
-            if (right <= canvasOnScreen.Left)
-            {
-                Canvas.SetLeft(innerBorder, canvas.PointFromScreen(new Point(canvasOnScreen.Left + 100 - width.Value, 0)).X);
-            }
-
-            if (left >= canvasOnScreen.Right)
-            {
-                Canvas.SetLeft(innerBorder, canvas.PointFromScreen(new Point(canvasOnScreen.Right - 100, 0)).X);
-            }
-
-            if (top <= canvasOnScreen.Top)
-            {
-                Canvas.SetTop(innerBorder, canvas.PointFromScreen(new Point(0, canvasOnScreen.Top)).Y);
-            }
-
-            if (bottom >= canvasOnScreen.Bottom)
-            {
-                Canvas.SetTop(innerBorder, canvas.PointFromScreen(new Point(0, canvasOnScreen.Bottom - height.Value)).Y);
-            }
+            PlaceResizer();
         }
 
         private void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
+            if (canvas == null) return;
             if (innerBorder == null) return;
+
+            Rect canvasOnScreen = new Rect(canvas.PointToScreen(new Point(0, 0)), new Size(canvas.ActualWidth, canvas.ActualHeight));
 
             double xAdjust = innerBorder.Width + e.HorizontalChange;
 
@@ -536,54 +644,60 @@ namespace WPF.InternalDialogs
                 // make sure we are within are min and max sizes
                 if (xAdjust <= ResizableMinWidth) xAdjust = ResizableMinWidth;
                 if (xAdjust >= ResizableMaxWidth) xAdjust = ResizableMaxWidth;
-
+                               
                 if (yAdjust <= ResizableMinHeight) yAdjust = ResizableMinHeight;
                 if (yAdjust >= ResizableMaxHeight) yAdjust = ResizableMaxHeight;
+
+                // make sure we are with the canvas area as well, no dragging off screen
+                double left = Canvas.GetLeft(innerBorder);
+                double top = Canvas.GetTop(innerBorder);
+
+                Point onScreenAdjusted = canvas.PointToScreen(new Point(left + xAdjust, top + yAdjust));
+
+                if (onScreenAdjusted.X > canvasOnScreen.Right)
+                    xAdjust = canvas.PointFromScreen(new Point(canvasOnScreen.Right - left, 0)).X;
+
+                if (onScreenAdjusted.Y > canvasOnScreen.Bottom)
+                    yAdjust = canvas.PointFromScreen(new Point(0, canvasOnScreen.Bottom - top)).Y;
 
                 innerBorder.Width = xAdjust;
                 innerBorder.Height = yAdjust;
 
-                // we are going to move the resizer too (bottom right of movable resizable internal dialog)
-                double left = Canvas.GetLeft(innerBorder);
-                double top = Canvas.GetTop(innerBorder);
-
+                // we are going to move the resizer too (bottom right of input box)
                 double newWidth = left + innerBorder.Width - 5;
                 double newHeight = top + innerBorder.Height - 5;
 
-                // make sure we can only drag to the minimum and maximum size of the movable resizable internal dialog
+                // make sure we can only drag to the minimum and maximum size of the input box
                 if (innerBorder.Width <= ResizableMinWidth)
-                {
                     newWidth = left + ResizableMinWidth - 5;
-                }
 
                 if (innerBorder.Width >= ResizableMaxWidth)
-                {
                     newWidth = left + ResizableMaxWidth - 5;
-                }
 
                 if (innerBorder.Height <= ResizableMinHeight)
-                {
                     newHeight = top + ResizableMinHeight - 5;
-                }
 
                 if (innerBorder.Height >= ResizableMaxHeight)
-                {
                     newHeight = top + ResizableMaxHeight - 5;
-                }
 
                 Canvas.SetLeft(resizeThumbContainer, newWidth);
                 Canvas.SetTop(resizeThumbContainer, newHeight);
             }
         }
 
-        private void ResizeThumb_DragStarted(object sender, DragStartedEventArgs e)
+        private void SizeContent()
         {
-            // should we do something here?
-        }
+            //double canvasWidth = canvas.ActualWidth;
+            //double canvasHeight = canvas.ActualHeight;
+            //Rect canvasOnScreen = new Rect(canvas.PointToScreen(new Point(0, 0)), new Size(canvasWidth, canvasHeight));
 
-        private void ResizeThumb_DragCompleted(object sender, DragCompletedEventArgs e)
-        {
-            // should we do something here?
+            //Debug.WriteLine($"Canvas on screen: {canvasOnScreen}");
+
+            //double borderWidth = innerBorder.ActualWidth;
+            //double borderHeight = innerBorder.ActualHeight;
+            //Rect borderOnScreen = new Rect(innerBorder.PointToScreen(new Point(0, 0)), new Size(borderWidth, borderHeight));
+
+            //Debug.WriteLine($"Border on screen: {borderOnScreen}");
         }
 
         /// <summary>
@@ -648,7 +762,7 @@ namespace WPF.InternalDialogs
             }
         }
 
-        new private void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
 
@@ -658,16 +772,23 @@ namespace WPF.InternalDialogs
                 {
                     LayoutUpdated -= MovableResizableInternalDialog_LayoutUpdated;
                     SizeChanged -= MovableResizableInternalDialog_SizeChanged;
+
+                    if (closeButton != null)
+                        closeButton.Click -= CloseButton_Click;
+
+                    if (titleThumb != null)
+                    {
+                        titleThumb.DragDelta -= TitleThumb_DragDelta;
+                    }
+
+                    if (resizeThumb != null)
+                    {
+                        resizeThumb.DragDelta -= ResizeThumb_DragDelta;
+                    }
                 }
 
-                disposedValue=true;
+                disposedValue = true;
             }
-        }
-
-        new public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
         }
 
         #endregion

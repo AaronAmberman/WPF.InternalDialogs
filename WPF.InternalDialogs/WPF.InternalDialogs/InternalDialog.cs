@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,9 +14,10 @@ namespace WPF.InternalDialogs
 
         private KeyboardNavigationMode cachedTabNavigationMode;
         private KeyboardNavigationMode cachedDirectionalNavigationMode;
-        private IInputElement? cachedFocusedElement;
-        private DispatcherFrame? frame;
-        private bool disposedValue;
+        private IInputElement cachedFocusedElement;
+        private DispatcherFrame frame;
+        
+        protected bool disposedValue;
 
         #endregion
 
@@ -24,8 +26,18 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the behavior to take when closing the dialog in regards to setting focus to content underneath.</summary>
         public InternalDialogCloseFocusBehavior CloseFocusBehavior
         {
-            get { return (InternalDialogCloseFocusBehavior)GetValue(CloseFocusBehaviorProperty); }
-            set { SetValue(CloseFocusBehaviorProperty, value); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (InternalDialogCloseFocusBehavior)GetValue(CloseFocusBehaviorProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(CloseFocusBehaviorProperty, value); 
+            }
         }
 
         public static readonly DependencyProperty CloseFocusBehaviorProperty =
@@ -35,8 +47,18 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets whether or not the dialog will close on escape key up. Default is true.</summary>
         public bool CloseOnEscape
         {
-            get { return (bool)GetValue(CloseOnEscapeProperty); }
-            set { SetValue(CloseOnEscapeProperty, value); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (bool)GetValue(CloseOnEscapeProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(CloseOnEscapeProperty, value);
+            }
         }
 
         public static readonly DependencyProperty CloseOnEscapeProperty =
@@ -45,8 +67,18 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the padding for the content inside the border.</summary>
         public Thickness ContentPadding
         {
-            get { return (Thickness)GetValue(ContentPaddingProperty); }
-            set { SetValue(ContentPaddingProperty, value); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (Thickness)GetValue(ContentPaddingProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(ContentPaddingProperty, value);
+            }
         }
 
         public static readonly DependencyProperty ContentPaddingProperty =
@@ -55,8 +87,18 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the corner radius for the border.</summary>
         public CornerRadius CornerRadius
         {
-            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (CornerRadius)GetValue(CornerRadiusProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(CornerRadiusProperty, value); 
+            }
         }
 
         public static readonly DependencyProperty CornerRadiusProperty =
@@ -73,8 +115,18 @@ namespace WPF.InternalDialogs
         /// </remarks>
         public UIElement FocusParent
         {
-            get { return (UIElement)GetValue(FocusParentProperty); }
-            set { SetValue(FocusParentProperty, value); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (UIElement)GetValue(FocusParentProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(FocusParentProperty, value);
+            }
         }
 
         public static readonly DependencyProperty FocusParentProperty =
@@ -88,8 +140,18 @@ namespace WPF.InternalDialogs
         /// </remarks>
         public bool IsModal
         {
-            get { return (bool)GetValue(IsModalProperty); }
-            set { SetValue(IsModalProperty, value); }
+            get
+            {
+                VerifyDisposed();
+
+                return (bool)GetValue(IsModalProperty); 
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(IsModalProperty, value); 
+            }
         }
 
         public static readonly DependencyProperty IsModalProperty =
@@ -98,8 +160,18 @@ namespace WPF.InternalDialogs
         /// <summary>gets or sets the result for the internal dialog.</summary>
         public MessageBoxResult Result
         {
-            get { return (MessageBoxResult)GetValue(ResultProperty); }
-            set { SetValue(ResultProperty, value); }
+            get 
+            {
+                VerifyDisposed();
+
+                return (MessageBoxResult)GetValue(ResultProperty);
+            }
+            set 
+            {
+                VerifyDisposed();
+
+                SetValue(ResultProperty, value);
+            }
         }
 
         public static readonly DependencyProperty ResultProperty =
@@ -115,8 +187,18 @@ namespace WPF.InternalDialogs
         /// <summary>Occurs when the visibility changed.</summary>
         public event RoutedEventHandler PreviewVisibilityChanged
         {
-            add { AddHandler(PreviewVisibilityChangedEvent, value); }
-            remove { RemoveHandler(PreviewVisibilityChangedEvent, value); }
+            add 
+            {
+                VerifyDisposed();
+
+                AddHandler(PreviewVisibilityChangedEvent, value);
+            }
+            remove 
+            {
+                VerifyDisposed();
+
+                RemoveHandler(PreviewVisibilityChangedEvent, value);
+            }
         }
 
         public static readonly RoutedEvent VisibilityChangedEvent = EventManager.RegisterRoutedEvent(
@@ -125,8 +207,18 @@ namespace WPF.InternalDialogs
         /// <summary>Occurs when the visibility changed.</summary>
         public event RoutedEventHandler VisibilityChanged
         {
-            add { AddHandler(VisibilityChangedEvent, value); }
-            remove { RemoveHandler(VisibilityChangedEvent, value); }
+            add 
+            {
+                VerifyDisposed();
+
+                AddHandler(VisibilityChangedEvent, value); 
+            }
+            remove 
+            {
+                VerifyDisposed();
+
+                RemoveHandler(VisibilityChangedEvent, value); 
+            }
         }
 
         #endregion
@@ -150,9 +242,11 @@ namespace WPF.InternalDialogs
 
         protected static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            InternalDialog? instance = d as InternalDialog;
+            InternalDialog instance = d as InternalDialog;
             
             if (instance == null) return;
+
+            instance.VerifyDisposed();
 
             Visibility visibility = (Visibility)e.NewValue;
 
@@ -262,6 +356,12 @@ namespace WPF.InternalDialogs
             }
         }
 
+        protected virtual void VerifyDisposed([CallerMemberName] string caller = "")
+        {
+            if (disposedValue)
+                throw new ObjectDisposedException(Name, $"{caller} cannot be accessed because the object instance has been disposed.");
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -271,13 +371,15 @@ namespace WPF.InternalDialogs
                     KeyUp -= InternalDialog_KeyUp;
                 }
 
-                disposedValue=true;
+                disposedValue = true;
             }
         }
 
         public void Dispose()
         {
-            Dispose(disposing: true);
+            VerifyDisposed();
+
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
