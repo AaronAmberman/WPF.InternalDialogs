@@ -813,12 +813,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxHeight");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "InputBoxMaxHeight");
             }
 
             if (InputBoxMaxHeight < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxHeight");
+                throw new ArgumentException("Cannot be less than 0.0.", "InputBoxMaxHeight");
             }
 
             switch (InputBoxMaxWidth)
@@ -827,12 +827,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMaxWidth");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "InputBoxMaxWidth");
             }
 
             if (InputBoxMaxWidth < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMaxWidth");
+                throw new ArgumentException("Cannot be less than 0.0.", "InputBoxMaxWidth");
             }
 
             switch (InputBoxMinHeight)
@@ -841,12 +841,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinHeight");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "InputBoxMinHeight");
             }
 
             if (InputBoxMinHeight < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinHeight");
+                throw new ArgumentException("Cannot be less than 0.0.", "InputBoxMinHeight");
             }
 
             switch (InputBoxMinWidth)
@@ -855,12 +855,12 @@ namespace WPF.InternalDialogs
                 case double.PositiveInfinity:
                 case double.NegativeInfinity:
                 case double.NaN:
-                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "MessageBoxMinWidth");
+                    throw new ArgumentException("Cannot be 0.0, double.PositiveInfinity, double.NegativeInfinity or double.NaN.", "InputBoxMinWidth");
             }
 
             if (InputBoxMinWidth < 0.0)
             {
-                throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinWidth");
+                throw new ArgumentException("Cannot be less than 0.0.", "InputBoxMinWidth");
             }
         }
 
