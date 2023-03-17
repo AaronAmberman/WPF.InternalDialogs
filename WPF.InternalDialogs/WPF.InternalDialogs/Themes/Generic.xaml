@@ -115,7 +115,7 @@
                     <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">                        
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding InputBoxBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
                                 MinHeight="{TemplateBinding InputBoxMinHeight}" MinWidth="{TemplateBinding InputBoxMinWidth}"
                                 MaxHeight="{TemplateBinding InputBoxMaxHeight}" MaxWidth="{TemplateBinding InputBoxMaxWidth}"
                                 Canvas.Left="0" Canvas.Top="0">
@@ -242,7 +242,7 @@
                     <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding MessageBoxBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
                                 MinHeight="{TemplateBinding MessageBoxMinHeight}" MinWidth="{TemplateBinding MessageBoxMinWidth}"
                                 MaxHeight="{TemplateBinding MessageBoxMaxHeight}" MaxWidth="{TemplateBinding MessageBoxMaxWidth}"
                                 Canvas.Left="0" Canvas.Top="0">
@@ -822,7 +822,7 @@
                     <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding ContentBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
                                 MinHeight="{TemplateBinding ResizableMinHeight}" MinWidth="{TemplateBinding ResizableMinWidth}"
                                 MaxHeight="{TemplateBinding ResizableMaxHeight}" MaxWidth="{TemplateBinding ResizableMaxWidth}"
                                 Canvas.Left="0" Canvas.Top="0">
@@ -929,7 +929,7 @@
                     <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding ProgressDialogBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
                                 MinHeight="{TemplateBinding ProgressDialogMinHeight}" MinWidth="{TemplateBinding ProgressDialogMinWidth}"
                                 MaxHeight="{TemplateBinding ProgressDialogMaxHeight}" MaxWidth="{TemplateBinding ProgressDialogMaxWidth}"
                                 Canvas.Left="0" Canvas.Top="0">
