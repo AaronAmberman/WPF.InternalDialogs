@@ -420,6 +420,24 @@ namespace WPF.InternalDialogs
 
         private void MovableResizableInternalDialog_LayoutUpdated(object? sender, EventArgs e)
         {
+            if (canvas == null) return;
+            if (innerBorder == null) return;
+            if (Visibility == Visibility.Collapsed) return;
+
+            if (!initialLayoutComplete)
+            {
+                CenterMessageBox();
+
+                initialLayoutComplete = true;
+            }
+
+            PlaceResizer();
+        }
+
+        private void MovableResizableInternalDialog_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (canvas == null) return;
+            if (innerBorder == null) return;
             if (Visibility == Visibility.Collapsed) return;
 
             if (initialLayoutComplete && KeepDialogCenteredOnContainerResize)
@@ -428,20 +446,6 @@ namespace WPF.InternalDialogs
 
                 return;
             }
-
-            if (!initialLayoutComplete)
-            {
-                CenterMessageBox();
-
-                initialLayoutComplete = true;
-            }
-        }
-
-        private void MovableResizableInternalDialog_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (canvas == null) return;
-            if (innerBorder == null) return;
-            if (Visibility == Visibility.Collapsed) return;
 
             EnsureVisibility();
             SizeContent();
@@ -508,8 +512,6 @@ namespace WPF.InternalDialogs
 
             Canvas.SetLeft(innerBorder, centerX);
             Canvas.SetTop(innerBorder, centerY);
-
-            PlaceResizer();
         }
 
         private void EnsureVisibility()
@@ -532,8 +534,6 @@ namespace WPF.InternalDialogs
                 if (newLeft >= canvasOnScreen.Left)
                 {
                     Canvas.SetLeft(innerBorder, newLeftActual);
-
-                    PlaceResizer();
                 }
             }
 
@@ -546,8 +546,6 @@ namespace WPF.InternalDialogs
                 if (newTop >= canvasOnScreen.Top)
                 {
                     Canvas.SetTop(innerBorder, newTopActual);
-
-                    PlaceResizer();
                 }
             }
         }
@@ -620,8 +618,6 @@ namespace WPF.InternalDialogs
 
             if (newYOnScreen > canvasOnScreen.Top && newYBottomOnScreen < canvasOnScreen.Bottom)
                 Canvas.SetTop(innerBorder, newY);
-
-            PlaceResizer();
         }
 
         private void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)

@@ -514,6 +514,8 @@ namespace WPF.InternalDialogs
 
                 initialLayoutComplete = true;
             }
+
+            PlaceResizer();
         }
 
         private void InputBoxInternalDialog_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -594,8 +596,6 @@ namespace WPF.InternalDialogs
 
             Canvas.SetLeft(innerBorder, centerX);
             Canvas.SetTop(innerBorder, centerY);
-
-            PlaceResizer();
         }
 
         private void EnsureVisibility()
@@ -618,8 +618,6 @@ namespace WPF.InternalDialogs
                 if (newLeft >= canvasOnScreen.Left)
                 {
                     Canvas.SetLeft(innerBorder, newLeftActual);
-
-                    PlaceResizer();
                 }
             }
 
@@ -632,8 +630,6 @@ namespace WPF.InternalDialogs
                 if (newTop >= canvasOnScreen.Top)
                 {
                     Canvas.SetTop(innerBorder, newTopActual);
-
-                    PlaceResizer();
                 }
             }
         }
@@ -722,8 +718,6 @@ namespace WPF.InternalDialogs
 
             if (newYOnScreen > canvasOnScreen.Top && newYBottomOnScreen < canvasOnScreen.Bottom)
                 Canvas.SetTop(innerBorder, newY);
-
-            PlaceResizer();
         }
 
         private void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)
