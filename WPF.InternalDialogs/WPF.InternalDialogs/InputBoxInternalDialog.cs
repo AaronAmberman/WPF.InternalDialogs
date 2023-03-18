@@ -31,6 +31,7 @@ namespace WPF.InternalDialogs
         private Thumb resizeThumb;
 
         private bool initialLayoutComplete;
+        private bool isSizeAndPositionUserManaged;
 
         #endregion
 
@@ -39,13 +40,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the button area.</summary>
         public SolidColorBrush ButtonAreaBackground
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (SolidColorBrush)GetValue(ButtonAreaBackgroundProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -59,13 +60,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the style to use for the buttons in the input box.</summary>
         public Style ButtonStyle
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (Style)GetValue(ButtonStyleProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -79,13 +80,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the style to use for the close button at the top right.</summary>
         public Style CloseButtonStyle
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
-                return (Style)GetValue(CloseButtonStyleProperty); 
+                return (Style)GetValue(CloseButtonStyleProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -99,13 +100,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input to display in the text box portion of the input box.</summary>
         public string Input
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (string)GetValue(InputProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -119,13 +120,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets whether or not the input text box accepts return. Default is false.</summary>
         public bool InputBoxAcceptsReturn
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (bool)GetValue(InputBoxAcceptsReturnProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -139,17 +140,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets whether or not the input text box accepts tabs. Default is false.</summary>
         public bool InputBoxAcceptsTab
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
-                return (bool)GetValue(InputBoxAcceptsTabProperty); 
+                return (bool)GetValue(InputBoxAcceptsTabProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
-                SetValue(InputBoxAcceptsTabProperty, value); 
+                SetValue(InputBoxAcceptsTabProperty, value);
             }
         }
 
@@ -159,13 +160,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the input box part of the input box internal dialog. Not the same as Background.</summary>
         public SolidColorBrush InputBoxBackground
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (SolidColorBrush)GetValue(InputBoxBackgroundProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -179,13 +180,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the default height of the resizable portion.</summary>
         public double InputBoxDefaultHeight
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (double)GetValue(InputBoxDefaultHeightProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -199,13 +200,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the default width of the resizable portion.</summary>
         public double InputBoxDefaultWidth
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
-                return (double)GetValue(InputBoxDefaultWidthProperty); 
+                return (double)GetValue(InputBoxDefaultWidthProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -219,7 +220,7 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input box maximum height. Default is 600.0.</summary>
         public double InputBoxMaxHeight
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
@@ -239,17 +240,17 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input box maximum width. Default is 800.0</summary>
         public double InputBoxMaxWidth
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
-                return (double)GetValue(InputBoxMaxWidthProperty); 
+                return (double)GetValue(InputBoxMaxWidthProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
-                SetValue(InputBoxMaxWidthProperty, value); 
+                SetValue(InputBoxMaxWidthProperty, value);
             }
         }
 
@@ -259,7 +260,7 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input box minimum height. Default is 50.0.</summary>
         public double InputBoxMinHeight
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
@@ -279,13 +280,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input box minimum width. default is 100.0.</summary>
         public double InputBoxMinWidth
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (double)GetValue(InputBoxMinWidthProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -303,38 +304,18 @@ namespace WPF.InternalDialogs
             {
                 VerifyDisposed();
 
-                return (string)GetValue(InputBoxMessageProperty); 
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(InputBoxMessageProperty, value); 
-            }
-        }
-
-        public static readonly DependencyProperty InputBoxMessageProperty =
-            DependencyProperty.Register("InputBoxMessage", typeof(string), typeof(InputBoxInternalDialog), new PropertyMetadata(string.Empty));
-
-        /// <summary>Gets or sets whether or not the dialog is re-centered when the container is resized (not the dialog itself).</summary>
-        public bool KeepDialogCenteredOnContainerResize
-        {
-            get
-            {
-                VerifyDisposed();
-
-                return (bool)GetValue(KeepDialogCenteredOnContainerResizeProperty);
+                return (string)GetValue(InputBoxMessageProperty);
             }
             set
             {
                 VerifyDisposed();
 
-                SetValue(KeepDialogCenteredOnContainerResizeProperty, value);
+                SetValue(InputBoxMessageProperty, value);
             }
         }
 
-        public static readonly DependencyProperty KeepDialogCenteredOnContainerResizeProperty =
-            DependencyProperty.Register("KeepDialogCenteredOnContainerResize", typeof(bool), typeof(InputBoxInternalDialog), new PropertyMetadata(false));
+        public static readonly DependencyProperty InputBoxMessageProperty =
+            DependencyProperty.Register("InputBoxMessage", typeof(string), typeof(InputBoxInternalDialog), new PropertyMetadata(string.Empty));
 
         /// <summary>Gets or sets the content for the resize grip.</summary>
         /// <remarks>
@@ -364,13 +345,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the cursor for the resize gripper. Default is Cursors.NWSE.</summary>
         public Cursor ResizeGripCursor
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (Cursor)GetValue(ResizeGripCursorProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -384,13 +365,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the visibility of the resize grip. Visible = resizing enabled, Collapsed/Hidden = resizing disabled.</summary>
         public Visibility ResizeGripVisibility
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (Visibility)GetValue(ResizeGripVisibilityProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -404,13 +385,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the title to the input box.</summary>
         public string Title
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (string)GetValue(TitleProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -430,7 +411,7 @@ namespace WPF.InternalDialogs
 
                 return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -444,13 +425,13 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
         public Cursor TitleCursor
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
                 return (Cursor)GetValue(TitleCursorProperty);
             }
-            set 
+            set
             {
                 VerifyDisposed();
 
@@ -464,7 +445,7 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the horizontal alignment of the title.</summary>
         public HorizontalAlignment TitleHorizontalAlignment
         {
-            get 
+            get
             {
                 VerifyDisposed();
 
@@ -510,7 +491,7 @@ namespace WPF.InternalDialogs
 
             if (!initialLayoutComplete)
             {
-                CenterMessageBox();
+                PlaceDialogInitially();
 
                 initialLayoutComplete = true;
             }
@@ -523,16 +504,11 @@ namespace WPF.InternalDialogs
             if (canvas == null) return;
             if (innerBorder == null) return;
             if (Visibility == Visibility.Collapsed) return;
+            if (!initialLayoutComplete) return;
 
-            if (initialLayoutComplete && KeepDialogCenteredOnContainerResize)
-            {
-                CenterMessageBox();
-
-                return;
-            }
-
-            EnsureVisibility();
-            SizeContent();
+            // if the user changed the position or size manually then no more automatic management of the dialog
+            if (isSizeAndPositionUserManaged) EnsureInBounds();
+            else SizeContent();
         }
 
         new private static void VisibilityChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -572,65 +548,79 @@ namespace WPF.InternalDialogs
             }
         }
 
-        private void CenterMessageBox()
+        private void PlaceDialogInitially()
         {
-            // set the inner border to the default size
-            innerBorder.Width = InputBoxDefaultWidth;
-            innerBorder.Height = InputBoxDefaultHeight;
+            double x = 0;
+            double y = 0;
+            double width = double.IsNaN(InputBoxDefaultWidth) ? innerBorder.ActualWidth : InputBoxDefaultWidth;
+            double height = double.IsNaN(InputBoxDefaultHeight) ? innerBorder.ActualHeight : InputBoxDefaultHeight;
 
-            // center input box
-            double totalWidth = canvas.ActualWidth;
-            double totalHeight = canvas.ActualHeight;
+            if (HorizontalContentAlignment == HorizontalAlignment.Left)
+                x = 0;
+            else if (HorizontalContentAlignment == HorizontalAlignment.Right)
+                x = canvas.ActualWidth - width - Padding.Right - Padding.Left;
+            else if (HorizontalContentAlignment == HorizontalAlignment.Center)
+                x = (canvas.ActualWidth / 2) - (width / 2) - Padding.Left;
+            else if (HorizontalContentAlignment == HorizontalAlignment.Stretch)
+            {
+                // InputBoxDefaultWidth is ignored if stretch, InputBoxMaxWidth is not
+                width = InputBoxMaxWidth;
 
-            double messageBoxWidth = innerBorder.ActualWidth;
-            double messageBoxHeight = innerBorder.ActualHeight;
+                // make sure the border fits into the canvas
+                if (width > canvas.ActualWidth) width = canvas.ActualWidth - Padding.Left - Padding.Right;
 
-            if (!double.IsNaN(InputBoxDefaultHeight))
-                messageBoxHeight = InputBoxDefaultHeight;
+                x = (canvas.ActualWidth / 2) - (width / 2) - Padding.Left;
+            }
 
-            if (!double.IsNaN(InputBoxDefaultWidth))
-                messageBoxWidth = InputBoxDefaultWidth;
+            if (VerticalContentAlignment == VerticalAlignment.Top)
+                y = 0;
+            else if (VerticalContentAlignment == VerticalAlignment.Bottom)
+                y = canvas.ActualHeight - height - Padding.Bottom - Padding.Top;
+            else if (VerticalContentAlignment == VerticalAlignment.Center)
+                y = (canvas.ActualHeight / 2) - (height / 2) - Padding.Top;
+            else if (VerticalContentAlignment == VerticalAlignment.Stretch)
+            {
+                // InputBoxDefaultHeight is ignored if stretch, InputBoxMaxHeight is not
+                height = InputBoxMaxHeight;
 
-            double centerX = (totalWidth / 2) - (messageBoxWidth / 2);
-            double centerY = (totalHeight / 2) - (messageBoxHeight / 2);
+                // make sure the border fits into the canvas
+                if (height > canvas.ActualHeight) height = canvas.ActualHeight - Padding.Top - Padding.Bottom;
 
-            Canvas.SetLeft(innerBorder, centerX);
-            Canvas.SetTop(innerBorder, centerY);
+                y = (canvas.ActualHeight / 2) - (height / 2) - Padding.Top;
+            }
+
+            innerBorder.Width = width;
+            innerBorder.Height = height;
+
+            Canvas.SetLeft(innerBorder, x);
+            Canvas.SetTop(innerBorder, y);
         }
 
-        private void EnsureVisibility()
+        private void EnsureInBounds()
         {
             double left = Canvas.GetLeft(innerBorder);
             double top = Canvas.GetTop(innerBorder);
+            double right = left + innerBorder.ActualWidth + Padding.Left + Padding.Right;
+            double bottom = top + innerBorder.ActualHeight + Padding.Top + Padding.Bottom;
 
-            Point borderTopLeft = canvas.PointToScreen(new Point(left, top));
-
-            Rect borderOnScreen = new Rect(borderTopLeft, new Size(innerBorder.ActualWidth, innerBorder.ActualHeight));
-            Rect canvasOnScreen = new Rect(canvas.PointToScreen(new Point(0, 0)), new Size(canvas.ActualWidth, canvas.ActualHeight));
-
-            // we only need to manage pushing the border if it is too far right or down
-            if (borderOnScreen.Right > canvasOnScreen.Right)
+            if (right > canvas.ActualWidth)
             {
-                double newLeft = canvasOnScreen.Right - innerBorder.ActualWidth;
-                double newLeftActual = canvas.PointFromScreen(new Point(newLeft, 0)).X;
+                double newLeft = canvas.ActualWidth - innerBorder.ActualWidth - Padding.Left - Padding.Right;
 
                 // make sure we aren't pushing left out of view
-                if (newLeft >= canvasOnScreen.Left)
-                {
-                    Canvas.SetLeft(innerBorder, newLeftActual);
-                }
+                if (newLeft < 0) newLeft = 0;
+
+                Canvas.SetLeft(innerBorder, newLeft);
             }
 
-            if (borderOnScreen.Bottom > canvasOnScreen.Bottom)
+            if (bottom > canvas.ActualHeight)
             {
-                double newTop = canvasOnScreen.Bottom - innerBorder.ActualHeight;
-                double newTopActual = canvas.PointFromScreen(new Point(0, newTop)).Y;
+                double newTop = canvas.ActualHeight - innerBorder.ActualHeight - Padding.Top - Padding.Bottom;
 
                 // make sure we aren't pushing up out of view
-                if (newTop >= canvasOnScreen.Top)
-                {
-                    Canvas.SetTop(innerBorder, newTopActual);
-                }
+                if (newTop < 0) newTop = 0;
+
+                Canvas.SetTop(innerBorder, newTop);
             }
         }
 
@@ -642,11 +632,69 @@ namespace WPF.InternalDialogs
             double width = innerBorder.ActualWidth;
             double height = innerBorder.ActualHeight;
 
-            double resizerX = updatedX + width - 5;
-            double resizerY = updatedY + height - 5;
+            double resizerX = updatedX + width + Padding.Left - 5;
+            double resizerY = updatedY + height + Padding.Top - 5;
 
             Canvas.SetLeft(resizeThumbContainer, resizerX);
             Canvas.SetTop(resizeThumbContainer, resizerY);
+        }
+
+        private void SizeContent()
+        {
+            double x = Canvas.GetLeft(innerBorder);
+            double y = Canvas.GetTop(innerBorder);
+            double width = innerBorder.ActualWidth;
+            double height = innerBorder.ActualHeight;
+
+            //if (HorizontalContentAlignment == HorizontalAlignment.Left)
+            //    leave it where it is because we are aligned from the left anyway
+            if (HorizontalContentAlignment == HorizontalAlignment.Right)
+                x = canvas.ActualWidth - width - Padding.Left - Padding.Right;
+            else if (HorizontalContentAlignment == HorizontalAlignment.Center)
+                x = (canvas.ActualWidth / 2) - (width / 2) - Padding.Left;
+            else if (HorizontalContentAlignment == HorizontalAlignment.Stretch)
+            {
+                // InputBoxDefaultWidth is ignored if stretch, InputBoxMaxWidth is not
+                width = InputBoxMaxWidth;
+
+                // make sure the border fits into the canvas
+                if (width + Padding.Left + Padding.Right > canvas.ActualWidth) 
+                    width = canvas.ActualWidth - Padding.Left - Padding.Right;
+
+                x = (canvas.ActualWidth / 2) - (width / 2) - Padding.Left;
+            }
+
+            // ensure 0 at a minimum
+            if (width >= canvas.ActualWidth - Padding.Left - Padding.Right)
+                x = 0;
+
+            //if (VerticalContentAlignment == VerticalAlignment.Top)
+            //    leave it where it is because we are aligned from the top anyway
+            if (VerticalContentAlignment == VerticalAlignment.Bottom)
+                y = canvas.ActualHeight - height - Padding.Top - Padding.Bottom;
+            else if (VerticalContentAlignment == VerticalAlignment.Center)
+                y = (canvas.ActualHeight / 2) - (height / 2) - Padding.Top;
+            else if (VerticalContentAlignment == VerticalAlignment.Stretch)
+            {
+                // InputBoxDefaultHeight is ignored if stretch, InputBoxMaxHeight is not
+                height = InputBoxMaxHeight;
+
+                // make sure the border fits into the canvas
+                if (height + Padding.Top + Padding.Bottom > canvas.ActualHeight) 
+                    height = canvas.ActualHeight - Padding.Top - Padding.Bottom;
+
+                y = (canvas.ActualHeight / 2) - (height / 2) - Padding.Top;
+            }
+
+            // ensure 0 at a minimum
+            if (height >= canvas.ActualHeight - Padding.Top - Padding.Bottom)
+                y = 0;
+
+            innerBorder.Width = width;
+            innerBorder.Height = height;
+
+            Canvas.SetLeft(innerBorder, x);
+            Canvas.SetTop(innerBorder, y);
         }
 
         public override void OnApplyTemplate()
@@ -704,19 +752,15 @@ namespace WPF.InternalDialogs
             if (canvas == null) return;
             if (innerBorder == null) return;
 
-            Rect canvasOnScreen = new Rect(canvas.PointToScreen(new Point(0, 0)), new Size(canvas.ActualWidth, canvas.ActualHeight));
+            isSizeAndPositionUserManaged = true;
 
             double newX = Canvas.GetLeft(innerBorder) + e.HorizontalChange;
             double newY = Canvas.GetTop(innerBorder) + e.VerticalChange;
-            double newXOnScreen = canvas.PointToScreen(new Point(newX, 0)).X;
-            double newYOnScreen = canvas.PointToScreen(new Point(0, newY)).Y;
-            double newXRightOnScreen = newXOnScreen + innerBorder.ActualWidth;
-            double newYBottomOnScreen = newYOnScreen + innerBorder.ActualHeight;
 
-            if (newXOnScreen > canvasOnScreen.Left && newXRightOnScreen < canvasOnScreen.Right)
+            if (newX > 0 && newX < canvas.ActualWidth - innerBorder.ActualWidth - Padding.Right - Padding.Left)
                 Canvas.SetLeft(innerBorder, newX);
 
-            if (newYOnScreen > canvasOnScreen.Top && newYBottomOnScreen < canvasOnScreen.Bottom)
+            if (newY > 0 && newY < canvas.ActualHeight - innerBorder.ActualHeight - Padding.Bottom - Padding.Top)
                 Canvas.SetTop(innerBorder, newY);
         }
 
@@ -725,15 +769,10 @@ namespace WPF.InternalDialogs
             if (canvas == null) return;
             if (innerBorder == null) return;
 
-            Rect canvasOnScreen = new Rect(canvas.PointToScreen(new Point(0, 0)), new Size(canvas.ActualWidth, canvas.ActualHeight));
+            isSizeAndPositionUserManaged = true;
 
-            double xAdjust = innerBorder.Width + e.HorizontalChange;
-
-            if (double.IsNaN(xAdjust)) xAdjust = innerBorder.ActualWidth + e.HorizontalChange;
-
-            double yAdjust = innerBorder.Height + e.VerticalChange;
-
-            if (double.IsNaN(yAdjust)) yAdjust = innerBorder.ActualHeight + e.VerticalChange;
+            double xAdjust = innerBorder.ActualWidth + e.HorizontalChange;
+            double yAdjust = innerBorder.ActualHeight + e.VerticalChange;
 
             if (xAdjust >= 0 && yAdjust >= 0)
             {
@@ -744,56 +783,24 @@ namespace WPF.InternalDialogs
                 if (yAdjust <= InputBoxMinHeight) yAdjust = InputBoxMinHeight;
                 if (yAdjust >= InputBoxMaxHeight) yAdjust = InputBoxMaxHeight;
 
-                // make sure we are with the canvas area as well, no dragging off screen
-                double left = Canvas.GetLeft(innerBorder);
-                double top = Canvas.GetTop(innerBorder);
+                double x = Canvas.GetLeft(innerBorder);
+                double y = Canvas.GetTop(innerBorder);
 
-                Point onScreenAdjusted = canvas.PointToScreen(new Point(left + xAdjust, top + yAdjust));
+                // make sure we are within the canvas area as well, no dragging off screen
+                double totalX = x + xAdjust + Padding.Left + Padding.Right;
+                double totalY = y + yAdjust + Padding.Top + Padding.Bottom;
 
-                if (onScreenAdjusted.X > canvasOnScreen.Right)
-                    xAdjust = canvas.PointFromScreen(new Point(canvasOnScreen.Right - left, 0)).X;
+                if (totalX > canvas.ActualWidth)
+                    xAdjust = canvas.ActualWidth - x - Padding.Left - Padding.Right;
 
-                if (onScreenAdjusted.Y > canvasOnScreen.Bottom)
-                    yAdjust = canvas.PointFromScreen(new Point(0, canvasOnScreen.Bottom - top)).Y;
+                if (totalY > canvas.ActualHeight)
+                    yAdjust = canvas.ActualHeight - y - Padding.Top - Padding.Bottom;
 
                 innerBorder.Width = xAdjust;
                 innerBorder.Height = yAdjust;
 
-                // we are going to move the resizer too (bottom right of input box)
-                double newWidth = left + innerBorder.Width - 5;
-                double newHeight = top + innerBorder.Height - 5;
-
-                // make sure we can only drag to the minimum and maximum size of the input box
-                if (innerBorder.Width <= InputBoxMinWidth)
-                    newWidth = left + InputBoxMinWidth - 5;
-
-                if (innerBorder.Width >= InputBoxMaxWidth)
-                    newWidth = left + InputBoxMaxWidth - 5;
-
-                if (innerBorder.Height <= InputBoxMinHeight)
-                    newHeight = top + InputBoxMinHeight - 5;
-
-                if (innerBorder.Height >= InputBoxMaxHeight)
-                    newHeight = top + InputBoxMaxHeight - 5;
-
-                Canvas.SetLeft(resizeThumbContainer, newWidth);
-                Canvas.SetTop(resizeThumbContainer, newHeight);
+                PlaceResizer();
             }
-        }
-
-        private void SizeContent()
-        {
-            //double canvasWidth = canvas.ActualWidth;
-            //double canvasHeight = canvas.ActualHeight;
-            //Rect canvasOnScreen = new Rect(canvas.PointToScreen(new Point(0, 0)), new Size(canvasWidth, canvasHeight));
-
-            //Debug.WriteLine($"Canvas on screen: {canvasOnScreen}");
-
-            //double borderWidth = innerBorder.ActualWidth;
-            //double borderHeight = innerBorder.ActualHeight;
-            //Rect borderOnScreen = new Rect(innerBorder.PointToScreen(new Point(0, 0)), new Size(borderWidth, borderHeight));
-
-            //Debug.WriteLine($"Border on screen: {borderOnScreen}");
         }
 
         /// <summary>

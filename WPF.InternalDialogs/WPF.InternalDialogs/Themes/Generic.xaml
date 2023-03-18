@@ -81,8 +81,7 @@
         <Setter Property="CloseFocusBehavior" Value="FocusPreviousFocusedIInputElement" />
         <Setter Property="CloseOnEscape" Value="True" />
         <Setter Property="ContentPadding" Value="0" />
-        <!-- does not work because of the canvas -->
-        <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="InputBoxAcceptsReturn" Value="False" />
         <Setter Property="InputBoxAcceptsTab" Value="False" />
         <Setter Property="InputBoxBackground" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
@@ -106,8 +105,7 @@
         <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <Setter Property="TitleCursor" Value="SizeAll" />
-        <!-- does not work because of the canvas -->
-        <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
         <Setter Property="Template">
             <Setter.Value>
@@ -115,7 +113,7 @@
                     <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">                        
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding InputBoxBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
                                 MinHeight="{TemplateBinding InputBoxMinHeight}" MinWidth="{TemplateBinding InputBoxMinWidth}"
                                 MaxHeight="{TemplateBinding InputBoxMaxHeight}" MaxWidth="{TemplateBinding InputBoxMaxWidth}"
                                 Canvas.Left="0" Canvas.Top="0">
@@ -208,8 +206,7 @@
         <Setter Property="CloseFocusBehavior" Value="FocusPreviousFocusedIInputElement" />
         <Setter Property="CloseOnEscape" Value="True" />
         <Setter Property="ContentPadding" Value="0" />
-        <!-- does not work because of the canvas -->
-        <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="IsModal" Value="False"/>
         <Setter Property="MessageBoxBackground" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
         <Setter Property="MessageBoxButton" Value="OK" />
@@ -233,8 +230,7 @@
         <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <Setter Property="TitleCursor" Value="SizeAll" />
-        <!-- does not work because of the canvas -->
-        <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
         <Setter Property="Template">
             <Setter.Value>
@@ -242,7 +238,7 @@
                     <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding MessageBoxBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
                                 MinHeight="{TemplateBinding MessageBoxMinHeight}" MinWidth="{TemplateBinding MessageBoxMinWidth}"
                                 MaxHeight="{TemplateBinding MessageBoxMaxHeight}" MaxWidth="{TemplateBinding MessageBoxMaxWidth}"
                                 Canvas.Left="0" Canvas.Top="0">
@@ -791,8 +787,7 @@
         <Setter Property="CloseOnEscape" Value="True" />
         <Setter Property="ContentBackground" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
         <Setter Property="ContentPadding" Value="0" />
-        <!-- does not work because of the canvas -->
-        <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="IsModal" Value="False"/>
         <Setter Property="Padding" Value="0" />
         <Setter Property="ResizableMaxHeight" Value="600" />
@@ -813,8 +808,7 @@
         <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <Setter Property="TitleCursor" Value="SizeAll" />
-        <!-- does not work because of the canvas -->
-        <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
         <Setter Property="Template">
             <Setter.Value>
@@ -822,7 +816,7 @@
                     <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding ContentBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
                                 MinHeight="{TemplateBinding ResizableMinHeight}" MinWidth="{TemplateBinding ResizableMinWidth}"
                                 MaxHeight="{TemplateBinding ResizableMaxHeight}" MaxWidth="{TemplateBinding ResizableMaxWidth}"
                                 Canvas.Left="0" Canvas.Top="0">
@@ -887,8 +881,7 @@
         <Setter Property="CloseFocusBehavior" Value="FocusPreviousFocusedIInputElement" />
         <Setter Property="CloseOnEscape" Value="True" />
         <Setter Property="ContentPadding" Value="0" />
-        <!-- does not work because of the canvas -->
-        <!--<Setter Property="HorizontalContentAlignment" Value="Center" />-->
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="IsModal" Value="False"/>
         <Setter Property="Padding" Value="0" />
         <Setter Property="ProgressBarStyle">
@@ -920,8 +913,7 @@
         <Setter Property="ResizeGripVisibility" Value="Visible" />
         <Setter Property="TitleAreaBackground" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
         <Setter Property="TitleCursor" Value="SizeAll" />
-        <!-- does not work because of the canvas -->
-        <!--<Setter Property="VerticalContentAlignment" Value="Center" />-->
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle" />
         <Setter Property="Template">
             <Setter.Value>
@@ -929,7 +921,7 @@
                     <Canvas x:Name="PART_Canvas" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}">
                         <Border x:Name="PART_InnerBorder" SnapsToDevicePixels="True" Background="{TemplateBinding ProgressDialogBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Margin="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"
                                 MinHeight="{TemplateBinding ProgressDialogMinHeight}" MinWidth="{TemplateBinding ProgressDialogMinWidth}"
                                 MaxHeight="{TemplateBinding ProgressDialogMaxHeight}" MaxWidth="{TemplateBinding ProgressDialogMaxWidth}"
                                 Canvas.Left="0" Canvas.Top="0">

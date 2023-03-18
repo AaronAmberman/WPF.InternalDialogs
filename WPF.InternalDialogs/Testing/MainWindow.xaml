@@ -119,7 +119,7 @@
                                      Message="This is a simple message box!!!" 
                                      Title="Message Box Example 1" MessageBoxImage="Information" MessageBoxButton="OK"
                                      FocusParent="{Binding ElementName=rootGrid}" />
-        <id:InputBoxInternalDialog x:Name="ibid" Grid.Row="0" Grid.RowSpan="4" Padding="0" KeepDialogCenteredOnContainerResize="True" InputBoxDefaultHeight="400" InputBoxDefaultWidth="600"
+        <id:InputBoxInternalDialog x:Name="ibid" Grid.Row="0" Grid.RowSpan="4" Padding="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                    InputBoxMessage="Message to the user." Title="The Title" CornerRadius="0" IsModal="False" 
                                    FocusParent="{Binding ElementName=rootGrid}" />
         <id:MovableResizableInternalDialog x:Name="mrid" Grid.Row="0" Grid.RowSpan="4" IsModal="False"
