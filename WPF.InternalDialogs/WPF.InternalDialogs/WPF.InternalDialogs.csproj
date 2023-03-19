@@ -10,6 +10,9 @@
     <PackageProjectUrl>https://github.com/AaronAmberman/WPF.InternalDialogs</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>WPF;dialogs;dialog;internal dialogs;internal dialog;light box;light-box</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +27,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+	  <None Include="..\..\LICENSE">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+	  </None>
   </ItemGroup>
 
 </Project>
