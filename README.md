@@ -14,13 +14,12 @@ Inspired by https://github.com/BenjaminGale/ModalContentPresenter/blob/master/Mo
 5. Proper look-less control template design so can be used in EDA or MVVM development.
     - Dependency properties make it so they can be assigned or bound to.
 6. Can be dragged by user.
-    - Bounds checking so the user if the user drags the dialog off screen then it snaps back into the interface a little bit. Enough to grab and move again.
 7. Can be resized by user.
 8. The MessageBoxInternalDialog has 23 different icons...not just 4.
 9. The MovableResizableInternalDialog makes it very easy to make your own movable resizable internal dialog if you want completely custom user interfaces.
 10. The resize gripper content can be whatever you want it to be as it is just a ContentPresenter. :) 
 
-![DraggableMessageBox](https://user-images.githubusercontent.com/23512394/156051059-286e3e62-69a4-4089-8d26-3aea36da3c3c.gif)
+![InternalDialogs](https://user-images.githubusercontent.com/23512394/226147107-b689cd26-3500-46bb-b58f-79c0bcd99317.gif)
 
 ```xml
 <id:MessageBoxInternalDialog x:Name="mbiDialog" Grid.Row="0" Grid.RowSpan="4"
@@ -37,16 +36,20 @@ See, very easy to use!
     - Remember the properties HorizontalContentAlignment and VerticalContentAlignment as they help a lot.
 - **MovableResizableInternalDialog**
     - This class allows developers to design and develop their own movable resizable content.
-    - HorizontalContentAlignment and VerticalContentAlignment have no effect.
+    - If HorizontalContentAlignment is set to Stretch then ResizableDefaultWidth is ignored.
+    - If VerticalContentAlignment is set to Stretch then ResizableDefaultHeight is ignored.
 - **InputBoxInternalDialog**
     - This class allows developers to capture basic user input.
-    - HorizontalContentAlignment and VerticalContentAlignment have no effect.
+    - If HorizontalContentAlignment is set to Stretch then InputBoxDefaultWidth is ignored.
+    - If VerticalContentAlignment is set to Stretch then InputBoxDefaultHeight is ignored.
 - **MessageBoxInternalDialog**
     - This is a message box that is an internal dialog.
-    - HorizontalContentAlignment and VerticalContentAlignment have no effect.
+    - If HorizontalContentAlignment is set to Stretch then MessageBoxDefaultWidth is ignored.
+    - If VerticalContentAlignment is set to Stretch then MessageBoxDefaultHeight is ignored.
 - **ProgressInternalDialog**
     - This class displays a simple message with a progress bar.
-    - HorizontalContentAlignment and VerticalContentAlignment have no effect.
+    - If HorizontalContentAlignment is set to Stretch then ProgressDialogDefaultWidth is ignored.
+    - If VerticalContentAlignment is set to Stretch then ProgressDialogDefaultHeight is ignored.
 
 
 ### Class Overviews
