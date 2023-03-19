@@ -73,8 +73,8 @@ Internal Dialogs implement IDisposable so be sure to clean up properly by callin
 ![MBID-Example2](https://user-images.githubusercontent.com/23512394/156067331-b7633be1-b45c-4754-9255-e94cb17b3d3f.png)
 
 # Examples
-[VTOL VR MIssion Assistant]([https://github.com/AaronAmberman/VTOLVR-MissionAssistant](https://github.com/AaronAmberman/VTOLVR-MissionAssistant/blob/main/VTOLVR-MissionAssistant/VTOLVR-MissionAssistant/MainWindow.xaml))
+[VTOL VR MIssion Assistant](https://github.com/AaronAmberman/VTOLVR-MissionAssistant/blob/main/VTOLVR-MissionAssistant/VTOLVR-MissionAssistant/MainWindow.xaml)
 
-[Magic The Gathering Arena Deck Master]([https://github.com/AaronAmberman/MagicTheGatheringArenaDeckMaster](https://github.com/AaronAmberman/MagicTheGatheringArenaDeckMaster/blob/main/MagicTheGatheringArenaDeckMaster/MagicTheGatheringArenaDeckMaster/UserControls/PopupDialogUserControl.xaml))
+[Magic The Gathering Arena Deck Master](https://github.com/AaronAmberman/MagicTheGatheringArenaDeckMaster/blob/main/MagicTheGatheringArenaDeckMaster/MagicTheGatheringArenaDeckMaster/UserControls/PopupDialogUserControl.xaml)
 
 Both of these projects have really extensive examples of internal dialogs.
