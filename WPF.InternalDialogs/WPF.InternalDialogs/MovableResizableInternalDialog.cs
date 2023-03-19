@@ -454,6 +454,7 @@ namespace WPF.InternalDialogs
             else // Collapsed
             {
                 instance.initialLayoutComplete = false;
+                instance.isSizeAndPositionUserManaged = false;
 
                 // make sure reset the size of the message (fixes custom size set from user dragging)
                 if (instance.innerBorder != null)
