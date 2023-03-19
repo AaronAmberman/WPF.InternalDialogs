@@ -30,6 +30,7 @@ Inspired by https://github.com/BenjaminGale/ModalContentPresenter/blob/master/Mo
 
 See, very easy to use!
 
+## Wiki
 Please see the [wiki](https://github.com/AaronAmberman/WPF.InternalDialogs/wiki) for type break down.
 
 #### FocusParent
