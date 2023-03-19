@@ -33,6 +33,7 @@ See, very easy to use!
 ## Wiki
 Please see the [wiki](https://github.com/AaronAmberman/WPF.InternalDialogs/wiki) for type break down.
 
+## Additional Insight
 #### FocusParent
 This property is required for every InternalDialog. It will throw an exception at runtime if this value is null. This property should be some kind of root Grid, Border or Panel that contains the other focusable children. It should NOT be a singular IInputElement to pass focus back to or steal it from. You can choose various types of "re-focusing" strategies by setting *CloseFocusBehavior*. The default is to focus back to the control that had focus previously but you can choose first, last, next or step backwards as well.
 
