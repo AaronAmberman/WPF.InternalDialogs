@@ -9,6 +9,7 @@
     <Copyright>© Aaron Amberman 2023</Copyright>
     <PackageProjectUrl>https://github.com/AaronAmberman/WPF.InternalDialogs</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
