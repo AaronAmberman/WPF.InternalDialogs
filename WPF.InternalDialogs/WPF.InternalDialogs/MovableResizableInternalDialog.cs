@@ -26,6 +26,7 @@ namespace WPF.InternalDialogs
         private Grid resizeThumbContainer;
         private Thumb resizeThumb;
 
+        private Size defaultSize = Size.Empty;
         private bool initialLayoutComplete;
         private bool isSizeAndPositionUserManaged;
 
@@ -472,39 +473,51 @@ namespace WPF.InternalDialogs
             double width = double.IsNaN(ResizableDefaultWidth) ? innerBorder.ActualWidth : ResizableDefaultWidth;
             double height = double.IsNaN(ResizableDefaultHeight) ? innerBorder.ActualHeight : ResizableDefaultHeight;
 
+            defaultSize = new Size(width, height);
+
+            // respect max
+            if (HorizontalContentAlignment == HorizontalAlignment.Stretch)
+                width = ResizableMaxWidth;
+
+            // make sure we fit
+            if (width > canvas.ActualWidth)
+                width = canvas.ActualWidth - Padding.Left - Padding.Right;
+
+            // make sure we aren't smaller than minimum
+            if (width < ResizableMinWidth)
+                width = ResizableMinWidth;
+
             if (HorizontalContentAlignment == HorizontalAlignment.Left)
                 x = 0;
             else if (HorizontalContentAlignment == HorizontalAlignment.Right)
                 x = canvas.ActualWidth - width - Padding.Right - Padding.Left;
-            else if (HorizontalContentAlignment == HorizontalAlignment.Center)
+            else if (HorizontalContentAlignment == HorizontalAlignment.Center ||
+                     HorizontalContentAlignment == HorizontalAlignment.Stretch)
                 x = (canvas.ActualWidth / 2) - (width / 2) - Padding.Left;
-            else if (HorizontalContentAlignment == HorizontalAlignment.Stretch)
-            {
-                // ResizableDefaultWidth is ignored if stretch, ResizableMaxWidth is not
-                width = ResizableMaxWidth;
 
-                // make sure the border fits into the canvas
-                if (width > canvas.ActualWidth) width = canvas.ActualWidth - Padding.Left - Padding.Right;
+            if (x < 0) x = 0;
 
-                x = (canvas.ActualWidth / 2) - (width / 2) - Padding.Left;
-            }
+            // respect max
+            if (VerticalContentAlignment == VerticalAlignment.Stretch)
+                height = ResizableMaxHeight;
+
+            // make sure we fit
+            if (height > canvas.ActualHeight)
+                height = canvas.ActualHeight - Padding.Left - Padding.Right;
+
+            // make sure we aren't smaller than minimum
+            if (height < ResizableMinHeight)
+                height = ResizableMinHeight;
 
             if (VerticalContentAlignment == VerticalAlignment.Top)
                 y = 0;
             else if (VerticalContentAlignment == VerticalAlignment.Bottom)
                 y = canvas.ActualHeight - height - Padding.Bottom - Padding.Top;
-            else if (VerticalContentAlignment == VerticalAlignment.Center)
+            else if (VerticalContentAlignment == VerticalAlignment.Center ||
+                     VerticalContentAlignment == VerticalAlignment.Stretch)
                 y = (canvas.ActualHeight / 2) - (height / 2) - Padding.Top;
-            else if (VerticalContentAlignment == VerticalAlignment.Stretch)
-            {
-                // ResizableDefaultHeight is ignored if stretch, ResizableMaxHeight is not
-                height = ResizableMaxHeight;
 
-                // make sure the border fits into the canvas
-                if (height > canvas.ActualHeight) height = canvas.ActualHeight - Padding.Top - Padding.Bottom;
-
-                y = (canvas.ActualHeight / 2) - (height / 2) - Padding.Top;
-            }
+            if (y < 0) y = 0;
 
             innerBorder.Width = width;
             innerBorder.Height = height;
@@ -560,15 +573,29 @@ namespace WPF.InternalDialogs
         {
             double x = Canvas.GetLeft(innerBorder);
             double y = Canvas.GetTop(innerBorder);
-            double width = innerBorder.ActualWidth;
-            double height = innerBorder.ActualHeight;
+            double width = canvas.ActualWidth - Padding.Left - Padding.Right;
+            double height = canvas.ActualHeight - Padding.Top - Padding.Bottom;
 
-            //if (HorizontalContentAlignment == HorizontalAlignment.Left)
-            //    leave it where it is because we are aligned from the left anyway
+            // make sure we fit
+            if (width > canvas.ActualWidth) width = canvas.ActualWidth - Padding.Left - Padding.Right;
+            if (width < ResizableMinWidth) width = ResizableMinWidth;
+
+            if (HorizontalContentAlignment == HorizontalAlignment.Left)
+            {
+                if (width > defaultSize.Width) width = defaultSize.Width;
+            }
             if (HorizontalContentAlignment == HorizontalAlignment.Right)
+            {
+                if (width > defaultSize.Width) width = defaultSize.Width;
+
                 x = canvas.ActualWidth - width - Padding.Left - Padding.Right;
+            }
             else if (HorizontalContentAlignment == HorizontalAlignment.Center)
+            {
+                if (width > defaultSize.Width) width = defaultSize.Width;
+
                 x = (canvas.ActualWidth / 2) - (width / 2) - Padding.Left;
+            }
             else if (HorizontalContentAlignment == HorizontalAlignment.Stretch)
             {
                 // ResizableDefaultWidth is ignored if stretch, ResizableMaxWidth is not
@@ -585,12 +612,26 @@ namespace WPF.InternalDialogs
             if (width >= canvas.ActualWidth - Padding.Left - Padding.Right)
                 x = 0;
 
-            //if (VerticalContentAlignment == VerticalAlignment.Top)
-            //    leave it where it is because we are aligned from the top anyway
+            // make sure we fit
+            if (height > canvas.ActualHeight) height = canvas.ActualHeight - Padding.Top - Padding.Bottom;
+            if (height < ResizableMinHeight) height = ResizableMinHeight;
+
+            if (VerticalContentAlignment == VerticalAlignment.Top)
+            {
+                if (height > defaultSize.Height) height = defaultSize.Height;
+            }
             if (VerticalContentAlignment == VerticalAlignment.Bottom)
+            {
+                if (height > defaultSize.Height) height = defaultSize.Height;
+
                 y = canvas.ActualHeight - height - Padding.Top - Padding.Bottom;
+            }
             else if (VerticalContentAlignment == VerticalAlignment.Center)
+            {
+                if (height > defaultSize.Height) height = defaultSize.Height;
+
                 y = (canvas.ActualHeight / 2) - (height / 2) - Padding.Top;
+            }
             else if (VerticalContentAlignment == VerticalAlignment.Stretch)
             {
                 // ResizableDefaultHeight is ignored if stretch, ResizableMaxHeight is not
