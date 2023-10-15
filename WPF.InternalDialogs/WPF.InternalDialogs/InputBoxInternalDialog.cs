@@ -39,13 +39,13 @@ namespace WPF.InternalDialogs
         #region Properties
 
         /// <summary>Gets or sets the background for the button area.</summary>
-        public SolidColorBrush ButtonAreaBackground
+        public Brush ButtonAreaBackground
         {
             get
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(ButtonAreaBackgroundProperty);
+                return (Brush)GetValue(ButtonAreaBackgroundProperty);
             }
             set
             {
@@ -56,7 +56,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty ButtonAreaBackgroundProperty =
-            DependencyProperty.Register("ButtonAreaBackground", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("ButtonAreaBackground", typeof(Brush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the style to use for the buttons in the input box.</summary>
         public Style ButtonStyle
@@ -159,13 +159,13 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("InputBoxAcceptsTab", typeof(bool), typeof(InputBoxInternalDialog), new PropertyMetadata(false));
 
         /// <summary>Gets or sets the background for the input box part of the input box internal dialog. Not the same as Background.</summary>
-        public SolidColorBrush InputBoxBackground
+        public Brush InputBoxBackground
         {
             get
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(InputBoxBackgroundProperty);
+                return (Brush)GetValue(InputBoxBackgroundProperty);
             }
             set
             {
@@ -176,7 +176,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty InputBoxBackgroundProperty =
-            DependencyProperty.Register("InputBoxBackground", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("InputBoxBackground", typeof(Brush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the default height of the resizable portion.</summary>
         public double InputBoxDefaultHeight
@@ -404,13 +404,13 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("Title", typeof(string), typeof(InputBoxInternalDialog), new PropertyMetadata(string.Empty));
 
         /// <summary>Gets or sets the background for the title area.</summary>
-        public SolidColorBrush TitleAreaBackground
+        public Brush TitleAreaBackground
         {
             get
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty);
+                return (Brush)GetValue(TitleAreaBackgroundProperty);
             }
             set
             {
@@ -421,7 +421,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
-            DependencyProperty.Register("TitleAreaBackground", typeof(SolidColorBrush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("TitleAreaBackground", typeof(Brush), typeof(InputBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
         public Cursor TitleCursor

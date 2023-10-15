@@ -35,13 +35,13 @@ namespace WPF.InternalDialogs
         #region Properties
 
         /// <summary>Gets or sets the background for the answer area.</summary>
-        public SolidColorBrush AnswerAreaBackground
+        public Brush AnswerAreaBackground
         {
             get 
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(AnswerAreaBackgroundProperty);
+                return (Brush)GetValue(AnswerAreaBackgroundProperty);
             }
             set 
             {
@@ -52,7 +52,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty AnswerAreaBackgroundProperty =
-            DependencyProperty.Register("AnswerAreaBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("AnswerAreaBackground", typeof(Brush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the answer area content.</summary>
         public object AnswerAreaContent
@@ -95,13 +95,13 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("CloseButtonStyle", typeof(Style), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the background for the content part of the movable resizable internal dialog. Not the same as Background.</summary>
-        public SolidColorBrush ContentBackground
+        public Brush ContentBackground
         {
             get 
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(ContentBackgroundProperty);
+                return (Brush)GetValue(ContentBackgroundProperty);
             }
             set 
             {
@@ -112,7 +112,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty ContentBackgroundProperty =
-            DependencyProperty.Register("ContentBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("ContentBackground", typeof(Brush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the default height of the resizable portion.</summary>
         public double ResizableDefaultHeight
@@ -300,13 +300,13 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("ResizeGripVisibility", typeof(Visibility), typeof(MovableResizableInternalDialog), new PropertyMetadata(Visibility.Visible));
 
         /// <summary>Gets or sets the background for the title area.</summary>
-        public SolidColorBrush TitleAreaBackground
+        public Brush TitleAreaBackground
         {
             get 
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty);
+                return (Brush)GetValue(TitleAreaBackgroundProperty);
             }
             set 
             {
@@ -317,7 +317,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
-            DependencyProperty.Register("TitleAreaBackground", typeof(SolidColorBrush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("TitleAreaBackground", typeof(Brush), typeof(MovableResizableInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the title content. The title content has IsHitTestVisible="False" set so the underlying Thumb can work.</summary>
         public object TitleContent

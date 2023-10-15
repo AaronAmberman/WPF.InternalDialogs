@@ -42,13 +42,13 @@ namespace WPF.InternalDialogs
         #region Properties
 
         /// <summary>Gets or sets the background for the button area.</summary>
-        public SolidColorBrush ButtonAreaBackground
+        public Brush ButtonAreaBackground
         {
             get 
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(ButtonAreaBackgroundProperty);
+                return (Brush)GetValue(ButtonAreaBackgroundProperty);
             }
             set
             {
@@ -59,7 +59,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty ButtonAreaBackgroundProperty =
-            DependencyProperty.Register("ButtonAreaBackground", typeof(SolidColorBrush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("ButtonAreaBackground", typeof(Brush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>gets or sets the style to use for the buttons in the message box.</summary>
         public Style ButtonStyle
@@ -202,13 +202,13 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("Message", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata(string.Empty));
 
         /// <summary>Gets or sets the background for the message box part of the message box internal dialog. Not the same as Background.</summary>
-        public SolidColorBrush MessageBoxBackground
+        public Brush MessageBoxBackground
         {
             get 
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(MessageBoxBackgroundProperty);
+                return (Brush)GetValue(MessageBoxBackgroundProperty);
             }
             set
             {
@@ -219,7 +219,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty MessageBoxBackgroundProperty =
-            DependencyProperty.Register("MessageBoxBackground", typeof(SolidColorBrush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("MessageBoxBackground", typeof(Brush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the message box buttons shown.</summary>
         public MessageBoxButton MessageBoxButton
@@ -468,13 +468,13 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("Title", typeof(string), typeof(MessageBoxInternalDialog), new PropertyMetadata(string.Empty));
 
         /// <summary>Gets or sets the background for the title area.</summary>
-        public SolidColorBrush TitleAreaBackground
+        public Brush TitleAreaBackground
         {
             get 
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty);
+                return (Brush)GetValue(TitleAreaBackgroundProperty);
             }
             set
             {
@@ -485,7 +485,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
-            DependencyProperty.Register("TitleAreaBackground", typeof(SolidColorBrush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("TitleAreaBackground", typeof(Brush), typeof(MessageBoxInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
         public Cursor TitleCursor

@@ -74,13 +74,13 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("ProgressBarStyle", typeof(Style), typeof(ProgressInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the background for the input box part of the input box internal dialog. Not the same as Background.</summary>
-        public SolidColorBrush ProgressDialogBackground
+        public Brush ProgressDialogBackground
         {
             get
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(ProgressDialogBackgroundProperty);
+                return (Brush)GetValue(ProgressDialogBackgroundProperty);
             }
             set 
             {
@@ -91,7 +91,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty ProgressDialogBackgroundProperty =
-            DependencyProperty.Register("ProgressDialogBackground", typeof(SolidColorBrush), typeof(ProgressInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("ProgressDialogBackground", typeof(Brush), typeof(ProgressInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the default height of the resizable portion.</summary>
         public double ProgressDialogDefaultHeight
@@ -339,13 +339,13 @@ namespace WPF.InternalDialogs
             DependencyProperty.Register("Title", typeof(string), typeof(ProgressInternalDialog), new PropertyMetadata(string.Empty));
 
         /// <summary>Gets or sets the background for the title area.</summary>
-        public SolidColorBrush TitleAreaBackground
+        public Brush TitleAreaBackground
         {
             get 
             {
                 VerifyDisposed();
 
-                return (SolidColorBrush)GetValue(TitleAreaBackgroundProperty);
+                return (Brush)GetValue(TitleAreaBackgroundProperty);
             }
             set 
             {
@@ -356,7 +356,7 @@ namespace WPF.InternalDialogs
         }
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
-            DependencyProperty.Register("TitleAreaBackground", typeof(SolidColorBrush), typeof(ProgressInternalDialog), new PropertyMetadata(null));
+            DependencyProperty.Register("TitleAreaBackground", typeof(Brush), typeof(ProgressInternalDialog), new PropertyMetadata(null));
 
         /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
         public Cursor TitleCursor
