@@ -36,18 +36,8 @@ namespace WPF.InternalDialogs
         /// <summary>gets or sets the style to use for the close button at the top right.</summary>
         public Style CloseButtonStyle
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Style)GetValue(CloseButtonStyleProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(CloseButtonStyleProperty, value);
-            }
+            get { return (Style)GetValue(CloseButtonStyleProperty); }
+            set { SetValue(CloseButtonStyleProperty, value); }
         }
 
         public static readonly DependencyProperty CloseButtonStyleProperty =
@@ -56,18 +46,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the style for the progress bar in the progress dialog.</summary>
         public Style ProgressBarStyle
         {
-            get
-            {
-                VerifyDisposed();
-
-                return (Style)GetValue(ProgressBarStyleProperty); 
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressBarStyleProperty, value);
-            }
+            get { return (Style)GetValue(ProgressBarStyleProperty); }
+            set { SetValue(ProgressBarStyleProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressBarStyleProperty =
@@ -76,18 +56,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the input box part of the input box internal dialog. Not the same as Background.</summary>
         public Brush ProgressDialogBackground
         {
-            get
-            {
-                VerifyDisposed();
-
-                return (Brush)GetValue(ProgressDialogBackgroundProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressDialogBackgroundProperty, value);
-            }
+            get { return (Brush)GetValue(ProgressDialogBackgroundProperty); }
+            set { SetValue(ProgressDialogBackgroundProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressDialogBackgroundProperty =
@@ -96,18 +66,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the default height of the resizable portion.</summary>
         public double ProgressDialogDefaultHeight
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(ProgressDialogDefaultHeightProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressDialogDefaultHeightProperty, value);
-            }
+            get { return (double)GetValue(ProgressDialogDefaultHeightProperty); }
+            set { SetValue(ProgressDialogDefaultHeightProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressDialogDefaultHeightProperty =
@@ -116,18 +76,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the default width of the resizable portion.</summary>
         public double ProgressDialogDefaultWidth
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(ProgressDialogDefaultWidthProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressDialogDefaultWidthProperty, value);
-            }
+            get { return (double)GetValue(ProgressDialogDefaultWidthProperty); }
+            set { SetValue(ProgressDialogDefaultWidthProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressDialogDefaultWidthProperty =
@@ -136,18 +86,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input box maximum height. Default is 600.0.</summary>
         public double ProgressDialogMaxHeight
         {
-            get
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(ProgressDialogMaxHeightProperty); 
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressDialogMaxHeightProperty, value);
-            }
+            get { return (double)GetValue(ProgressDialogMaxHeightProperty); }
+            set { SetValue(ProgressDialogMaxHeightProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressDialogMaxHeightProperty =
@@ -156,18 +96,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input box maximum width. Default is 800.0</summary>
         public double ProgressDialogMaxWidth
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(ProgressDialogMaxWidthProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressDialogMaxWidthProperty, value);
-            }
+            get { return (double)GetValue(ProgressDialogMaxWidthProperty); }
+            set { SetValue(ProgressDialogMaxWidthProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressDialogMaxWidthProperty =
@@ -176,18 +106,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input box minimum height. Default is 50.0.</summary>
         public double ProgressDialogMinHeight
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(ProgressDialogMinHeightProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressDialogMinHeightProperty, value);
-            }
+            get { return (double)GetValue(ProgressDialogMinHeightProperty); }
+            set { SetValue(ProgressDialogMinHeightProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressDialogMinHeightProperty =
@@ -196,18 +116,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the input box minimum width. default is 100.0.</summary>
         public double ProgressDialogMinWidth
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(ProgressDialogMinWidthProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressDialogMinWidthProperty, value);
-            }
+            get  { return (double)GetValue(ProgressDialogMinWidthProperty); }
+            set { SetValue(ProgressDialogMinWidthProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressDialogMinWidthProperty =
@@ -216,18 +126,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the message to display to the user.</summary>
         public string ProgressDialogMessage
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (string)GetValue(ProgressDialogMessageProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressDialogMessageProperty, value);
-            }
+            get { return (string)GetValue(ProgressDialogMessageProperty); }
+            set { SetValue(ProgressDialogMessageProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressDialogMessageProperty =
@@ -236,18 +136,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the progress value.</summary>
         public double ProgressValue
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(ProgressValueProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ProgressValueProperty, value);
-            }
+            get { return (double)GetValue(ProgressValueProperty); }
+            set { SetValue(ProgressValueProperty, value); }
         }
 
         public static readonly DependencyProperty ProgressValueProperty =
@@ -261,18 +151,8 @@ namespace WPF.InternalDialogs
         /// </remarks>
         public object ResizeGripContent
         {
-            get
-            {
-                VerifyDisposed();
-
-                return (object)GetValue(ResizeGripContentProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ResizeGripContentProperty, value);
-            }
+            get { return (object)GetValue(ResizeGripContentProperty); }
+            set { SetValue(ResizeGripContentProperty, value); }
         }
 
         public static readonly DependencyProperty ResizeGripContentProperty =
@@ -281,18 +161,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the cursor for the resize gripper.</summary>
         public Cursor ResizeGripCursor
         {
-            get
-            {
-                VerifyDisposed();
-
-                return (Cursor)GetValue(ResizeGripCursorProperty); 
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ResizeGripCursorProperty, value);
-            }
+            get { return (Cursor)GetValue(ResizeGripCursorProperty); }
+            set { SetValue(ResizeGripCursorProperty, value); }
         }
 
         public static readonly DependencyProperty ResizeGripCursorProperty =
@@ -301,18 +171,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the visibility of the resize grip. Visible = resizing enabled, Collapsed/Hidden = resizing disabled.</summary>
         public Visibility ResizeGripVisibility
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Visibility)GetValue(ResizeGripVisibilityProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ResizeGripVisibilityProperty, value);
-            }
+            get { return (Visibility)GetValue(ResizeGripVisibilityProperty); }
+            set { SetValue(ResizeGripVisibilityProperty, value); }
         }
 
         public static readonly DependencyProperty ResizeGripVisibilityProperty =
@@ -321,18 +181,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the title to the input box.</summary>
         public string Title
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (string)GetValue(TitleProperty); 
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(TitleProperty, value);
-            }
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
 
         public static readonly DependencyProperty TitleProperty =
@@ -341,18 +191,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the title area.</summary>
         public Brush TitleAreaBackground
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Brush)GetValue(TitleAreaBackgroundProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(TitleAreaBackgroundProperty, value);
-            }
+            get { return (Brush)GetValue(TitleAreaBackgroundProperty); }
+            set { SetValue(TitleAreaBackgroundProperty, value); }
         }
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
@@ -361,18 +201,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
         public Cursor TitleCursor
         {
-            get
-            {
-                VerifyDisposed();
-
-                return (Cursor)GetValue(TitleCursorProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(TitleCursorProperty, value);
-            }
+            get { return (Cursor)GetValue(TitleCursorProperty); }
+            set { SetValue(TitleCursorProperty, value); }
         }
 
         public static readonly DependencyProperty TitleCursorProperty =
@@ -381,18 +211,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the horizontal alignment of the title.</summary>
         public HorizontalAlignment TitleHorizontalAlignment
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(TitleHorizontalAlignmentProperty, value);
-            }
+            get { return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); }
+            set { SetValue(TitleHorizontalAlignmentProperty, value); }
         }
 
         public static readonly DependencyProperty TitleHorizontalAlignmentProperty =
@@ -452,8 +272,6 @@ namespace WPF.InternalDialogs
             ProgressInternalDialog instance = d as ProgressInternalDialog;
 
             if (instance == null) return;
-
-            instance.VerifyDisposed();
 
             Visibility visibility = (Visibility)e.NewValue;
 
@@ -835,35 +653,6 @@ namespace WPF.InternalDialogs
             if (ProgressDialogMinWidth < 0.0)
             {
                 throw new ArgumentException("Cannot be less than 0.0.", "ProgressDialogMinWidth");
-            }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    LayoutUpdated -= ProgressInternalDialog_LayoutUpdated;
-                    SizeChanged -= ProgressInternalDialog_SizeChanged;
-
-                    if (closeButton != null)
-                        closeButton.Click -= CloseButton_Click;
-
-                    if (titleThumb != null)
-                    {
-                        titleThumb.DragDelta -= TitleThumb_DragDelta;
-                    }
-
-                    if (resizeThumb != null)
-                    {
-                        resizeThumb.DragDelta -= ResizeThumb_DragDelta;
-                    }
-                }
-
-                disposedValue = true;
             }
         }
 

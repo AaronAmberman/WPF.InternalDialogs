@@ -44,18 +44,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the button area.</summary>
         public Brush ButtonAreaBackground
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Brush)GetValue(ButtonAreaBackgroundProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ButtonAreaBackgroundProperty, value);
-            }
+            get { return (Brush)GetValue(ButtonAreaBackgroundProperty); }
+            set { SetValue(ButtonAreaBackgroundProperty, value); }
         }
 
         public static readonly DependencyProperty ButtonAreaBackgroundProperty =
@@ -64,18 +54,8 @@ namespace WPF.InternalDialogs
         /// <summary>gets or sets the style to use for the buttons in the message box.</summary>
         public Style ButtonStyle
         {
-            get
-            {
-                VerifyDisposed();
-
-                return (Style)GetValue(ButtonStyleProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ButtonStyleProperty, value);
-            }
+            get { return (Style)GetValue(ButtonStyleProperty); }
+            set { SetValue(ButtonStyleProperty, value); }
         }
 
         public static readonly DependencyProperty ButtonStyleProperty =
@@ -84,18 +64,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the text to use for the Cancel button.</summary>
         public string ButtonTextCancel
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (string)GetValue(ButtonTextCancelProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ButtonTextCancelProperty, value);
-            }
+            get { return (string)GetValue(ButtonTextCancelProperty); }
+            set { SetValue(ButtonTextCancelProperty, value); }
         }
 
         public static readonly DependencyProperty ButtonTextCancelProperty =
@@ -104,18 +74,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the text to use for the No button.</summary>
         public string ButtonTextNo
         {
-            get
-            {
-                VerifyDisposed();
-
-                return (string)GetValue(ButtonTextNoProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ButtonTextNoProperty, value);
-            }
+            get { return (string)GetValue(ButtonTextNoProperty); }
+            set { SetValue(ButtonTextNoProperty, value); }
         }
 
         public static readonly DependencyProperty ButtonTextNoProperty =
@@ -124,18 +84,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the text to use for the OK button.</summary>
         public string ButtonTextOk
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (string)GetValue(ButtonTextOkProperty);
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(ButtonTextOkProperty, value); 
-            }
+            get { return (string)GetValue(ButtonTextOkProperty); }
+            set { SetValue(ButtonTextOkProperty, value); }
         }
 
         public static readonly DependencyProperty ButtonTextOkProperty =
@@ -144,18 +94,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the text to use for the Yes button.</summary>
         public string ButtonTextYes
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (string)GetValue(ButtonTextYesProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ButtonTextYesProperty, value);
-            }
+            get { return (string)GetValue(ButtonTextYesProperty); }
+            set { SetValue(ButtonTextYesProperty, value); }
         }
 
         public static readonly DependencyProperty ButtonTextYesProperty =
@@ -164,18 +104,8 @@ namespace WPF.InternalDialogs
         /// <summary>gets or sets the style to use for the close button at the top right.</summary>
         public Style CloseButtonStyle
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Style)GetValue(CloseButtonStyleProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(CloseButtonStyleProperty, value);
-            }
+            get { return (Style)GetValue(CloseButtonStyleProperty); }
+            set { SetValue(CloseButtonStyleProperty, value); }
         }
 
         public static readonly DependencyProperty CloseButtonStyleProperty =
@@ -184,18 +114,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the message to display in the dialog.</summary>
         public string Message
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (string)GetValue(MessageProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(MessageProperty, value);
-            }
+            get { return (string)GetValue(MessageProperty); }
+            set { SetValue(MessageProperty, value); }
         }
 
         public static readonly DependencyProperty MessageProperty =
@@ -204,18 +124,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the message box part of the message box internal dialog. Not the same as Background.</summary>
         public Brush MessageBoxBackground
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Brush)GetValue(MessageBoxBackgroundProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxBackgroundProperty, value);
-            }
+            get { return (Brush)GetValue(MessageBoxBackgroundProperty); }
+            set { SetValue(MessageBoxBackgroundProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxBackgroundProperty =
@@ -224,18 +134,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the message box buttons shown.</summary>
         public MessageBoxButton MessageBoxButton
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (MessageBoxButton)GetValue(MessageBoxButtonProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxButtonProperty, value);
-            }
+            get { return (MessageBoxButton)GetValue(MessageBoxButtonProperty); }
+            set { SetValue(MessageBoxButtonProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxButtonProperty =
@@ -244,18 +144,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the image for the message.</summary>
         public MessageBoxInternalDialogImage MessageBoxImage
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (MessageBoxInternalDialogImage)GetValue(MessageBoxImageProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxImageProperty, value);
-            }
+            get { return (MessageBoxInternalDialogImage)GetValue(MessageBoxImageProperty); }
+            set { SetValue(MessageBoxImageProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxImageProperty =
@@ -265,18 +155,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the default height of the resizable portion.</summary>
         public double MessageBoxDefaultHeight
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(MessageBoxDefaultHeightProperty); 
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxDefaultHeightProperty, value);
-            }
+            get { return (double)GetValue(MessageBoxDefaultHeightProperty); }
+            set { SetValue(MessageBoxDefaultHeightProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxDefaultHeightProperty =
@@ -285,18 +165,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the default width of the resizable portion.</summary>
         public double MessageBoxDefaultWidth
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(MessageBoxDefaultWidthProperty); 
-            }
-            set 
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxDefaultWidthProperty, value);
-            }
+            get { return (double)GetValue(MessageBoxDefaultWidthProperty); }
+            set { SetValue(MessageBoxDefaultWidthProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxDefaultWidthProperty =
@@ -305,18 +175,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the message box maximum height. Default is 600.0.</summary>
         public double MessageBoxMaxHeight
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(MessageBoxMaxHeightProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxMaxHeightProperty, value);
-            }
+            get { return (double)GetValue(MessageBoxMaxHeightProperty); }
+            set { SetValue(MessageBoxMaxHeightProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxMaxHeightProperty =
@@ -325,18 +185,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the message box maximum width. Default is 800.0</summary>
         public double MessageBoxMaxWidth
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(MessageBoxMaxWidthProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxMaxWidthProperty, value);
-            }
+            get { return (double)GetValue(MessageBoxMaxWidthProperty); }
+            set { SetValue(MessageBoxMaxWidthProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxMaxWidthProperty =
@@ -345,18 +195,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the message box minimum height. Default is 50.0.</summary>
         public double MessageBoxMinHeight
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(MessageBoxMinHeightProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxMinHeightProperty, value);
-            }
+            get { return (double)GetValue(MessageBoxMinHeightProperty); }
+            set { SetValue(MessageBoxMinHeightProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxMinHeightProperty =
@@ -365,18 +205,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the message box minimum width. default is 100.0.</summary>
         public double MessageBoxMinWidth
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (double)GetValue(MessageBoxMinWidthProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(MessageBoxMinWidthProperty, value);
-            }
+            get { return (double)GetValue(MessageBoxMinWidthProperty); }
+            set { SetValue(MessageBoxMinWidthProperty, value); }
         }
 
         public static readonly DependencyProperty MessageBoxMinWidthProperty =
@@ -390,18 +220,8 @@ namespace WPF.InternalDialogs
         /// </remarks>
         public object ResizeGripContent
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (object)GetValue(ResizeGripContentProperty); 
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ResizeGripContentProperty, value);
-            }
+            get { return (object)GetValue(ResizeGripContentProperty); }
+            set { SetValue(ResizeGripContentProperty, value); }
         }
 
         public static readonly DependencyProperty ResizeGripContentProperty =
@@ -410,18 +230,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the cursor for the resize gripper. Default is Cursors.NWSE.</summary>
         public Cursor ResizeGripCursor
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Cursor)GetValue(ResizeGripCursorProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ResizeGripCursorProperty, value);
-            }
+            get { return (Cursor)GetValue(ResizeGripCursorProperty); }
+            set { SetValue(ResizeGripCursorProperty, value); }
         }
 
         public static readonly DependencyProperty ResizeGripCursorProperty =
@@ -430,18 +240,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the visibility of the resize grip. Visible = resizing enabled, Collapsed/Hidden = resizing disabled.</summary>
         public Visibility ResizeGripVisibility
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Visibility)GetValue(ResizeGripVisibilityProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(ResizeGripVisibilityProperty, value);
-            }
+            get { return (Visibility)GetValue(ResizeGripVisibilityProperty); }
+            set { SetValue(ResizeGripVisibilityProperty, value); }
         }
 
         public static readonly DependencyProperty ResizeGripVisibilityProperty =
@@ -450,18 +250,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the title to the message box.</summary>
         public string Title
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (string)GetValue(TitleProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(TitleProperty, value);
-            }
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
 
         public static readonly DependencyProperty TitleProperty =
@@ -470,18 +260,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the background for the title area.</summary>
         public Brush TitleAreaBackground
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Brush)GetValue(TitleAreaBackgroundProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(TitleAreaBackgroundProperty, value);
-            }
+            get { return (Brush)GetValue(TitleAreaBackgroundProperty); }
+            set { SetValue(TitleAreaBackgroundProperty, value); }
         }
 
         public static readonly DependencyProperty TitleAreaBackgroundProperty =
@@ -490,18 +270,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the cursor for the title area. Default is Cursors.SizeAll.</summary>
         public Cursor TitleCursor
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (Cursor)GetValue(TitleCursorProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(TitleCursorProperty, value);
-            }
+            get { return (Cursor)GetValue(TitleCursorProperty); }
+            set { SetValue(TitleCursorProperty, value); }
         }
 
         public static readonly DependencyProperty TitleCursorProperty =
@@ -510,18 +280,8 @@ namespace WPF.InternalDialogs
         /// <summary>Gets or sets the horizontal alignment of the title.</summary>
         public HorizontalAlignment TitleHorizontalAlignment
         {
-            get 
-            {
-                VerifyDisposed();
-
-                return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty);
-            }
-            set
-            {
-                VerifyDisposed();
-
-                SetValue(TitleHorizontalAlignmentProperty, value);
-            }
+            get { return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); }
+            set { SetValue(TitleHorizontalAlignmentProperty, value); }
         }
 
         public static readonly DependencyProperty TitleHorizontalAlignmentProperty =
@@ -581,8 +341,6 @@ namespace WPF.InternalDialogs
             MessageBoxInternalDialog instance = d as MessageBoxInternalDialog;
 
             if (instance == null) return;
-
-            instance.VerifyDisposed();
 
             Visibility visibility = (Visibility)e.NewValue;
 
@@ -988,47 +746,6 @@ namespace WPF.InternalDialogs
             if (MessageBoxMinWidth < 0.0)
             {
                 throw new ArgumentException("Cannot be less than 0.0.", "MessageBoxMinWidth");
-            }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    LayoutUpdated -= MessageBoxInternalDialog_LayoutUpdated;
-                    SizeChanged -= MessageBoxInternalDialog_SizeChanged;
-
-                    if (cancelButton != null)
-                        cancelButton.Click -= CancelButton_Click;
-
-                    if (closeButton != null)
-                        closeButton.Click -= CloseButton_Click;
-
-                    if (okButton != null)
-                        okButton.Click -= OkButton_Click;
-
-                    if (noButton != null)
-                        noButton.Click -= NoButton_Click;
-
-                    if (yesButton != null)
-                        yesButton.Click -= YesButton_Click;
-
-                    if (titleThumb != null)
-                    {
-                        titleThumb.DragDelta -= TitleThumb_DragDelta;
-                    }
-
-                    if (resizeThumb != null)
-                    {
-                        resizeThumb.DragDelta -= ResizeThumb_DragDelta;
-                    }
-                }
-
-                disposedValue = true;
             }
         }
 
