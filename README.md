@@ -65,9 +65,6 @@ We gave you a *ProgressBarStyle* property so custom styling can be applied to th
 #### Close On Escape Key Push?
 Yup, we got that!
 
-#### Dispose
-Internal Dialogs implement IDisposable so be sure to clean up properly by calling Dispose().
-
 #### Hope you enjoy. Happy coding!
 ![MBID-Example1](https://user-images.githubusercontent.com/23512394/156067308-d8b9651f-8248-497d-9235-ffd9cad4cf39.png)
 ![MBID-Example2](https://user-images.githubusercontent.com/23512394/156067331-b7633be1-b45c-4754-9255-e94cb17b3d3f.png)
